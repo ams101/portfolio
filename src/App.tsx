@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navigation, { type NavTarget } from './components/Navigation';
 import Hero from './components/Hero';
 import CaseStudies from './components/CaseStudies';
@@ -84,6 +85,7 @@ function App() {
 
         <Footer />
       </main>
+      <Analytics />
     </div>
   );
 }
