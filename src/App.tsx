@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import ScrollProgress from './components/ScrollProgress';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -82,6 +83,7 @@ function App() {
 
       <FloatingDownloadCV showOnOtherViews={currentView !== 'home'} />
       <ScrollToTop />
+      <Analytics />
     </div>
   );
 }
