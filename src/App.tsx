@@ -3,6 +3,7 @@ import ScrollProgress from './components/ScrollProgress';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Metrics from './components/Metrics';
+import FeaturedTara from './components/FeaturedTara';
 import CaseStudies from './components/CaseStudies';
 import CaseStudyDetail from './components/CaseStudyDetail';
 import ProductDemoPage from './components/ProductDemoPage';
@@ -36,6 +37,15 @@ function App() {
     window.scrollTo(0, 0);
   };
 
+  const openTara = () => {
+    setCurrentView('product-demo');
+    setTimeout(() => {
+      const el = document.getElementById('tara');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else window.scrollTo(0, 0);
+    }, 50);
+  };
+
   const goHome = () => {
     setCurrentView('home');
     setSelectedId(null);
@@ -61,6 +71,7 @@ function App() {
         <>
           <Hero />
           <Metrics />
+          <FeaturedTara onTry={openTara} />
           <About />
           <CaseStudies onViewDetails={openCaseStudy} />
           <Writing onReadArticle={openArticle} />

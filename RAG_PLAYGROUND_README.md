@@ -1,4 +1,4 @@
-# RAG Playground: Movie Recommender
+# How RAG Works: Movie Recommender
 
 An educational interactive demo that teaches how Retrieval-Augmented Generation (RAG) works, step by step.
 
@@ -29,7 +29,7 @@ Instead of relying solely on a model's memory, RAG systems:
 - Allows retrieval to grab the most relevant parts of each synopsis
 - Visualizes original text and resulting chunks
 
-#### Step 3: Embeddings (Keyless)
+#### Step 3: Embeddings (simplified)
 - Generates 256-dimensional pseudo-embeddings locally
 - Uses deterministic hashed bag-of-words with TF weighting
 - No external API required
@@ -53,20 +53,14 @@ Instead of relying solely on a model's memory, RAG systems:
   - **CONTEXT**: Retrieved context pack
 
 #### Step 7: Generation
-Two modes available:
-
-**A) Keyless Mode (Default)**
+Runs in the browser with no API key:
 - Groups retrieved chunks by movie
 - Scores movies by max/avg similarity
 - Picks top 3-5 distinct movies
-- Generates natural language recommendations using templates
+- Builds the recommendation text from templates
 - Derives reasons from tags, genres, and chunk keywords
 
-**B) Live LLM Mode (Optional)**
-- User can paste OpenAI API key (memory only, not stored)
-- Would call OpenAI chat completions with assembled prompt
-- Falls back to keyless if key missing or API fails
-- Currently defaults to keyless for demo purposes
+A production system would send the prompt from step 6 to a language model instead.
 
 #### Step 8: Final Answer
 - Displays 3-5 movie recommendations as cards
@@ -99,7 +93,6 @@ Two modes available:
 - **Dataset Search**: Filter movies by title, genre, or tag
 - **Movie Preview**: Click any movie to see full details
 - **Citations Toggle**: Expand to see exact chunks used for each recommendation
-- **Advanced Settings**: Enable Live LLM mode with API key
 
 ### Sample Queries
 
@@ -163,7 +156,7 @@ retrieveChunks(positive: string, negative: string, k = 6): RetrievedChunk[]
 - No backend required
 - All processing happens in the browser
 - Perfect for portfolio deployment
-- Works on static hosting (Netlify, Vercel, GitHub Pages)
+- Works on static hosting (Vercel, GitHub Pages)
 
 ## Installation & Setup
 
@@ -174,18 +167,6 @@ The demo is already integrated into the project. To use:
 3. Integrated into ProductDemoPage component
 4. Access via the main demo page
 
-## Optional: Live LLM Mode
-
-To enable actual LLM generation:
-
-1. Click "Advanced Settings"
-2. Check "Use Live LLM"
-3. Paste your OpenAI API key
-4. Key stored in memory only (not persisted)
-5. Currently falls back to keyless mode
-
-**Note**: The keyless mode is fully functional and demonstrates the complete RAG pipeline without requiring any API keys.
-
 ## Educational Value
 
 This demo teaches:
@@ -195,7 +176,7 @@ This demo teaches:
 3. **Vector Embeddings**: Demonstrates how text becomes numbers
 4. **Semantic Search**: Shows similarity-based retrieval in action
 5. **Context Assembly**: Reveals how retrieved info becomes prompts
-6. **Generation Methods**: Compares keyless vs. LLM approaches
+6. **Generation**: Shows where a language model would take over
 7. **Source Attribution**: Demonstrates citation and traceability
 
 Perfect for:

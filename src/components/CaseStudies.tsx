@@ -11,7 +11,7 @@ const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => {
       icon: Plane,
       title: 'Zo-Trips at Zostel',
       subtitle: '0-to-1 AI-powered trips business',
-      description: 'Turned simple hostel-trip upsells into a full trips business across India and the Middle East. Owned growth, product and ops for Zo-Trips - from targeted social campaigns and onsite real estate to personalised pages, an AI trip comparator, WATI reactivation and LLM-based ops checks - scaling to ~Rs. 12 Cr annual GMV with ~15% MoM growth.',
+      description: 'Turned simple hostel-trip upsells into a full trips business across India and the Middle East. Owned growth, product and ops for Zo-Trips - from targeted social campaigns and onsite real estate to personalised pages, an AI trip comparator, WATI reactivation and LLM-based ops checks - scaling to ~Rs. 18 Cr annual GMV with ~15% MoM growth.',
       gradient: 'from-teal-500 to-cyan-500',
       shadowColor: 'shadow-teal-500/30',
     },

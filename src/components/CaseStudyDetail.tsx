@@ -9,7 +9,7 @@ const CaseStudyDetail = ({ caseStudyId, onBack }: CaseStudyDetailProps) => {
   const studies = [
     {
       id: 'zo-trips',
-      title: 'Zo-Trips at Zostel: building an AI-powered trips business from 0 to Rs. 12 Cr GMV',
+      title: 'Zo-Trips at Zostel: building an AI-powered trips business from 0 to Rs. 18 Cr GMV',
       subtitle: '0-to-1 AI-powered trips business',
       context: 'Zostel is a leading youth travel and hostel brand with a strong footprint in India and growing demand from Middle Eastern (GCC) travellers. Trips started as small upsell cards on hostel pages with low visibility, minimal differentiation and heavy manual operations.',
       role: [
@@ -50,13 +50,13 @@ const CaseStudyDetail = ({ caseStudyId, onBack }: CaseStudyDetailProps) => {
         },
       ],
       impact: [
-        'Grew Zo-Trips from a small upsell widget into a curated trips business doing ~Rs. 12 Cr in annual GMV with ~15% MoM growth',
+        'Grew Zo-Trips from a small upsell widget into a curated trips business doing ~Rs. 18 Cr in annual GMV with ~15% MoM growth',
         'Increased trip discovery and qualified leads through targeted campaigns and onsite placements',
         'Improved decision-making and reduced abandonment via personalised pages and an AI comparator, driving ~15% more leads from existing traffic',
         'Reactivated lapsed users using WATI campaigns, strengthening top-of-funnel from returning travellers',
         'Scaled operations using automation and LLM-based audits instead of linearly scaling the operations team',
       ],
-      metrics: 'Rs. 12 Cr+ GMV | 15% MoM growth',
+      metrics: 'Rs. 18 Cr+ GMV | 15% MoM growth',
     },
     {
       id: 'shaadi',
