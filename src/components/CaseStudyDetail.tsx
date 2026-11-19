@@ -1,5 +1,6 @@
 import Section from './Section';
 import { caseStudies } from '../data/caseStudies';
+import { CASE_DIAGRAMS } from './CaseDiagrams';
 
 interface CaseStudyDetailProps {
   caseStudyId: string;
@@ -12,6 +13,7 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
   if (index === -1) return null;
   const study = caseStudies[index];
   const next = caseStudies[(index + 1) % caseStudies.length];
+  const diagram = CASE_DIAGRAMS[study.id];
 
   return (
     <article>
@@ -45,6 +47,19 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
           </div>
         ))}
       </section>
+
+      {diagram && (
+        <figure className="mt-14 mx-0 flex flex-col gap-3">
+          <div className="overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0">
+            <div className="bg-paper-deep/60 border border-rule p-4 md:p-8">
+              <diagram.Diagram />
+            </div>
+          </div>
+          <figcaption className="font-mono text-xs text-muted">
+            Fig. 1 — {diagram.caption} <span className="text-[#8A857C]">Simplified diagram.</span>
+          </figcaption>
+        </figure>
+      )}
 
       <Section label="01 — What I owned" className="pt-24">
         <div className="max-w-[680px] flex flex-col gap-4">
