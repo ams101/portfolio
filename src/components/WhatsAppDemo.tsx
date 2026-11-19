@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   Search, MoreVertical, Send, ArrowLeft, X, Check, CheckCheck,
-  Clock, ChevronDown, CreditCard, Smartphone, Building2
+  Clock, ChevronDown, CreditCard, Smartphone, Building2, Cpu
 } from 'lucide-react';
 import PaymentGateway from './PaymentGateway';
 import { TravelAssistant } from '../utils/travelAssistant';
@@ -27,6 +27,11 @@ interface Message {
       description: string;
     };
   };
+  debug?: {
+    intent: string;
+    state: string;
+    toolCalls: string[];
+  };
 }
 
 const WhatsAppDemo = () => {
@@ -41,6 +46,7 @@ const WhatsAppDemo = () => {
   const [userPhone, setUserPhone] = useState('');
   const [showUserForm, setShowUserForm] = useState(true);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [showInternals, setShowInternals] = useState(true);
 
   const chatRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -174,7 +180,8 @@ const WhatsAppDemo = () => {
         type: response.ui?.linkPreview ? 'link' : 'text',
         text: response.reply,
         timestamp: new Date(),
-        metadata: response.ui
+        metadata: response.ui,
+        debug: response.debug
       };
 
       setMessages(prev => {
@@ -337,8 +344,18 @@ const WhatsAppDemo = () => {
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <div className="w-full max-w-[420px] bg-slate-900 rounded-[3rem] shadow-2xl border-8 border-slate-800 overflow-hidden">
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => setShowInternals(!showInternals)}
+            className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-slate-300 hover:bg-slate-800 transition-all"
+          >
+            <Cpu className="w-3.5 h-3.5" />
+            {showInternals ? 'Hide' : 'Show'} what's happening behind the chat
+          </button>
+        </div>
+
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-6">
+          <div className="w-full max-w-[420px] mx-auto lg:mx-0 bg-slate-900 rounded-[3rem] shadow-2xl border-8 border-slate-800 overflow-hidden">
             {screen === 'list' ? (
               <div className="bg-slate-800 h-[700px] flex flex-col">
                 <div className="bg-teal-600 px-6 py-4 flex items-center justify-between">
@@ -515,6 +532,10 @@ const WhatsAppDemo = () => {
               </div>
             )}
           </div>
+
+          {showInternals && (
+            <BehindTheChat messages={messages} />
+          )}
         </div>
 
         {showPayment && currentPaymentId && (
@@ -526,6 +547,55 @@ const WhatsAppDemo = () => {
           />
         )}
       </div>
+    </div>
+  );
+};
+
+const BehindTheChat = ({ messages }: { messages: Message[] }) => {
+  const turns = messages
+    .map((m, i) => ({ bot: m, user: messages[i - 1] }))
+    .filter(t => t.bot.direction === 'in' && t.bot.debug)
+    .reverse();
+
+  return (
+    <div className="w-full lg:w-[380px] bg-slate-900/60 border border-slate-800 rounded-2xl p-5 lg:h-[716px] flex flex-col">
+      <div className="flex items-center gap-2 mb-1">
+        <Cpu className="w-4 h-4 text-teal-400" />
+        <h4 className="text-sm font-bold text-white">Behind the chat</h4>
+      </div>
+      <p className="text-xs text-slate-500 mb-4">
+        What the assistant decided on each message: the intent it detected, the conversation state it moved to, and the actions it took.
+      </p>
+
+      {turns.length === 0 ? (
+        <div className="flex-1 flex items-center justify-center text-center text-xs text-slate-500 px-6 py-10">
+          Send a message and each turn will show up here.
+        </div>
+      ) : (
+        <div className="flex-1 overflow-y-auto space-y-3 pr-1">
+          {turns.map(({ bot, user }) => (
+            <div key={bot.id} className="bg-slate-950/60 border border-slate-800 rounded-xl p-3 text-xs">
+              {user && user.direction === 'out' && (
+                <p className="text-slate-300 mb-2 truncate">“{user.text}”</p>
+              )}
+              <div className="grid grid-cols-[64px_1fr] gap-y-1.5 font-mono">
+                <span className="text-slate-500">intent</span>
+                <span className="text-teal-400">{bot.debug!.intent}</span>
+                <span className="text-slate-500">state</span>
+                <span className="text-amber-400">{bot.debug!.state}</span>
+                <span className="text-slate-500">actions</span>
+                <span className="text-slate-300">
+                  {bot.debug!.toolCalls.length ? bot.debug!.toolCalls.join(', ') : 'reply only'}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <p className="text-[11px] text-slate-500 mt-4 pt-3 border-t border-slate-800">
+        Rule-based engine: keyword intents, a state machine for booking, change and cancellation flows, three-strike moderation and a human handoff.
+      </p>
     </div>
   );
 };

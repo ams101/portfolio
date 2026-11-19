@@ -199,6 +199,15 @@ export class TravelAssistant {
       };
     }
 
+    // Questions about policies are answered before action intents, so
+    // "what's the cancellation policy?" isn't treated as a cancellation.
+    for (const [key, answer] of Object.entries(FAQS)) {
+      if (lower.includes(key) || lower.includes(answer.toLowerCase().substring(0, 15))) {
+        entities.faqKey = key;
+        return { intent: 'faq', entities };
+      }
+    }
+
     if (lower.includes('book') || lower.includes('reservation')) {
       PLACES.forEach(place => {
         if (lower.includes(place.name.toLowerCase())) {
@@ -252,12 +261,6 @@ export class TravelAssistant {
       return { intent: 'booking_confirm', entities };
     }
 
-    for (const [key, answer] of Object.entries(FAQS)) {
-      if (lower.includes(key) || lower.includes(answer.toLowerCase().substring(0, 15))) {
-        entities.faqKey = key;
-        return { intent: 'faq', entities };
-      }
-    }
 
     return { intent: 'unknown', entities };
   }
@@ -301,7 +304,42 @@ export class TravelAssistant {
     }
   }
 
+  // Wraps the rule engine and reports what happened on each turn
+  // (detected intent, resulting state, actions taken) for the "Behind the chat" panel.
   async processMessage(request: ChatRequest): Promise<ChatResponse> {
+    const countBy = (status: Booking['status']) =>
+      Array.from(this.bookings.values()).filter(b => b.status === status).length;
+    const prior = this.sessions.get(request.session_id);
+    const before = {
+      bookings: this.bookings.size,
+      payments: this.payments.size,
+      confirmed: countBy('CONFIRMED'),
+      cancelled: countBy('CANCELLED'),
+      strikes: prior?.strikes ?? 0,
+      active: prior?.active ?? true
+    };
+    const isAbuse = this.checkProfanity(request.message);
+    const intent = !before.active ? 'session_closed' : isAbuse ? 'abuse' : this.extractIntent(request.message).intent;
+
+    const response = await this.handleMessage(request);
+
+    const session = this.sessions.get(request.session_id);
+    const actions: string[] = [];
+    if (this.bookings.size > before.bookings) actions.push('create_booking');
+    if (this.payments.size > before.payments) actions.push('send_payment_link');
+    if (countBy('CONFIRMED') > before.confirmed) actions.push('confirm_booking');
+    if (countBy('CANCELLED') > before.cancelled) actions.push('cancel_booking');
+    if ((session?.strikes ?? 0) > before.strikes) actions.push(`warn_user (strike ${session?.strikes})`);
+    if (before.active && session && !session.active) actions.push('end_session');
+    if (/human|agent|support team/i.test(response.reply)) actions.push('handoff_to_human');
+
+    return {
+      ...response,
+      debug: { intent, state: session?.state ?? 'IDLE', toolCalls: actions }
+    };
+  }
+
+  private async handleMessage(request: ChatRequest): Promise<ChatResponse> {
     const session = this.getOrCreateSession(request.session_id, request.user.phone);
 
     if (!session.active) {

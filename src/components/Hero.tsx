@@ -60,7 +60,7 @@ const Hero = () => {
               <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg shadow-emerald-500/20 group-hover:shadow-emerald-500/40 transition-shadow">
                 <TrendingUp className="w-4 h-4 text-white" />
               </div>
-              <span className="font-semibold text-slate-300 group-hover:text-white transition-colors">Rs. 12 Cr+ GMV built</span>
+              <span className="font-semibold text-slate-300 group-hover:text-white transition-colors">Rs. 18 Cr+ GMV built</span>
             </div>
             <div className="group flex items-center gap-3 px-5 py-3.5 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 hover:-translate-y-1 backdrop-blur-sm">
               <div className="p-2 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl shadow-lg shadow-orange-500/20 group-hover:shadow-orange-500/40 transition-shadow">

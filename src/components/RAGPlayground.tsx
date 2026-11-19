@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Play, RotateCcw, ChevronDown, ChevronRight, AlertCircle, Check, Loader2, Settings } from 'lucide-react';
+import { Play, RotateCcw, ChevronDown, ChevronRight, AlertCircle, Check, Loader2 } from 'lucide-react';
 import moviesData from '../data/movies100.json';
 
 interface Movie {
@@ -51,9 +51,6 @@ const RAGPlayground = () => {
   const [showWhatIsRAG, setShowWhatIsRAG] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showSettings, setShowSettings] = useState(false);
-  const [apiKey, setApiKey] = useState('');
-  const [useLiveLLM, setUseLiveLLM] = useState(false);
 
   const movies: Movie[] = moviesData as Movie[];
 
@@ -286,28 +283,15 @@ const RAGPlayground = () => {
     updateStep(7, 'active');
     if (delayTime) await delay(delayTime * 1.2);
 
-    let recommendations;
-    if (useLiveLLM && apiKey) {
-      recommendations = await generateWithLLM(prompt);
-    } else {
-      recommendations = generateKeylessRecommendations(retrieved, positiveQuery, negativeQuery || '');
-    }
+    const recommendations = generateKeylessRecommendations(retrieved, positiveQuery, negativeQuery || '');
 
-    updateStep(7, 'completed', { mode: useLiveLLM && apiKey ? 'live' : 'keyless', recommendations });
+    updateStep(7, 'completed', { mode: 'keyless', recommendations });
 
     updateStep(8, 'active');
     if (delayTime) await delay(delayTime);
     updateStep(8, 'completed', { recommendations });
 
     setIsRunning(false);
-  };
-
-  const generateWithLLM = async (prompt: any) => {
-    return generateKeylessRecommendations(
-      steps.find(s => s.id === 4)?.data?.chunks || [],
-      positiveQuery,
-      negativeQuery || ''
-    );
   };
 
   const runInstantly = async () => {
@@ -373,7 +357,7 @@ const RAGPlayground = () => {
     <div className="p-8 bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">RAG Playground: Movie Recommender</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">How RAG works: movie recommender</h2>
           <p className="text-slate-300 text-lg mb-6">
             Learn how Retrieval-Augmented Generation works, step by step
           </p>
@@ -499,48 +483,6 @@ const RAGPlayground = () => {
                     />
                     Latency simulation (adds delays for realism)
                   </label>
-
-                  <button
-                    onClick={() => setShowSettings(!showSettings)}
-                    className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-300 transition-colors"
-                  >
-                    <Settings className="w-4 h-4" />
-                    Advanced Settings
-                  </button>
-
-                  {showSettings && (
-                    <div className="p-4 bg-slate-900/50 rounded-lg space-y-3 border border-slate-700">
-                      <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={useLiveLLM}
-                          onChange={(e) => setUseLiveLLM(e.target.checked)}
-                          className="w-4 h-4 rounded border-slate-600 bg-slate-900 text-teal-500 focus:ring-teal-500"
-                        />
-                        Use Live LLM (requires API key)
-                      </label>
-
-                      {useLiveLLM && (
-                        <div>
-                          <label className="block text-xs text-slate-400 mb-1">OpenAI API Key (memory only)</label>
-                          <input
-                            type="password"
-                            value={apiKey}
-                            onChange={(e) => setApiKey(e.target.value)}
-                            placeholder="sk-..."
-                            className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                          />
-                          <p className="text-xs text-slate-500 mt-1">Note: Currently uses keyless mode regardless</p>
-                        </div>
-                      )}
-
-                      <p className="text-xs text-slate-500">
-                        Mode: <span className="text-teal-400 font-medium">
-                          {useLiveLLM && apiKey ? 'Live LLM' : 'Keyless (default)'}
-                        </span>
-                      </p>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -758,7 +700,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
           </div>
 
           <p className="text-xs text-slate-500 italic">
-            Note: This is a deterministic pseudo-embedding for educational purposes
+            Simplified so it runs in your browser. A production system would use a trained embedding model, which captures meaning rather than shared words.
           </p>
         </div>
       );
@@ -837,12 +779,12 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
       return (
         <div className="space-y-3">
           <p className="text-slate-300 text-sm">
-            Generation mode: <strong className="text-teal-400">{step.data.mode}</strong>
+            Generation mode: <strong className="text-teal-400">template-based (in browser)</strong>
           </p>
 
           {step.data.mode === 'keyless' && (
             <div className="p-3 bg-slate-900 rounded border border-slate-700">
-              <p className="text-xs text-slate-400 mb-2">Keyless generation process:</p>
+              <p className="text-xs text-slate-400 mb-2">In this demo, the answer is assembled from the retrieved chunks. A production system would pass the prompt from step 6 to a language model.</p>
               <ol className="text-xs text-slate-300 space-y-1 list-decimal list-inside">
                 <li>Group chunks by movie</li>
                 <li>Score movies by max + average similarity</li>

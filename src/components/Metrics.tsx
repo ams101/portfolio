@@ -4,7 +4,7 @@ const Metrics = () => {
   const metrics = [
     {
       icon: DollarSign,
-      value: 'Rs. 12 Cr+',
+      value: 'Rs. 18 Cr+',
       label: 'annual GMV',
       caption: 'Zo-Trips at Zostel, ~15% MoM growth',
       gradient: 'from-emerald-500 to-teal-500',
