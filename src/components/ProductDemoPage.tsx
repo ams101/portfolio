@@ -91,15 +91,14 @@ const ProductDemoPage = () => {
       </Section>
 
       {DEMOS.filter(d => d.id === openDemo).map(d => (
-        // The demos were built dark, so they sit on a dark "bench" inside the paper page.
         <div
           key={d.id}
           id={`demo-panel-${d.id}`}
-          className="-mx-6 md:mx-0 mb-24 bg-slate-950 md:rounded-lg overflow-hidden border border-ink"
+          className="scroll-mt-6 mb-24 border-t-2 border-ink"
         >
-          <div className="flex items-center justify-between px-6 md:px-8 py-3 bg-ink text-paper">
-            <span className="font-mono text-xs">{d.title}</span>
-            <button onClick={() => setOpenDemo(null)} className="font-mono text-xs text-[#A8A397] hover:text-paper min-h-[44px]">
+          <div className="flex items-center justify-between py-3 border-b border-rule">
+            <span className="label">Now playing · {d.title}</span>
+            <button onClick={() => setOpenDemo(null)} className="font-mono text-[13px] text-muted hover:text-ink min-h-[44px]">
               Close ×
             </button>
           </div>

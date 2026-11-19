@@ -232,47 +232,47 @@ const WhatsAppDemo = () => {
 
     switch (status) {
       case 'sending':
-        return <Clock className="w-3 h-3 text-slate-400" />;
+        return <Clock className="w-3 h-3 text-muted" />;
       case 'sent':
-        return <Check className="w-3 h-3 text-slate-400" />;
+        return <Check className="w-3 h-3 text-muted" />;
       case 'delivered':
-        return <CheckCheck className="w-3 h-3 text-slate-400" />;
+        return <CheckCheck className="w-3 h-3 text-muted" />;
       case 'read':
-        return <CheckCheck className="w-3 h-3 text-teal-400" />;
+        return <CheckCheck className="w-3 h-3 text-accent" />;
     }
   };
 
   if (showUserForm) {
     return (
-      <div className="flex items-center justify-center min-h-[600px] bg-gradient-to-br from-teal-500/10 to-emerald-500/10 rounded-3xl">
-        <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-8 max-w-md w-full mx-4 border border-slate-800/50">
+      <div className="flex items-center justify-center min-h-[600px] bg-accent/10 rounded-lg">
+        <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 border border-rule">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
               <Smartphone className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Travel Assistant</h3>
-            <p className="text-slate-400 text-sm">Enter your details to start chatting</p>
+            <h3 className="text-2xl font-serif font-normal text-ink mb-2">Travel Assistant</h3>
+            <p className="text-muted text-sm">Enter your details to start chatting</p>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-slate-300 mb-2">Name</label>
+              <label className="block text-sm font-semibold text-ink-soft mb-2">Name</label>
               <input
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
-                className="w-full bg-slate-800/50 border border-slate-700/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20"
+                className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30"
                 placeholder="Your name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-300 mb-2">Phone</label>
+              <label className="block text-sm font-semibold text-ink-soft mb-2">Phone</label>
               <input
                 type="tel"
                 value={userPhone}
                 onChange={(e) => setUserPhone(e.target.value)}
-                className="w-full bg-slate-800/50 border border-slate-700/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20"
+                className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30"
                 placeholder="+971 50 000 0000"
               />
             </div>
@@ -280,7 +280,7 @@ const WhatsAppDemo = () => {
             <button
               onClick={startSession}
               disabled={!userName.trim() || !userPhone.trim()}
-              className="w-full py-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-bold rounded-xl hover:from-teal-400 hover:to-emerald-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-accent text-white font-bold rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Start Chat
             </button>
@@ -296,20 +296,20 @@ const WhatsAppDemo = () => {
         <div className="mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <button
             onClick={resetDemo}
-            className="px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-xl text-slate-300 hover:bg-slate-800 transition-all text-sm font-semibold"
+            className="px-4 py-2 bg-paper-deep border border-rule rounded text-ink-soft hover:bg-paper-deep transition-all text-sm font-semibold"
           >
             Reset Demo
           </button>
 
           <div className="flex-1 max-w-2xl">
-            <p className="text-sm text-slate-400 mb-2 text-center md:text-right">Try these sample queries:</p>
+            <p className="text-sm text-muted mb-2 text-center md:text-right">Try these sample queries:</p>
             <div className="flex flex-wrap gap-2 justify-center md:justify-end">
               <button
                 onClick={() => {
                   if (screen === 'list') setScreen('chat');
                   setInputText('Book a private room in Place 2 next weekend for 2');
                 }}
-                className="px-3 py-1.5 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 rounded-lg text-xs text-teal-400 transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
               >
                 Book a stay
               </button>
@@ -318,7 +318,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText('Cancel booking BK-' + Date.now().toString().slice(-6));
                 }}
-                className="px-3 py-1.5 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 rounded-lg text-xs text-orange-400 transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
               >
                 Cancel booking
               </button>
@@ -327,7 +327,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText("What's the cancellation policy?");
                 }}
-                className="px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 rounded-lg text-xs text-blue-400 transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
               >
                 Ask about policy
               </button>
@@ -336,7 +336,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText('Modify my booking to add 1 guest');
                 }}
-                className="px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs text-purple-400 transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
               >
                 Modify booking
               </button>
@@ -347,7 +347,7 @@ const WhatsAppDemo = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={() => setShowInternals(!showInternals)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-xs text-slate-300 hover:bg-slate-800 transition-all"
+            className="flex items-center gap-2 px-3 py-1.5 bg-paper-deep border border-rule rounded-lg text-xs text-ink-soft hover:bg-paper-deep transition-all"
           >
             <Cpu className="w-3.5 h-3.5" />
             {showInternals ? 'Hide' : 'Show'} what's happening behind the chat
@@ -355,10 +355,10 @@ const WhatsAppDemo = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row justify-center items-start gap-6">
-          <div className="w-full max-w-[420px] mx-auto lg:mx-0 bg-slate-900 rounded-[3rem] shadow-2xl border-8 border-slate-800 overflow-hidden">
+          <div className="w-full max-w-[420px] mx-auto lg:mx-0 bg-white rounded-[3rem] border-8 border-rule overflow-hidden">
             {screen === 'list' ? (
-              <div className="bg-slate-800 h-[700px] flex flex-col">
-                <div className="bg-teal-600 px-6 py-4 flex items-center justify-between">
+              <div className="bg-paper-deep h-[700px] flex flex-col">
+                <div className="bg-accent px-6 py-4 flex items-center justify-between">
                   <h2 className="text-white font-semibold text-xl">Chats</h2>
                   <div className="flex items-center gap-4">
                     <Search className="w-5 h-5 text-white cursor-pointer" />
@@ -366,22 +366,22 @@ const WhatsAppDemo = () => {
                   </div>
                 </div>
 
-                <div className="flex-1 overflow-y-auto bg-slate-900">
+                <div className="flex-1 overflow-y-auto bg-white">
                   <div
                     onClick={() => setScreen('chat')}
-                    className="flex items-center gap-4 px-4 py-4 hover:bg-slate-800/50 cursor-pointer border-b border-slate-800"
+                    className="flex items-center gap-4 px-4 py-4 hover:bg-paper-deep cursor-pointer border-b border-rule"
                   >
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
                       <Smartphone className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-semibold text-white">Travel Assistant</h3>
-                        <span className="text-xs text-slate-400">now</span>
+                        <h3 className="font-semibold text-ink">Travel Assistant</h3>
+                        <span className="text-xs text-muted">now</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <p className="text-sm text-slate-400 truncate">Hi! Tell me what you need 🙂</p>
-                        <div className="w-5 h-5 rounded-full bg-teal-500 flex items-center justify-center flex-shrink-0 ml-2">
+                        <p className="text-sm text-muted truncate">Hi! Tell me what you need 🙂</p>
+                        <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center flex-shrink-0 ml-2">
                           <span className="text-xs text-white font-semibold">1</span>
                         </div>
                       </div>
@@ -390,29 +390,29 @@ const WhatsAppDemo = () => {
                 </div>
               </div>
             ) : (
-              <div className="h-[700px] flex flex-col bg-slate-900">
-                <div className="bg-teal-600 px-4 py-3 flex items-center gap-3 shadow-lg">
+              <div className="h-[700px] flex flex-col bg-white">
+                <div className="bg-accent px-4 py-3 flex items-center gap-3 ">
                   <button onClick={() => setScreen('list')} className="p-1">
                     <ArrowLeft className="w-5 h-5 text-white" />
                   </button>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-emerald-400 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
                     <Smartphone className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-white">Travel Assistant</h3>
-                    <p className="text-xs text-teal-100">{isTyping ? 'typing...' : 'online'}</p>
+                    <p className="text-xs text-white/80">{isTyping ? 'typing...' : 'online'}</p>
                   </div>
-                  <MoreVertical className="w-5 h-5 text-white cursor-pointer" />
+                  <MoreVertical className="w-5 h-5 text-ink cursor-pointer" />
                 </div>
 
                 <div
                   ref={chatRef}
                   onScroll={handleScroll}
-                  className="flex-1 overflow-y-auto px-4 py-4 bg-slate-950 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjAyIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] relative"
+                  className="flex-1 overflow-y-auto px-4 py-4 bg-paper bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjAyIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] relative"
                   style={{ backgroundSize: '40px 40px' }}
                 >
                   <div className="flex justify-center mb-4">
-                    <div className="bg-slate-800/70 backdrop-blur-sm rounded-lg px-3 py-1 text-xs text-slate-300">
+                    <div className="bg-paper-deep rounded-lg px-3 py-1 text-xs text-ink-soft">
                       Today
                     </div>
                   </div>
@@ -422,8 +422,8 @@ const WhatsAppDemo = () => {
                       <div className={`max-w-[85%] ${message.direction === 'out' ? 'order-2' : 'order-1'}`}>
                         <div className={`rounded-lg px-3 py-2 ${
                           message.direction === 'out'
-                            ? 'bg-teal-600 text-white rounded-br-none'
-                            : 'bg-slate-800 text-slate-100 rounded-bl-none'
+                            ? 'bg-accent text-white rounded-br-none'
+                            : 'bg-paper-deep text-ink-soft rounded-bl-none'
                         }`}>
                           <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.text}</p>
                           <div className="flex items-center justify-end gap-1 mt-1">
@@ -438,26 +438,26 @@ const WhatsAppDemo = () => {
                               setCurrentPaymentId(message.metadata?.linkPreview?.url.split('/').pop() || null);
                               setShowPayment(true);
                             }}
-                            className="mt-2 bg-slate-800 rounded-lg p-3 border border-slate-700 cursor-pointer hover:bg-slate-750 transition-colors"
+                            className="mt-2 bg-paper-deep rounded-lg p-3 border border-rule cursor-pointer hover:bg-paper-deep transition-colors"
                           >
                             <div className="flex items-center gap-2 mb-2">
-                              <CreditCard className="w-4 h-4 text-teal-400" />
-                              <span className="text-xs font-semibold text-teal-400">Payment Link</span>
+                              <CreditCard className="w-4 h-4 text-accent" />
+                              <span className="text-xs font-semibold text-accent">Payment Link</span>
                             </div>
-                            <h4 className="font-semibold text-white text-sm mb-1">{message.metadata.linkPreview.title}</h4>
-                            <p className="text-xs text-slate-400">{message.metadata.linkPreview.description}</p>
+                            <h4 className="font-semibold text-ink text-sm mb-1">{message.metadata.linkPreview.title}</h4>
+                            <p className="text-xs text-muted">{message.metadata.linkPreview.description}</p>
                           </div>
                         )}
 
                         {message.metadata?.cards && message.metadata.cards.length > 0 && (
                           <div className="mt-2 space-y-2">
                             {message.metadata.cards.map((card, idx) => (
-                              <div key={idx} className="bg-slate-800 rounded-lg p-3 border border-slate-700">
-                                <h4 className="font-semibold text-white text-sm mb-1">{card.title}</h4>
-                                <p className="text-xs text-slate-400 mb-2">{card.subtitle}</p>
+                              <div key={idx} className="bg-paper-deep rounded-lg p-3 border border-rule">
+                                <h4 className="font-semibold text-ink text-sm mb-1">{card.title}</h4>
+                                <p className="text-xs text-muted mb-2">{card.subtitle}</p>
                                 <button
                                   onClick={() => handleCardAction(card.actionPayload, card.actionText)}
-                                  className="text-xs font-semibold text-teal-400 hover:text-teal-300"
+                                  className="text-xs font-semibold text-accent hover:text-ink"
                                 >
                                   {card.actionText}
                                 </button>
@@ -472,7 +472,7 @@ const WhatsAppDemo = () => {
                               <button
                                 key={idx}
                                 onClick={() => handleChipClick(chip)}
-                                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs rounded-full border border-slate-600 transition-colors"
+                                className="px-3 py-1.5 bg-paper-deep hover:bg-rule text-ink text-xs rounded-full border border-rule-strong transition-colors"
                               >
                                 {chip}
                               </button>
@@ -485,11 +485,11 @@ const WhatsAppDemo = () => {
 
                   {isTyping && (
                     <div className="mb-3 flex justify-start">
-                      <div className="bg-slate-800 text-slate-100 rounded-lg rounded-bl-none px-4 py-3">
+                      <div className="bg-paper-deep text-ink-soft rounded-lg rounded-bl-none px-4 py-3">
                         <div className="flex gap-1">
-                          <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                          <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                          <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                          <div className="w-2 h-2 bg-rule-strong rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                          <div className="w-2 h-2 bg-rule-strong rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                          <div className="w-2 h-2 bg-rule-strong rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                         </div>
                       </div>
                     </div>
@@ -501,13 +501,13 @@ const WhatsAppDemo = () => {
                 {showScrollDown && (
                   <button
                     onClick={() => scrollToBottom('smooth')}
-                    className="absolute bottom-20 right-8 bg-teal-600 hover:bg-teal-500 text-white rounded-full p-2 shadow-lg transition-all"
+                    className="absolute bottom-20 right-8 bg-accent hover:bg-accent text-white rounded-full p-2 transition-all"
                   >
                     <ChevronDown className="w-5 h-5" />
                   </button>
                 )}
 
-                <div className="bg-slate-800 px-3 py-2 flex items-end gap-2">
+                <div className="bg-paper-deep px-3 py-2 flex items-end gap-2">
                   <textarea
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
@@ -518,13 +518,13 @@ const WhatsAppDemo = () => {
                       }
                     }}
                     placeholder="Type a message"
-                    className="flex-1 bg-slate-900 text-white px-4 py-2 rounded-full resize-none focus:outline-none text-sm max-h-32"
+                    className="flex-1 bg-white text-ink px-4 py-2 rounded-full resize-none focus:outline-none text-sm max-h-32"
                     rows={1}
                   />
                   <button
                     onClick={handleSend}
                     disabled={!inputText.trim()}
-                    className="bg-teal-600 hover:bg-teal-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-full p-2 transition-colors flex-shrink-0"
+                    className="bg-accent hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-full p-2 transition-colors flex-shrink-0"
                   >
                     <Send className="w-5 h-5" />
                   </button>
@@ -558,33 +558,33 @@ const BehindTheChat = ({ messages }: { messages: Message[] }) => {
     .reverse();
 
   return (
-    <div className="w-full lg:w-[380px] bg-slate-900/60 border border-slate-800 rounded-2xl p-5 lg:h-[716px] flex flex-col">
+    <div className="w-full lg:w-[380px] bg-white border border-rule rounded-lg p-5 lg:h-[716px] flex flex-col">
       <div className="flex items-center gap-2 mb-1">
-        <Cpu className="w-4 h-4 text-teal-400" />
-        <h4 className="text-sm font-bold text-white">Behind the chat</h4>
+        <Cpu className="w-4 h-4 text-accent" />
+        <h4 className="text-sm font-bold text-ink">Behind the chat</h4>
       </div>
-      <p className="text-xs text-slate-500 mb-4">
+      <p className="text-xs text-muted mb-4">
         What the assistant decided on each message: the intent it detected, the conversation state it moved to, and the actions it took.
       </p>
 
       {turns.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center text-center text-xs text-slate-500 px-6 py-10">
+        <div className="flex-1 flex items-center justify-center text-center text-xs text-muted px-6 py-10">
           Send a message and each turn will show up here.
         </div>
       ) : (
         <div className="flex-1 overflow-y-auto space-y-3 pr-1">
           {turns.map(({ bot, user }) => (
-            <div key={bot.id} className="bg-slate-950/60 border border-slate-800 rounded-xl p-3 text-xs">
+            <div key={bot.id} className="bg-paper border border-rule rounded p-3 text-xs">
               {user && user.direction === 'out' && (
-                <p className="text-slate-300 mb-2 truncate">“{user.text}”</p>
+                <p className="text-ink-soft mb-2 truncate">“{user.text}”</p>
               )}
               <div className="grid grid-cols-[64px_1fr] gap-y-1.5 font-mono">
-                <span className="text-slate-500">intent</span>
-                <span className="text-teal-400">{bot.debug!.intent}</span>
-                <span className="text-slate-500">state</span>
-                <span className="text-amber-400">{bot.debug!.state}</span>
-                <span className="text-slate-500">actions</span>
-                <span className="text-slate-300">
+                <span className="text-muted">intent</span>
+                <span className="text-accent">{bot.debug!.intent}</span>
+                <span className="text-muted">state</span>
+                <span className="text-amber-700">{bot.debug!.state}</span>
+                <span className="text-muted">actions</span>
+                <span className="text-ink-soft">
                   {bot.debug!.toolCalls.length ? bot.debug!.toolCalls.join(', ') : 'reply only'}
                 </span>
               </div>
@@ -593,7 +593,7 @@ const BehindTheChat = ({ messages }: { messages: Message[] }) => {
         </div>
       )}
 
-      <p className="text-[11px] text-slate-500 mt-4 pt-3 border-t border-slate-800">
+      <p className="text-[11px] text-muted mt-4 pt-3 border-t border-rule">
         Rule-based engine: keyword intents, a state machine for booking, change and cancellation flows, three-strike moderation and a human handoff.
       </p>
     </div>

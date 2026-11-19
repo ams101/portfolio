@@ -52,33 +52,16 @@ const ABExperiment = () => {
   };
 
   return (
-    <section className="relative py-24 px-6 bg-slate-950 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white"></div>
-
-      <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] animate-floatSlow"></div>
-      <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-teal-500/10 rounded-full blur-[100px] animate-floatSlow delay-500"></div>
-
+    <section className="relative py-10 bg-paper overflow-hidden">
       <div className="max-w-5xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/10 rounded-full text-emerald-400 font-semibold text-sm mb-4 border border-emerald-500/30 backdrop-blur-sm">
-            <Beaker className="w-4 h-4" />
-            Experiment Playground
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            A/B Testing Simulator
-          </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Pick a metric, choose a lever, and see what happens. Sometimes the best decision is knowing when not to ship.
-          </p>
-        </div>
 
-        <div className="bg-slate-900/50 backdrop-blur-xl rounded-3xl border border-slate-800/50 p-8 md:p-10 relative overflow-hidden shadow-2xl">
+        <div className="bg-white rounded-lg border border-rule p-8 md:p-10 relative overflow-hidden ">
           {isAnimating && (
-            <div className="absolute inset-0 bg-slate-900/90 backdrop-blur-sm z-20 flex items-center justify-center">
+            <div className="absolute inset-0 bg-white z-20 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-16 h-16 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-white font-semibold text-lg">Running experiment...</p>
-                <p className="text-slate-400 text-sm mt-1">Analyzing user cohorts</p>
+                <div className="w-16 h-16 border-4 border-accent/40 border-t-accent rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-ink font-semibold text-lg">Running experiment...</p>
+                <p className="text-muted text-sm mt-1">Analyzing user cohorts</p>
               </div>
             </div>
           )}
@@ -87,38 +70,38 @@ const ABExperiment = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                  <div className="w-10 h-10 rounded bg-accent flex items-center justify-center ">
                     <TrendingUp className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Select Metric</h3>
+                  <h3 className="text-xl font-serif font-normal text-ink">Select Metric</h3>
                 </div>
                 {metrics.map((metric) => (
                   <button
                     key={metric.id}
                     onClick={() => setSelectedMetric(metric.id)}
-                    className={`group w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
+                    className={`group w-full text-left p-5 rounded-lg border-2 transition-all duration-300 ${
                       selectedMetric === metric.id
-                        ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border-emerald-500/50 shadow-xl shadow-emerald-500/10'
-                        : 'bg-slate-800/30 border-slate-700/50 hover:border-slate-600'
+                        ? 'bg-accent/10 border-accent/40 '
+                        : 'bg-paper-deep border-rule hover:border-ink'
                     }`}
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-3 rounded-xl transition-all duration-300 ${
+                        className={`p-3 rounded transition-all duration-300 ${
                           selectedMetric === metric.id
-                            ? 'bg-gradient-to-br from-emerald-500 to-teal-500 shadow-lg shadow-emerald-500/30'
-                            : 'bg-slate-700/50 group-hover:bg-slate-700'
+                            ? 'bg-accent '
+                            : 'bg-rule group-hover:bg-rule'
                         }`}
                       >
                         <metric.icon
                           className={`w-6 h-6 ${
-                            selectedMetric === metric.id ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'
+                            selectedMetric === metric.id ? 'text-ink' : 'text-muted group-hover:text-ink'
                           }`}
                         />
                       </div>
                       <span
                         className={`font-bold text-lg ${
-                          selectedMetric === metric.id ? 'text-white' : 'text-slate-400 group-hover:text-white'
+                          selectedMetric === metric.id ? 'text-ink' : 'text-muted group-hover:text-ink'
                         }`}
                       >
                         {metric.label}
@@ -130,38 +113,38 @@ const ABExperiment = () => {
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-teal-500/25">
+                  <div className="w-10 h-10 rounded bg-accent flex items-center justify-center ">
                     <Beaker className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Choose Lever</h3>
+                  <h3 className="text-xl font-serif font-normal text-ink">Choose Lever</h3>
                 </div>
                 {levers.map((lever) => (
                   <button
                     key={lever.id}
                     onClick={() => setSelectedLever(lever.id)}
-                    className={`group w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
+                    className={`group w-full text-left p-5 rounded-lg border-2 transition-all duration-300 ${
                       selectedLever === lever.id
-                        ? 'bg-gradient-to-r from-teal-500/20 to-emerald-500/20 border-teal-500/50 shadow-xl shadow-teal-500/10'
-                        : 'bg-slate-800/30 border-slate-700/50 hover:border-slate-600'
+                        ? 'bg-accent/10 border-accent/40 '
+                        : 'bg-paper-deep border-rule hover:border-ink'
                     }`}
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-3 rounded-xl transition-all duration-300 ${
+                        className={`p-3 rounded transition-all duration-300 ${
                           selectedLever === lever.id
-                            ? 'bg-gradient-to-br from-teal-500 to-emerald-500 shadow-lg shadow-teal-500/30'
-                            : 'bg-slate-700/50 group-hover:bg-slate-700'
+                            ? 'bg-accent '
+                            : 'bg-rule group-hover:bg-rule'
                         }`}
                       >
                         <lever.icon
                           className={`w-6 h-6 ${
-                            selectedLever === lever.id ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'
+                            selectedLever === lever.id ? 'text-ink' : 'text-muted group-hover:text-ink'
                           }`}
                         />
                       </div>
                       <span
                         className={`font-bold text-lg ${
-                          selectedLever === lever.id ? 'text-white' : 'text-slate-400 group-hover:text-white'
+                          selectedLever === lever.id ? 'text-ink' : 'text-muted group-hover:text-ink'
                         }`}
                       >
                         {lever.label}
@@ -176,10 +159,10 @@ const ABExperiment = () => {
               <button
                 onClick={handleRunExperiment}
                 disabled={!selectedMetric || !selectedLever || isAnimating}
-                className={`px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
+                className={`px-8 py-4 rounded font-bold text-lg transition-all duration-300 ${
                   selectedMetric && selectedLever && !isAnimating
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/40 hover:scale-105'
-                    : 'bg-slate-800/50 text-slate-500 cursor-not-allowed'
+                    ? 'bg-accent text-white '
+                    : 'bg-paper-deep text-muted cursor-not-allowed'
                 }`}
               >
                 Run Experiment
@@ -187,7 +170,7 @@ const ABExperiment = () => {
               {(selectedMetric || selectedLever || showResult) && (
                 <button
                   onClick={handleReset}
-                  className="px-6 py-4 rounded-xl font-bold text-lg bg-slate-800/50 text-slate-300 border border-slate-700/50 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 flex items-center gap-2"
+                  className="px-6 py-4 rounded font-bold text-lg bg-paper-deep text-ink-soft border border-rule hover:bg-paper-deep hover:border-ink transition-all duration-300 flex items-center gap-2"
                 >
                   <X className="w-5 h-5" />
                   Reset
@@ -197,35 +180,35 @@ const ABExperiment = () => {
 
             {showResult && (
               <div className="mt-8 animate-fadeIn">
-                <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 p-8">
+                <div className="bg-paper-deep rounded-lg border border-rule p-8">
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
-                    <div className="text-center p-6 bg-slate-900/50 rounded-xl border border-slate-700/30">
-                      <div className={`text-4xl font-bold mb-2 ${result.isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
+                    <div className="text-center p-6 bg-white rounded border border-rule">
+                      <div className={`text-4xl font-bold mb-2 ${result.isPositive ? 'text-accent' : 'text-red-700'}`}>
                         {result.isPositive ? '+' : '-'}{result.change}%
                       </div>
-                      <div className="text-slate-500 text-sm uppercase tracking-wide font-semibold">Change</div>
+                      <div className="text-muted text-sm uppercase tracking-wide font-semibold">Change</div>
                     </div>
-                    <div className="text-center p-6 bg-slate-900/50 rounded-xl border border-slate-700/30">
-                      <div className="text-4xl font-bold text-teal-400 mb-2">{result.confidence}%</div>
-                      <div className="text-slate-500 text-sm uppercase tracking-wide font-semibold">Confidence</div>
+                    <div className="text-center p-6 bg-white rounded border border-rule">
+                      <div className="text-4xl font-serif font-normal text-accent mb-2">{result.confidence}%</div>
+                      <div className="text-muted text-sm uppercase tracking-wide font-semibold">Confidence</div>
                     </div>
-                    <div className="text-center p-6 bg-slate-900/50 rounded-xl border border-slate-700/30">
-                      <div className="text-4xl font-bold text-slate-300 mb-2">7d</div>
-                      <div className="text-slate-500 text-sm uppercase tracking-wide font-semibold">Duration</div>
+                    <div className="text-center p-6 bg-white rounded border border-rule">
+                      <div className="text-4xl font-serif font-normal text-ink-soft mb-2">7d</div>
+                      <div className="text-muted text-sm uppercase tracking-wide font-semibold">Duration</div>
                     </div>
                   </div>
 
-                  <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
+                  <div className="bg-amber-50 border border-amber-200 rounded p-6">
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 p-3 bg-amber-500/20 rounded-xl">
-                        <AlertCircle className="w-6 h-6 text-amber-400" />
+                      <div className="flex-shrink-0 p-3 bg-amber-50 rounded">
+                        <AlertCircle className="w-6 h-6 text-amber-700" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-xl font-bold text-amber-300 mb-3">Product Commentary</h4>
-                        <p className="text-white font-semibold mb-3">
+                        <h4 className="text-xl font-serif font-normal text-amber-700 mb-3">Product Commentary</h4>
+                        <p className="text-ink font-semibold mb-3">
                           "This is when you don't ship."
                         </p>
-                        <p className="text-slate-400 text-sm leading-relaxed">
+                        <p className="text-muted text-sm leading-relaxed">
                           A {Math.abs(parseFloat(result.change))}% {result.isPositive ? 'increase' : 'decrease'} might look
                           {result.isPositive ? ' promising' : ' concerning'}, but ask yourself: Does this align with long-term strategy?
                           What are the second-order effects? Sometimes the smartest move is to dig deeper, run another iteration,
