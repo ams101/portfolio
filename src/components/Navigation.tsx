@@ -1,127 +1,78 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Home } from 'lucide-react';
+import { useState } from 'react';
+
+export type NavTarget = 'home' | 'work' | 'built' | 'about' | 'writing' | 'contact';
 
 interface NavigationProps {
-  onHomeClick: () => void;
-  showHomeButton: boolean;
-  onProductDemoClick: () => void;
+  active: NavTarget | null;
+  onNavigate: (target: NavTarget) => void;
 }
 
-const Navigation = ({ onHomeClick, showHomeButton, onProductDemoClick }: NavigationProps) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const ITEMS: { target: NavTarget; label: string }[] = [
+  { target: 'work', label: 'Work' },
+  { target: 'built', label: 'Things I’ve built' },
+  { target: 'writing', label: 'Writing' },
+  { target: 'about', label: 'About' },
+  { target: 'contact', label: 'Contact' },
+];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+const Navigation = ({ active, onNavigate }: NavigationProps) => {
+  const [open, setOpen] = useState(false);
 
-  const navItems = [
-    { label: 'About', href: '#about', isPage: false },
-    { label: 'Case Studies', href: '#case-studies', isPage: false },
-    { label: 'Product Demo', href: '#product-demo', isPage: true },
-    { label: 'Writing', href: '#writing', isPage: false },
-    { label: 'Contact', href: '#contact', isPage: false },
-  ];
-
-  const handleNavClick = (item: typeof navItems[0]) => {
-    if (item.isPage && item.href === '#product-demo') {
-      onProductDemoClick();
-      setMobileMenuOpen(false);
-    } else {
-      scrollToSection(item.href);
-    }
+  const go = (target: NavTarget) => {
+    setOpen(false);
+    onNavigate(target);
   };
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
-  };
+  const linkClass = (target: NavTarget) =>
+    `text-[15px] text-ink no-underline border-b pb-0.5 transition-colors ${
+      active === target ? 'border-accent' : 'border-transparent hover:border-rule-strong'
+    }`;
 
   return (
-    <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-slate-950/90 backdrop-blur-xl shadow-xl shadow-slate-950/20 border-b border-slate-800/50'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              {showHomeButton && (
-                <button
-                  onClick={onHomeClick}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-xl hover:from-teal-400 hover:to-emerald-400 transition-all duration-300 font-medium shadow-lg shadow-teal-500/25"
-                >
-                  <Home className="w-4 h-4" />
-                  <span className="hidden sm:inline">Back to Home</span>
-                </button>
-              )}
-              <button
-                onClick={() => {
-                  if (showHomeButton) {
-                    onHomeClick();
-                  } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }
-                }}
-                className="text-xl font-bold text-white hover:text-teal-400 transition-colors"
-              >
-                Atib Shaikh
-              </button>
-            </div>
+    <header className="max-w-page mx-auto px-6 md:px-8">
+      <nav aria-label="Main" className="flex items-baseline justify-between gap-4 py-7 border-b border-rule">
+        <button onClick={() => go('home')} className="font-serif text-[22px] leading-none text-ink">
+          Atib Shaikh
+        </button>
 
-            {!showHomeButton && (
-              <div className="hidden md:flex items-center gap-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.href}
-                    onClick={() => handleNavClick(item)}
-                    className="px-4 py-2 text-slate-400 hover:text-white font-medium transition-colors rounded-lg hover:bg-slate-800/50"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        <div className="hidden md:flex items-baseline gap-7">
+          {ITEMS.map(item => (
+            <button key={item.target} onClick={() => go(item.target)} className={linkClass(item.target)}>
+              {item.label}
             </button>
-          </div>
+          ))}
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="text-[15px] text-ink border-b border-transparent hover:border-rule-strong pb-0.5">
+            Resume
+          </a>
         </div>
+
+        <button
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="md:hidden font-mono text-[13px] text-ink min-h-[44px] px-1"
+        >
+          {open ? 'Close' : 'Menu'}
+        </button>
       </nav>
 
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-          <div className="fixed top-[72px] left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800/50 shadow-xl">
-            <div className="px-6 py-4 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => handleNavClick(item)}
-                  className="block w-full text-left px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/50 font-medium transition-colors rounded-lg"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
+      {open && (
+        <div id="mobile-menu" className="md:hidden flex flex-col border-b border-rule">
+          {ITEMS.map(item => (
+            <button
+              key={item.target}
+              onClick={() => go(item.target)}
+              className="text-left font-serif text-2xl py-3 border-b border-rule last:border-b-0"
+            >
+              {item.label}
+            </button>
+          ))}
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="font-serif text-2xl py-3">
+            Resume
+          </a>
         </div>
       )}
-    </>
+    </header>
   );
 };
 
