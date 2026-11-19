@@ -9,6 +9,55 @@
     --color-warm: 251 146 60;
     --color-warm-dark: 234 88 12;
   }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    @apply bg-accent text-paper;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.accent');
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .label {
+    @apply font-mono text-[13px] text-muted;
+  }
+
+  .link {
+    @apply underline decoration-accent decoration-1 underline-offset-4 hover:decoration-2;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2.5 min-h-[48px] px-[22px] bg-ink text-paper rounded font-medium text-base transition-colors hover:bg-ink-soft;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 min-h-[44px] px-5 border border-ink rounded font-medium text-[15px] transition-colors hover:bg-paper-deep;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center gap-2.5 min-h-[48px] px-[22px] bg-accent text-white rounded font-medium text-base transition-opacity hover:opacity-90;
+  }
+
+  .row-arrow {
+    @apply text-accent transition-transform duration-150;
+  }
+
+  .group:hover .row-arrow {
+    transform: translateX(4px);
+  }
 }
 
 @layer utilities {
