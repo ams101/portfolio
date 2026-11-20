@@ -110,3 +110,54 @@ export type NameDecision = 'verified' | 'flagged' | 'failed';
 
 export const decideName = (score: number): NameDecision =>
   score >= VERIFY_AT ? 'verified' : score >= FLAG_FROM ? 'flagged' : 'failed';
+
+// ---------------------------------------------------------------------------
+// Improved scoring
+// Two fixes found by testing the original against realistic pairs:
+//  1. A token-subset match needs at least two names, including the surname.
+//     ("Khan" alone no longer matches "Mohammed Arif Khan".)
+//  2. If the first names clearly differ, the score is capped below the verify
+//     threshold, so a person reviews it. Short forms and initials still count as
+//     the same first name. ("Rahul Verma" vs "Rakesh Kumar Verma" is flagged,
+//     not verified.)
+// ---------------------------------------------------------------------------
+
+const FIRST_NAME_ALIASES: string[][] = [
+  ['mohd', 'md', 'mohammed', 'mohammad', 'mohamed', 'muhammad', 'mohamad'],
+  ['syed', 'sayed', 'saiyed'],
+  ['shaikh', 'sheikh', 'shaik', 'sk'],
+];
+
+function sameFirstName(a: string, b: string): boolean {
+  if (!a || !b) return false;
+  if (a === b) return true;
+  if (a.length === 1 || b.length === 1) return a[0] === b[0]; // initials
+  if (FIRST_NAME_ALIASES.some(g => g.includes(a) && g.includes(b))) return true;
+  return jaroWinkler(a, b) >= 0.9; // small spelling slips: "pria" / "priya"
+}
+
+export interface ImprovedMatch extends NameMatch {
+  subsetAllowed: boolean;
+  firstNamesMatch: boolean;
+  capped: boolean;
+}
+
+export function scoreNamesImproved(a: string, b: string): ImprovedMatch {
+  const base = scoreNames(a, b);
+  const ta = base.a.split(' ').filter(Boolean);
+  const tb = base.b.split(' ').filter(Boolean);
+  const [short, long] = ta.length <= tb.length ? [ta, tb] : [tb, ta];
+  const subsetAllowed = base.tokenSubset && short.length >= 2 && short.includes(long[long.length - 1]);
+  // A valid subset (e.g. a dropped leading name) already proves the names line up.
+  const firstNamesMatch = subsetAllowed || sameFirstName(ta[0] ?? '', tb[0] ?? '');
+
+  let score: number;
+  if (base.exact) score = 100;
+  else if (subsetAllowed) score = 90;
+  else score = Math.min(100, base.jaroWinkler + base.soundexBonus);
+
+  const capped = !base.exact && !firstNamesMatch && score >= VERIFY_AT;
+  if (capped) score = VERIFY_AT - 1;
+
+  return { ...base, score, subsetAllowed, firstNamesMatch, capped };
+}
