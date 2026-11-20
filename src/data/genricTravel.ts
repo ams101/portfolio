@@ -325,3 +325,35 @@ export const BENCHMARK: BenchmarkRow[] = [
     rawExcerpt: 'Vietnam - Buy 1 Get 1 Free … 4 Nights 5 Days … Hotel Meals Flights Sightseeing Transfer … 68 798 Starting price per adult …',
   },
 ];
+
+// ---------------------------------------------------------------------------
+// ID check at checkout: one booking, its guests, and the test PAN records
+// ---------------------------------------------------------------------------
+
+export interface BookingGuest {
+  id: string;
+  name: string; // as entered at booking
+  nationality: 'Indian' | 'Portuguese';
+  dob: string; // ISO date, from the booking profile
+}
+
+export const PAN_BOOKING = {
+  id: 'GRT-7Q4K2M',
+  trip: 'Experience Vietnam',
+  variant: 'Regular batches',
+  batch: '23–30 Jan 2027',
+  bookedOn: '14 Nov 2026',
+  pricePerPerson: 44817,
+  guests: [
+    { id: 'g1', name: 'Mohd Arif Khan', nationality: 'Indian', dob: '1992-03-14' },
+    { id: 'g2', name: 'Rahul Verma', nationality: 'Indian', dob: '1990-08-02' },
+    { id: 'g3', name: 'Ana Ferreira', nationality: 'Portuguese', dob: '1994-06-30' },
+  ] as BookingGuest[],
+};
+
+/** Fictional PAN records the mock verifier knows. Only these are accepted. */
+export const TEST_PANS: { pan: string; nameOnRecord: string; dob: string; hint: string }[] = [
+  { pan: 'ABKPK1234Q', nameOnRecord: 'Mohammed Arif Khan', dob: '1992-03-14', hint: 'Short form of a first name' },
+  { pan: 'ACVPV5678L', nameOnRecord: 'Rakesh Kumar Verma', dob: '1990-08-02', hint: 'Same surname, different person' },
+  { pan: 'ADMPM9012H', nameOnRecord: 'Priya Sreekumar Menon', dob: '1995-11-21', hint: 'Date of birth won’t match' },
+];
