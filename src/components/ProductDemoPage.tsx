@@ -3,6 +3,7 @@ import TaraDemo from './TaraDemo';
 import TripComparator from './TripComparator';
 import PanCheck from './PanCheck';
 import OpsSection from './OpsSection';
+import CoPilotReplay from './CoPilotReplay';
 import Section from './Section';
 import ProductDemo from './ProductDemo';
 import ABExperiment from './ABExperiment';
@@ -114,6 +115,14 @@ const ProductDemoPage = () => {
           <d.Component />
         </div>
       ))}
+
+      <div id="side-projects" className="scroll-mt-24 pt-8 pb-24">
+        <header className="flex flex-col gap-2 pb-10">
+          <p className="label m-0">Side projects</p>
+          <h2 className="m-0 font-serif font-normal text-[36px] md:text-[44px] leading-[1.05]">Built for my own problems</h2>
+        </header>
+        <CoPilotReplay />
+      </div>
     </div>
   );
 };
