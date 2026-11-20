@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TaraDemo from './TaraDemo';
+import TripComparator from './TripComparator';
 import Section from './Section';
 import ProductDemo from './ProductDemo';
 import ABExperiment from './ABExperiment';
@@ -60,6 +61,8 @@ const ProductDemoPage = () => {
       </header>
 
       <TaraDemo />
+
+      <TripComparator />
 
       <Section label="More to try" className="pt-24 pb-24">
         <ul className="m-0 p-0 list-none">
