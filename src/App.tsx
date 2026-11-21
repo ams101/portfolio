@@ -45,10 +45,12 @@ function App() {
     scrollToId(target);
   };
 
-  const openTara = () => {
+  const openSection = (id: string) => {
     setCurrentView('product-demo');
-    scrollToId('tara');
+    scrollToId(id);
   };
+
+  const openTara = () => openSection('tara');
 
   const active: NavTarget | null =
     currentView === 'product-demo' ? 'built' : currentView === 'case-study' ? 'work' : currentView === 'article' ? 'writing' : null;
@@ -62,7 +64,7 @@ function App() {
           <>
             <Hero onSeeBuilt={() => show('product-demo')} />
             <CaseStudies onViewDetails={id => show('case-study', id)} />
-            <BuiltTeaser onTryTara={openTara} onSeeAll={() => show('product-demo')} />
+            <BuiltTeaser onTryTara={openTara} onSeeAll={() => show('product-demo')} onOpenSection={openSection} />
             <About />
             <Writing onReadArticle={id => show('article', id)} />
             <Contact />
