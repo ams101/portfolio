@@ -15,7 +15,7 @@ const Writing = () => (
             }`}
           >
             <span className="flex-[1_1_420px] flex flex-col gap-1">
-              <span className="font-serif text-[26px] leading-[1.2] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
+              <span className="font-display font-medium text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.01em] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
                 {article.title}
               </span>
               <span className="text-base text-muted">{article.subtitle}</span>

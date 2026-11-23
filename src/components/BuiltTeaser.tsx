@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Section from './Section';
 import { hrefFor } from '../routes';
@@ -59,13 +58,13 @@ const Row = ({ item }: { item: Item }) => {
         <img src={item.thumb} alt={item.alt} loading="lazy" width={168} height={104} className="w-full h-full object-cover object-top" />
       </span>
       <span className="flex-[1_1_300px] min-w-0 flex flex-col gap-1">
-        <span className="font-serif text-[24px] md:text-[26px] leading-[1.2] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
+        <span className="font-display font-medium text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.01em] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
           {item.title}
         </span>
         <span className="text-[15px] text-muted">{item.line}</span>
       </span>
       <span className="flex items-baseline gap-5 sm:flex-col sm:items-end sm:gap-2 whitespace-nowrap">
-        <span className="font-mono text-xs text-muted">{item.kind}</span>
+        <span className="text-[13px] text-muted">{item.kind}</span>
         <span className="inline-flex items-center gap-2 text-[15px] font-medium text-accent">
           {item.cta}
           {item.href ? (
@@ -89,104 +88,19 @@ const Row = ({ item }: { item: Item }) => {
   );
 };
 
-// The call plays once when it scrolls into view: each line arrives from its
-// speaker's side, the status follows whose turn it is, the clock runs 0:36 → 0:42.
-const CALL = [
-  { at: 0, from: 'tara', text: 'You’re on the video KYC. It takes about three minutes. Can you do it now?' },
-  { at: 2600, from: 'caller', text: 'I’m driving right now.' },
-  { at: 4000, from: 'tara', text: 'No problem. What time works for you later today?' },
-] as const;
-const START_SEC = 36;
-const END_SEC = 42;
-
-const reducedMotion = () =>
-  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-
-const TaraCall = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const skip = reducedMotion() || typeof IntersectionObserver === 'undefined';
-  const [shown, setShown] = useState(skip ? CALL.length : 0);
-  const [sec, setSec] = useState(skip ? END_SEC : START_SEC);
-  const [started, setStarted] = useState(skip);
-
-  useEffect(() => {
-    if (skip || !ref.current) return;
-    const io = new IntersectionObserver(
-      entries => {
-        if (entries.some(e => e.isIntersecting)) {
-          setStarted(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.5 },
-    );
-    io.observe(ref.current);
-    return () => io.disconnect();
-  }, [skip]);
-
-  useEffect(() => {
-    if (!started || skip) return;
-    const timers = CALL.map((line, i) => window.setTimeout(() => setShown(i + 1), line.at));
-    const clock = window.setInterval(() => setSec(s => (s < END_SEC ? s + 1 : s)), 1000);
-    const stop = window.setTimeout(() => window.clearInterval(clock), (END_SEC - START_SEC) * 1000 + 50);
-    return () => {
-      timers.forEach(window.clearTimeout);
-      window.clearInterval(clock);
-      window.clearTimeout(stop);
-    };
-  }, [started, skip]);
-
-  const speaking = shown > 0 && CALL[shown - 1].from === 'tara' && sec < END_SEC;
-  const status = !started ? 'Ringing' : speaking ? 'Speaking' : 'Listening';
-
-  return (
-    <div
-      ref={ref}
-      aria-hidden="true"
-      className="flex-[0_1_300px] bg-ink text-[#EDEAE3] rounded-[28px] p-6 flex flex-col gap-3 min-h-[300px]"
-    >
-      <div className="flex items-center gap-3 pb-3 border-b border-[#34322E]">
-        <span className="w-9 h-9 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-lg">T</span>
-        <span className="flex flex-col leading-tight">
-          <span className="text-[15px]">Tara</span>
-          <span className="font-mono text-[11px] text-[#A8A397] tabular-nums">
-            {status} · 0:{String(sec).padStart(2, '0')}
-          </span>
-        </span>
-      </div>
-      {CALL.map((line, i) => (
-        <p
-          key={i}
-          data-on={i < shown ? '' : undefined}
-          className={`call-line m-0 max-w-[85%] px-3 py-2 rounded-[14px] text-sm leading-[1.45] ${
-            line.from === 'tara' ? 'self-start bg-[#2A2825]' : 'call-line--caller self-end bg-[#EDEAE3] text-ink'
-          }`}
-        >
-          {line.text}
-        </p>
-      ))}
-    </div>
-  );
-};
-
 const BuiltTeaser = () => (
-  <Section id="built" label="Things I’ve built" className="py-20 md:py-24 border-t border-rule">
-    <div className="flex justify-end -mt-1 mb-2">
-      <span className="font-mono text-xs text-muted">{MORE.length + 1} things you can try</span>
-    </div>
-    <div className="flex flex-wrap items-center gap-10 pt-6 border-t border-ink">
-      <div className="flex-[1_1_340px] flex flex-col gap-4">
-        <h3 className="m-0 font-serif font-normal text-[40px] leading-[1.1]">Talk to Tara</h3>
+  <Section id="built" label="Things I’ve built" note={`${MORE.length + 1} you can try`} className="py-20 md:py-24 border-t border-rule">
+    <div className="pt-8 border-t border-ink">
+      <div className="flex flex-col gap-4 max-w-[640px]">
+        <h3 className="m-0 font-display font-medium text-[32px] leading-[1.1] tracking-[-0.02em]">Talk to Tara</h3>
         <p className="m-0 text-ink-soft">
-          A real voice AI agent, working for a concept company. She calls approved credit-card customers and gets them to an active card, one step at a time, in Hindi or
-          English. Pick a situation and try to trip her up.
+          A real voice AI agent, working for a concept company. She calls approved credit-card customers and gets them to
+          an active card, one step at a time, in Hindi or English. Pick a situation and try to trip her up.
         </p>
-        <div className="flex flex-wrap items-center gap-5">
+        <div className="pt-2">
           <a href={hrefFor.built('tara')} className="btn-accent">Start a 1-minute call</a>
         </div>
-      </div>
-
-      <TaraCall />
+    </div>
     </div>
 
     <ul className="m-0 p-0 list-none mt-12 border-t border-ink">

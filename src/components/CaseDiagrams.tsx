@@ -3,11 +3,11 @@ import type { ReactNode } from 'react';
 // Hand-drawn-style flow diagrams for the case studies, in the site's palette.
 // Built only from facts in the case-study text; no real screenshots or data.
 
-const INK = '#1A1A1A';
-const MUTED = '#5A5650';
-const RULE = '#BDB6A8';
-const ACCENT = '#B3330E';
-const SERIF = 'Newsreader, Georgia, serif';
+const INK = '#171717';
+const MUTED = '#6B6B6B';
+const RULE = '#D4D4D4';
+const ACCENT = '#B42318';
+const SERIF = '"Anek Latin", "IBM Plex Sans", sans-serif';
 const SANS = '"IBM Plex Sans", system-ui, sans-serif';
 const MONO = '"IBM Plex Mono", ui-monospace, monospace';
 
@@ -26,7 +26,7 @@ interface BoxProps {
 
 const Box = ({ x, y, w, h, title, lines = [], tone = 'plain', dashed = false }: BoxProps) => {
   const stroke = tone === 'accent' ? ACCENT : tone === 'muted' ? RULE : INK;
-  const fill = tone === 'accent' ? '#F7E9E4' : tone === 'muted' ? '#ECE8DF' : '#FFFFFF';
+  const fill = tone === 'accent' ? '#F7E9E4' : tone === 'muted' ? '#F4F4F5' : '#FFFFFF';
   const titleColor = tone === 'muted' ? MUTED : INK;
   const blockH = 22 + lines.length * 17;
   const top = y + (h - blockH) / 2 + 16;

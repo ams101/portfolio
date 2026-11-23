@@ -383,7 +383,7 @@ const RAGPlayground = () => {
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="bg-paper-deep rounded-lg border border-rule p-6">
-              <h3 className="text-2xl font-serif font-normal text-ink mb-6">Try It</h3>
+              <h3 className="text-2xl font-display font-normal text-ink mb-6">Try It</h3>
 
               <div className="space-y-4">
                 <div>
@@ -416,7 +416,7 @@ const RAGPlayground = () => {
                   <button
                     onClick={runStepByStep}
                     disabled={isRunning}
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isRunning ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5" />}
                     Step-by-Step
@@ -425,7 +425,7 @@ const RAGPlayground = () => {
                   <button
                     onClick={runInstantly}
                     disabled={isRunning}
-                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-rule hover:bg-rule text-ink font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-rule hover:bg-rule text-ink font-semibold rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Play className="w-5 h-5" />
                     Instantly
@@ -433,7 +433,7 @@ const RAGPlayground = () => {
 
                   <button
                     onClick={reset}
-                    className="px-4 py-3 bg-rule hover:bg-rule text-ink rounded-lg transition-all duration-300"
+                    className="px-4 py-3 bg-rule hover:bg-rule text-ink rounded-lg transition duration-300"
                   >
                     <RotateCcw className="w-5 h-5" />
                   </button>
@@ -486,7 +486,7 @@ const RAGPlayground = () => {
 
           <div className="space-y-4">
             <div className="bg-paper-deep rounded-lg border border-rule p-6">
-              <h3 className="text-2xl font-serif font-normal text-ink mb-6">Behind the Scenes</h3>
+              <h3 className="text-2xl font-display font-normal text-ink mb-6">Behind the Scenes</h3>
 
               <div className="space-y-3">
                 {steps.map((step) => (
@@ -540,7 +540,7 @@ const StepCard = ({ step, isExpanded, onToggle, selectedMovieId, setSelectedMovi
   };
 
   return (
-    <div className={`border rounded-lg transition-all duration-300 ${getStatusColor()}`}>
+    <div className={`border rounded-lg transition duration-300 ${getStatusColor()}`}>
       <button
         onClick={onToggle}
         className="w-full px-4 py-3 flex items-center justify-between hover:bg-paper-deep transition-colors rounded-lg"

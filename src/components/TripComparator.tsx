@@ -1,3 +1,4 @@
+import { AlertTriangle } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import {
   BENCHMARK,
@@ -35,10 +36,9 @@ const TripComparator = () => {
   return (
     <section id="comparator" aria-labelledby="comparator-title" className="scroll-mt-24 border-t-2 border-ink pt-10 mt-24">
       <div className="flex flex-col gap-2.5 max-w-[680px] pb-8">
-        <p className="m-0 font-mono text-xs text-muted">AI · structured extraction · {BRAND.name} (fictional company)</p>
-        <h2 id="comparator-title" className="m-0 font-serif font-normal text-[40px] md:text-[48px] leading-[1.05]">Trip comparator</h2>
+        <h2 id="comparator-title" className="m-0 font-display font-medium text-[40px] md:text-[48px] leading-[1.05] tracking-[-0.02em]">Trip comparator</h2>
         <p className="m-0 text-lg md:text-[19px] text-ink-soft">
-          Every travel page lists the same things differently. A model turns each page into one fixed structure, so trips
+          Every travel page lists the same things differently. For {BRAND.name}, a fictional company, a model turns each page into one fixed structure, so trips
           can be compared side by side: by travellers on the trip page, and by the product team against competitors.
         </p>
       </div>
@@ -82,7 +82,7 @@ const TripComparator = () => {
           aria-expanded={showHow}
           className="w-full flex flex-wrap justify-between items-center gap-2 min-h-[64px] border-t border-ink border-b border-rule text-left"
         >
-          <span className="font-serif text-2xl">How this was generated</span>
+          <span className="font-display text-2xl">How this was generated</span>
           <span className="font-mono text-[13px] text-muted">Page text · prompt · structured output {showHow ? '−' : '+'}</span>
         </button>
         {showHow && <HowItWorks variant={variant} />}
@@ -111,12 +111,12 @@ const TripPageTab = ({ variant, onPick, comparing, setComparing, a, b }: TripPag
       {/* Mock trip page */}
       <div className="bg-white border border-rule">
         <div className="flex items-center justify-between px-5 md:px-7 py-3 border-b border-rule">
-          <span className="font-serif text-lg">{BRAND.name}</span>
+          <span className="font-display text-lg">{BRAND.name}</span>
           <span className="font-mono text-[11px] text-muted">Sample trip page</span>
         </div>
         <div className="px-5 md:px-7 py-6 flex flex-col gap-5">
           <div className="flex flex-col gap-1.5">
-            <h3 className="m-0 font-serif font-normal text-[30px] leading-[1.15]">{VIETNAM.name}</h3>
+            <h3 className="m-0 font-display font-normal text-[30px] leading-[1.15]">{VIETNAM.name}</h3>
             <p className="m-0 text-sm text-muted">
               {p.pickup} → {p.drop} · {p.duration} · up to {VIETNAM.groupSize} travellers
             </p>
@@ -157,7 +157,7 @@ const TripPageTab = ({ variant, onPick, comparing, setComparing, a, b }: TripPag
             </div>
             <div className="bg-paper border border-rule p-4 flex flex-col gap-2 self-start">
               <p className="m-0 text-sm text-muted">From</p>
-              <p className="m-0 font-serif text-[30px] leading-none">
+              <p className="m-0 font-display text-[30px] leading-none">
                 {inr(cheapest)} <span className="text-sm font-sans text-muted">/ person</span>
               </p>
               {variant.batches.map(bt => (
@@ -222,8 +222,8 @@ const VariantComparison = ({ a, b }: { a: TripVariant; b: TripVariant }) => {
           <thead>
             <tr className="border-b border-ink text-left">
               <th className="py-2 pr-4 font-mono text-xs font-normal text-muted w-[28%]">Field</th>
-              <th className="py-2 pr-4 font-serif text-lg font-normal">{a.name}</th>
-              <th className="py-2 font-serif text-lg font-normal">{b.name}</th>
+              <th className="py-2 pr-4 font-display text-lg font-normal">{a.name}</th>
+              <th className="py-2 font-display text-lg font-normal">{b.name}</th>
             </tr>
           </thead>
           <tbody>
@@ -248,7 +248,7 @@ const VariantComparison = ({ a, b }: { a: TripVariant; b: TripVariant }) => {
 
       <div className="bg-white border border-rule p-5 flex flex-col gap-1.5">
         <p className="label m-0">What actually differs</p>
-        <p className="m-0 font-serif text-[22px] leading-[1.4]">
+        <p className="m-0 font-display text-[22px] leading-[1.4]">
           Same route, same plan, same inclusions. The {b.name} variant costs {inr(diff)} ({pct}%) more for the
           festive dates.
         </p>
@@ -329,7 +329,7 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
                       <ul className="m-0 p-0 list-none flex flex-col gap-1">
                         {r.flags.map(f => (
                           <li key={f.text} className={`text-[12px] leading-snug ${f.level === 'warn' ? 'text-amber-700' : 'text-muted'}`}>
-                            {f.level === 'warn' ? '⚠ ' : ''}
+                            {f.level === 'warn' && <AlertTriangle aria-hidden="true" size={12} strokeWidth={1.5} className="inline mr-1 align-[-1px]" />}
                             {f.text}
                           </li>
                         ))}
@@ -394,7 +394,7 @@ const HowItWorks = ({ variant }: { variant: TripVariant }) => {
           <li key={s.n} className="flex gap-3 py-4 border-t border-rule">
             <span className="font-mono text-[13px] text-accent pt-1">{s.n}</span>
             <div className="flex flex-col gap-1">
-              <h3 className="m-0 font-serif font-normal text-xl">{s.title}</h3>
+              <h3 className="m-0 font-display font-normal text-xl">{s.title}</h3>
               <p className="m-0 text-[14px] text-ink-soft">{s.body}</p>
             </div>
           </li>

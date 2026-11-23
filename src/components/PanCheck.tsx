@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { BRAND, PAN_BOOKING, TEST_PANS, type BookingGuest } from '../data/genricTravel';
 import {
@@ -163,10 +164,9 @@ const PanCheck = () => {
     <section id="id-check" aria-labelledby="id-check-title" className="scroll-mt-24 border-t-2 border-ink pt-10 mt-24">
       <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
         <div className="flex flex-col gap-2.5 max-w-[680px]">
-          <p className="m-0 font-mono text-xs text-muted">Payments · compliance · {BRAND.name} (fictional company)</p>
-          <h2 id="id-check-title" className="m-0 font-serif font-normal text-[40px] md:text-[48px] leading-[1.05]">ID check at checkout</h2>
+          <h2 id="id-check-title" className="m-0 font-display font-medium text-[40px] md:text-[48px] leading-[1.05] tracking-[-0.02em]">ID check at checkout</h2>
           <p className="m-0 text-lg md:text-[19px] text-ink-soft">
-            International trips need each Indian traveller’s PAN for tax collection at source (TCS). Names on PAN cards
+            At {BRAND.name}, a fictional company, international trips need each Indian traveller’s PAN for tax collection at source (TCS). Names on PAN cards
             rarely match booking names exactly, so close matches go to a person instead of being rejected.
           </p>
         </div>
@@ -191,13 +191,13 @@ const PanCheck = () => {
         {/* ------------------------------------------------ Traveller */}
         <div className="bg-white border border-rule">
           <div className="flex items-center justify-between px-5 py-3 border-b border-rule">
-            <span className="font-serif text-lg">{BRAND.name}</span>
+            <span className="font-display text-lg">{BRAND.name}</span>
             <span className="font-mono text-[11px] text-muted">Traveller view</span>
           </div>
           <div className="p-5 flex flex-col gap-5">
             <div>
               <p className="m-0 text-sm text-muted">Booking confirmed · {PAN_BOOKING.id}</p>
-              <h3 className="m-0 font-serif font-normal text-[26px] leading-tight">{PAN_BOOKING.trip}</h3>
+              <h3 className="m-0 font-display font-normal text-[26px] leading-tight">{PAN_BOOKING.trip}</h3>
               <p className="m-0 text-sm text-muted">
                 {PAN_BOOKING.variant} · {PAN_BOOKING.batch}
               </p>
@@ -295,7 +295,7 @@ const PanCheck = () => {
         {/* ------------------------------------------------ Ops */}
         <div className="bg-paper-deep border border-rule">
           <div className="flex items-center justify-between px-5 py-3 border-b border-rule">
-            <span className="font-serif text-lg">Ops · {PAN_BOOKING.id}</span>
+            <span className="font-display text-lg">Ops · {PAN_BOOKING.id}</span>
             <span className="font-mono text-[11px] text-muted">Operations view</span>
           </div>
           <div className="p-5 flex flex-col gap-5">
@@ -357,7 +357,7 @@ const PanCheck = () => {
               <span>As applicable</span>
               <span className="text-muted">Ready to file</span>
               <span>
-                {doneCount} of {indian.length} Indian travellers verified{doneCount === indian.length ? ' ✓' : ''}
+                {doneCount} of {indian.length} Indian travellers verified{doneCount === indian.length && <Check aria-hidden="true" size={14} strokeWidth={1.5} className="inline ml-1 align-[-2px]" />}
               </span>
             </div>
 
@@ -429,7 +429,7 @@ const PanCheck = () => {
               return (
                 <div key={title} className={`border p-4 flex flex-col gap-3 ${improved === (mode === 'improved') ? 'border-ink' : 'border-rule'}`}>
                   <div className="flex items-baseline justify-between gap-2">
-                    <p className="m-0 font-serif text-xl">{title}</p>
+                    <p className="m-0 font-display text-xl">{title}</p>
                     {improved === (mode === 'improved') && <span className="font-mono text-[11px] text-muted">in use</span>}
                   </div>
                   <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px]">
@@ -441,7 +441,7 @@ const PanCheck = () => {
                     ))}
                   </dl>
                   <div className="flex items-center gap-3 border-t border-rule pt-3">
-                    <span className="font-serif text-[32px] leading-none">{m.score}</span>
+                    <span className="font-display text-[32px] leading-none">{m.score}</span>
                     <Chip status={d} />
                   </div>
                 </div>
@@ -466,7 +466,7 @@ const PanCheck = () => {
           ['4. Name score', `${VERIFY_AT}+ verified · ${FLAG_FROM}–${VERIFY_AT - 1} flagged for ops · below ${FLAG_FROM} failed.`],
         ].map(([t, b]) => (
           <div key={t} className="border-t border-rule pt-3">
-            <p className="m-0 font-serif text-lg">{t}</p>
+            <p className="m-0 font-display text-lg">{t}</p>
             <p className="m-0 text-[14px] text-ink-soft">{b}</p>
           </div>
         ))}

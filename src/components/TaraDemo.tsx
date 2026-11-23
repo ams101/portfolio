@@ -292,11 +292,10 @@ const TaraDemo = () => {
     <section id="tara" aria-labelledby="tara-title" className="scroll-mt-24 border-t-2 border-ink pt-10">
       {/* Header */}
       <div className="flex flex-col gap-2.5 max-w-[680px] pb-8">
-        <p className="m-0 font-mono text-xs text-muted">Voice AI agent · real agent, concept company</p>
-        <h2 id="tara-title" className="m-0 font-serif font-normal text-[40px] md:text-[48px] leading-[1.05]">Tara</h2>
+        <h2 id="tara-title" className="m-0 font-display font-medium text-[40px] md:text-[48px] leading-[1.05] tracking-[-0.02em]">Tara</h2>
         <p className="m-0 text-lg md:text-[19px] text-ink-soft">
-          A voice agent that calls approved credit-card customers and gets them to an active card, one step at a time. In
-          Hindi or English.
+          A real voice AI agent, working for a concept company. She calls approved credit-card customers and gets them to an active card, one step at a time,
+          in Hindi or English.
         </p>
       </div>
 
@@ -327,7 +326,7 @@ const TaraDemo = () => {
           <div className="flex flex-col gap-3">
             <p className="m-0 font-mono text-xs text-muted">2 · Your role</p>
             <div className="bg-white border border-rule px-6 md:px-7 py-6 flex flex-col gap-[18px]">
-              <p className="m-0 font-serif text-[22px] md:text-2xl leading-[1.4]">&ldquo;{scenario.role}&rdquo;</p>
+              <p className="m-0 font-display text-[22px] md:text-2xl leading-[1.4]">&ldquo;{scenario.role}&rdquo;</p>
               <div className="flex flex-col gap-2">
                 <p className="m-0 text-[13px] text-muted">Tara starts the call knowing</p>
                 <div className="flex flex-wrap gap-1.5 font-mono text-xs">
@@ -359,12 +358,12 @@ const TaraDemo = () => {
 
         {/* Right: call panel (a phone, so it stays dark) */}
         <div className={`flex-[1_1_340px] max-w-[400px] w-full ${inCall ? 'fixed inset-x-0 bottom-0 z-40 p-3 max-w-none lg:static lg:p-0 lg:max-w-[400px]' : ''}`}>
-          <div className="bg-ink text-[#EDEAE3] rounded-[32px] p-[22px] flex flex-col h-[440px] lg:h-[520px] shadow-[0_24px_48px_rgba(26,26,26,0.18)]">
-            <div className="flex items-center gap-3 pb-3.5 border-b border-[#34322E]">
-              <span className={`w-10 h-10 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-xl ${taraSpeaking ? 'ring-4 ring-accent/50' : ''}`}>T</span>
+          <div className="bg-ink text-[#EDEDED] rounded-[32px] p-[22px] flex flex-col h-[440px] lg:h-[520px] shadow-[0_24px_48px_rgba(26,26,26,0.18)]">
+            <div className="flex items-center gap-3 pb-3.5 border-b border-[#2C2C2F]">
+              <span className={`w-10 h-10 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-display text-xl ${taraSpeaking ? 'ring-4 ring-accent/50' : ''}`}>T</span>
               <span className="flex-1 flex flex-col leading-tight">
                 <span className="text-[15px]">Tara</span>
-                <span className="font-mono text-[11px] text-[#A8A397]">
+                <span className="font-mono text-[11px] text-[#A1A1A6]">
                   {status === 'idle' && 'Live call · 1 minute'}
                   {status === 'connecting' && 'Connecting…'}
                   {status === 'live' && (taraSpeaking ? 'Speaking' : 'Listening')}
@@ -373,7 +372,7 @@ const TaraDemo = () => {
                 </span>
               </span>
               {status === 'live' && (
-                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-[#F2A07B]' : 'text-[#A8A397]'}`}>
+                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-[#F2A07B]' : 'text-[#A1A1A6]'}`}>
                   <Clock className="w-4 h-4" aria-hidden="true" />
                   0:{String(secondsLeft).padStart(2, '0')}
                 </span>
@@ -383,12 +382,12 @@ const TaraDemo = () => {
             <div ref={transcriptRef} className="flex-1 overflow-y-auto py-4 space-y-3" aria-live="polite">
               {status === 'idle' && (
                 <div className="h-full flex flex-col items-center justify-center text-center gap-1.5 px-2">
-                  <p className="m-0 font-serif text-[22px] leading-[1.3]">Tara will call you right here in the browser.</p>
-                  <p className="m-0 text-[13px] text-[#A8A397]">Captions appear as you talk.</p>
+                  <p className="m-0 font-display text-[22px] leading-[1.3]">Tara will call you right here in the browser.</p>
+                  <p className="m-0 text-[13px] text-[#A1A1A6]">Captions appear as you talk.</p>
                 </div>
               )}
               {status === 'connecting' && (
-                <div className="h-full flex flex-col items-center justify-center gap-3 text-sm text-[#A8A397]">
+                <div className="h-full flex flex-col items-center justify-center gap-3 text-sm text-[#A1A1A6]">
                   <Loader2 className="w-6 h-6 animate-spin" aria-hidden="true" />
                   Connecting to Tara…
                 </div>
@@ -402,13 +401,13 @@ const TaraDemo = () => {
               {(status === 'live' || status === 'ended') && (
                 <>
                   {lines.length === 0 && !partial && status === 'live' && (
-                    <p className="text-center text-xs text-[#A8A397] pt-8">Tara is about to speak…</p>
+                    <p className="text-center text-xs text-[#A1A1A6] pt-8">Tara is about to speak…</p>
                   )}
                   {[...lines, ...(partial ? [partial] : [])].map((l, i) => (
                     <div key={i} className={`flex ${l.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <p
                         className={`m-0 max-w-[85%] px-3 py-2 rounded-[14px] text-sm leading-[1.45] ${
-                          l.role === 'user' ? 'bg-[#EDEAE3] text-ink' : 'bg-[#2A2825]'
+                          l.role === 'user' ? 'bg-[#EDEDED] text-ink' : 'bg-[#232325]'
                         } ${partial && i === lines.length ? 'opacity-70' : ''}`}
                       >
                         {l.text}
@@ -416,7 +415,7 @@ const TaraDemo = () => {
                     </div>
                   ))}
                   {status === 'ended' && (
-                    <p className="text-center text-xs text-[#A8A397] pt-2">That&apos;s the minute. Try another situation?</p>
+                    <p className="text-center text-xs text-[#A1A1A6] pt-2">That&apos;s the minute. Try another situation?</p>
                   )}
                 </>
               )}
@@ -429,7 +428,7 @@ const TaraDemo = () => {
                   return (
                     <span
                       key={i}
-                      className={`w-[3px] rounded-full transition-all duration-100 ${taraSpeaking ? 'bg-accent' : 'bg-[#4A4743]'}`}
+                      className={`w-[3px] rounded-full transition duration-100 ${taraSpeaking ? 'bg-accent' : 'bg-[#4A4743]'}`}
                       style={{ height: `${h * 100}%` }}
                     />
                   );
@@ -437,7 +436,7 @@ const TaraDemo = () => {
               </div>
             )}
 
-            <div className="pt-3 border-t border-[#34322E]">
+            <div className="pt-3 border-t border-[#2C2C2F]">
               {inCall ? (
                 <div className="flex items-center justify-center gap-4">
                   <button
@@ -445,7 +444,7 @@ const TaraDemo = () => {
                     disabled={status !== 'live'}
                     aria-label={muted ? 'Unmute' : 'Mute'}
                     className={`w-12 h-12 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 ${
-                      muted ? 'bg-[#EDEAE3] text-ink border-[#EDEAE3]' : 'border-[#4A4743] hover:bg-[#2A2825]'
+                      muted ? 'bg-[#EDEDED] text-ink border-[#EDEDED]' : 'border-[#4A4743] hover:bg-[#232325]'
                     }`}
                   >
                     {muted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -467,7 +466,7 @@ const TaraDemo = () => {
                     {status === 'idle' ? <Phone className="w-5 h-5" aria-hidden="true" /> : <RotateCcw className="w-5 h-5" aria-hidden="true" />}
                     {status === 'idle' ? 'Start call' : 'Call again'}
                   </button>
-                  <p className="m-0 mt-2 text-[11px] text-[#A8A397] text-center leading-snug">
+                  <p className="m-0 mt-2 text-[11px] text-[#A1A1A6] text-center leading-snug">
                     Uses your microphone · processed by Vapi · don&apos;t share real personal details
                   </p>
                 </>
@@ -484,7 +483,7 @@ const TaraDemo = () => {
           aria-expanded={showDesign}
           className="w-full flex flex-wrap justify-between items-center gap-2 min-h-[64px] border-t border-ink border-b border-rule text-left"
         >
-          <span className="font-serif text-2xl">How I designed it</span>
+          <span className="font-display text-2xl">How I designed it</span>
           <span className="font-mono text-[13px] text-muted">Brief · 6 decisions · call flow · tools {showDesign ? '−' : '+'}</span>
         </button>
 
@@ -492,7 +491,7 @@ const TaraDemo = () => {
           <div className="pt-10 pb-4 flex flex-col gap-14">
             <div className="flex flex-col gap-3 max-w-[680px]">
               <p className="label m-0">The brief</p>
-              <p className="m-0 font-serif text-[22px] leading-[1.45]">
+              <p className="m-0 font-display text-[22px] leading-[1.45]">
                 Plenty of customers get approved for a card and never use it. They stall at one of three steps: the KYC in
                 the app, the video KYC, or activation.
               </p>
@@ -512,7 +511,7 @@ const TaraDemo = () => {
                   <li key={d.title} className="flex gap-4 py-5 border-t border-rule">
                     <span className="font-mono text-[13px] text-accent pt-1.5">{i + 1}</span>
                     <div className="flex flex-col gap-1.5">
-                      <h3 className="m-0 font-serif font-normal text-[22px] leading-[1.25]">{d.title}</h3>
+                      <h3 className="m-0 font-display font-normal text-[22px] leading-[1.25]">{d.title}</h3>
                       <p className="m-0 text-[15px] text-ink-soft leading-relaxed">{d.body}</p>
                       <p className="m-0 text-[13px] text-muted">
                         <span className="font-medium text-ink-soft">Trade-off:</span> {d.tradeoff}
@@ -529,7 +528,7 @@ const TaraDemo = () => {
                 {FLOW.map((f, i) => (
                   <li key={f.title} className="flex flex-col md:flex-row md:items-center gap-2 flex-1">
                     <div className="flex-1 bg-white border border-rule px-4 py-3">
-                      <p className="m-0 font-serif text-lg">{i + 1}. {f.title}</p>
+                      <p className="m-0 font-display text-lg">{i + 1}. {f.title}</p>
                       <p className="m-0 text-[13px] text-muted">{f.body}</p>
                     </div>
                     {i < FLOW.length - 1 && <span className="self-center text-muted rotate-90 md:rotate-0" aria-hidden="true">→</span>}

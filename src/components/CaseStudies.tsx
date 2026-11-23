@@ -16,7 +16,7 @@ const CaseStudies = () => (
           >
             <span className="label flex-[0_0_170px]">{study.company}</span>
             <span className="flex-[1_1_380px] flex flex-col gap-1">
-              <span className="font-serif text-[26px] md:text-[28px] leading-[1.2] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
+              <span className="font-display font-medium text-[22px] md:text-[24px] leading-[1.2] tracking-[-0.01em] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
                 {study.listTitle}
               </span>
               <span className="text-base text-muted">{study.listLine}</span>

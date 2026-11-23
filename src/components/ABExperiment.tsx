@@ -73,13 +73,13 @@ const ABExperiment = () => {
                   <div className="w-10 h-10 rounded bg-accent flex items-center justify-center ">
                     <TrendingUp className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-xl font-serif font-normal text-ink">Select Metric</h3>
+                  <h3 className="text-xl font-display font-normal text-ink">Select Metric</h3>
                 </div>
                 {metrics.map((metric) => (
                   <button
                     key={metric.id}
                     onClick={() => setSelectedMetric(metric.id)}
-                    className={`group w-full text-left p-5 rounded-lg border-2 transition-all duration-300 ${
+                    className={`group w-full text-left p-5 rounded-lg border-2 transition duration-300 ${
                       selectedMetric === metric.id
                         ? 'bg-accent/10 border-accent/40 '
                         : 'bg-paper-deep border-rule hover:border-ink'
@@ -87,7 +87,7 @@ const ABExperiment = () => {
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-3 rounded transition-all duration-300 ${
+                        className={`p-3 rounded transition duration-300 ${
                           selectedMetric === metric.id
                             ? 'bg-accent '
                             : 'bg-rule group-hover:bg-rule'
@@ -116,13 +116,13 @@ const ABExperiment = () => {
                   <div className="w-10 h-10 rounded bg-accent flex items-center justify-center ">
                     <Beaker className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-xl font-serif font-normal text-ink">Choose Lever</h3>
+                  <h3 className="text-xl font-display font-normal text-ink">Choose Lever</h3>
                 </div>
                 {levers.map((lever) => (
                   <button
                     key={lever.id}
                     onClick={() => setSelectedLever(lever.id)}
-                    className={`group w-full text-left p-5 rounded-lg border-2 transition-all duration-300 ${
+                    className={`group w-full text-left p-5 rounded-lg border-2 transition duration-300 ${
                       selectedLever === lever.id
                         ? 'bg-accent/10 border-accent/40 '
                         : 'bg-paper-deep border-rule hover:border-ink'
@@ -130,7 +130,7 @@ const ABExperiment = () => {
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-3 rounded transition-all duration-300 ${
+                        className={`p-3 rounded transition duration-300 ${
                           selectedLever === lever.id
                             ? 'bg-accent '
                             : 'bg-rule group-hover:bg-rule'
@@ -159,7 +159,7 @@ const ABExperiment = () => {
               <button
                 onClick={handleRunExperiment}
                 disabled={!selectedMetric || !selectedLever || isAnimating}
-                className={`px-8 py-4 rounded font-bold text-lg transition-all duration-300 ${
+                className={`px-8 py-4 rounded font-bold text-lg transition duration-300 ${
                   selectedMetric && selectedLever && !isAnimating
                     ? 'bg-accent text-white '
                     : 'bg-paper-deep text-muted cursor-not-allowed'
@@ -170,7 +170,7 @@ const ABExperiment = () => {
               {(selectedMetric || selectedLever || showResult) && (
                 <button
                   onClick={handleReset}
-                  className="px-6 py-4 rounded font-bold text-lg bg-paper-deep text-ink-soft border border-rule hover:bg-paper-deep hover:border-ink transition-all duration-300 flex items-center gap-2"
+                  className="px-6 py-4 rounded font-bold text-lg bg-paper-deep text-ink-soft border border-rule hover:bg-paper-deep hover:border-ink transition duration-300 flex items-center gap-2"
                 >
                   <X className="w-5 h-5" />
                   Reset
@@ -189,11 +189,11 @@ const ABExperiment = () => {
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Change</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded border border-rule">
-                      <div className="text-4xl font-serif font-normal text-accent mb-2">{result.confidence}%</div>
+                      <div className="text-4xl font-display font-normal text-accent mb-2">{result.confidence}%</div>
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Confidence</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded border border-rule">
-                      <div className="text-4xl font-serif font-normal text-ink-soft mb-2">7d</div>
+                      <div className="text-4xl font-display font-normal text-ink-soft mb-2">7d</div>
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Duration</div>
                     </div>
                   </div>
@@ -204,7 +204,7 @@ const ABExperiment = () => {
                         <AlertCircle className="w-6 h-6 text-amber-700" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-xl font-serif font-normal text-amber-700 mb-3">Product Commentary</h4>
+                        <h4 className="text-xl font-display font-normal text-amber-700 mb-3">Product Commentary</h4>
                         <p className="text-ink font-semibold mb-3">
                           "This is when you don't ship."
                         </p>

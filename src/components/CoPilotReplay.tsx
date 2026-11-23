@@ -1,3 +1,4 @@
+import { Check, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 // Replay of one real session through the Intraday Co-Pilot's own rules.
@@ -132,11 +133,11 @@ const Spark = ({ s, i }: { s: Series; i: number }) => {
   const ol = s.ol[i];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" role="img" aria-label="Price and VWAP through the session">
-      {i >= ORB_END && oh != null && <line x1={x(ORB_END)} x2={W} y1={y(oh)} y2={y(oh)} stroke="#BDB6A8" strokeDasharray="4 4" />}
-      {i >= ORB_END && ol != null && <line x1={x(ORB_END)} x2={W} y1={y(ol)} y2={y(ol)} stroke="#BDB6A8" strokeDasharray="4 4" />}
-      <path d={path('vwap', i)} fill="none" stroke="#5A5650" strokeWidth={1} strokeDasharray="2 3" />
-      <path d={path('c', i)} fill="none" stroke="#1A1A1A" strokeWidth={1.75} />
-      <line x1={x(i)} x2={x(i)} y1={0} y2={H} stroke="#B3330E" strokeWidth={1} />
+      {i >= ORB_END && oh != null && <line x1={x(ORB_END)} x2={W} y1={y(oh)} y2={y(oh)} stroke="#D4D4D4" strokeDasharray="4 4" />}
+      {i >= ORB_END && ol != null && <line x1={x(ORB_END)} x2={W} y1={y(ol)} y2={y(ol)} stroke="#D4D4D4" strokeDasharray="4 4" />}
+      <path d={path('vwap', i)} fill="none" stroke="#6B6B6B" strokeWidth={1} strokeDasharray="2 3" />
+      <path d={path('c', i)} fill="none" stroke="#171717" strokeWidth={1.75} />
+      <line x1={x(i)} x2={x(i)} y1={0} y2={H} stroke="#B42318" strokeWidth={1} />
     </svg>
   );
 };
@@ -207,7 +208,7 @@ const CoPilotReplay = () => {
       <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
         <div className="flex flex-col gap-2.5 max-w-[680px]">
           <p className="m-0 font-mono text-xs text-muted">Personal project · live market data · decision support</p>
-          <h2 id="copilot-title" className="m-0 font-serif font-normal text-[40px] md:text-[48px] leading-[1.05]">Intraday Co-Pilot</h2>
+          <h2 id="copilot-title" className="m-0 font-display font-medium text-[40px] md:text-[48px] leading-[1.05] tracking-[-0.02em]">Intraday Co-Pilot</h2>
           <p className="m-0 text-lg md:text-[19px] text-ink-soft">
             It suggests and explains; I decide and execute. The co-pilot watches a live feed of NSE stocks, scores intraday
             setups against rules I can tune, and explains each one in plain English.
@@ -232,7 +233,7 @@ const CoPilotReplay = () => {
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <p className="m-0">
                 <span className="font-mono text-xs text-muted block">Replay of a real session</span>
-                <span className="font-serif text-xl">{dateLabel}</span>
+                <span className="font-display text-xl">{dateLabel}</span>
               </p>
               <p className="m-0">
                 <span className="font-mono text-xs text-muted block">Time</span>
@@ -267,7 +268,7 @@ const CoPilotReplay = () => {
                   setPlaying(false);
                   setI(Number(e.target.value));
                 }}
-                className="w-full accent-[#B3330E]"
+                className="w-full accent-[#B42318]"
                 aria-valuetext={data.times[i]}
               />
               <span className="flex justify-between font-mono text-[11px] text-muted">
@@ -310,11 +311,11 @@ const CoPilotReplay = () => {
                         <td className="py-2 pr-2 capitalize">{r.side}</td>
                         <td className="py-2 pr-2 text-right font-mono">{r.score}</td>
                         <td className="py-2 pr-2">
-                          <span className={r.vwapOk ? 'text-green-800' : 'text-muted'}>{r.vwapOk ? '✓' : '✗'}</span>{' '}
+                          <span className={r.vwapOk ? 'text-green-800' : 'text-muted'}>{r.vwapOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
                           <span className="font-mono text-[12px] text-muted">{pct(r.vd)}</span>
                         </td>
                         <td className="py-2 pr-2">
-                          <span className={r.volOk ? 'text-green-800' : 'text-muted'}>{r.volOk ? '✓' : '✗'}</span>{' '}
+                          <span className={r.volOk ? 'text-green-800' : 'text-muted'}>{r.volOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
                           <span className="font-mono text-[12px] text-muted">{r.vx.toFixed(1)}×</span>
                         </td>
                         <td className="py-2">
@@ -338,7 +339,7 @@ const CoPilotReplay = () => {
             {sel && (
               <div className="bg-white border border-rule p-4 md:p-5 flex flex-col gap-3">
                 <div className="flex items-baseline justify-between gap-2">
-                  <p className="m-0 font-serif text-2xl">{NAMES[sel.sym] ?? sel.sym}</p>
+                  <p className="m-0 font-display text-2xl">{NAMES[sel.sym] ?? sel.sym}</p>
                   <span className="font-mono text-[12px] text-muted">{sel.sym}</span>
                 </div>
                 <Spark s={data.stocks[sel.sym]} i={i} />
@@ -380,7 +381,7 @@ const CoPilotReplay = () => {
                 step={0.1}
                 value={minVolx}
                 onChange={e => setMinVolx(Number(e.target.value))}
-                className="w-full accent-[#B3330E]"
+                className="w-full accent-[#B42318]"
               />
             </label>
             {fireRate && (
@@ -407,7 +408,7 @@ const CoPilotReplay = () => {
           aria-expanded={showHow}
           className="w-full flex flex-wrap justify-between items-center gap-2 min-h-[64px] border-t border-ink border-b border-rule text-left"
         >
-          <span className="font-serif text-2xl">How it works</span>
+          <span className="font-display text-2xl">How it works</span>
           <span className="font-mono text-[13px] text-muted">Live feed · indicators · rules · explanations {showHow ? '−' : '+'}</span>
         </button>
         {showHow && (
@@ -422,7 +423,7 @@ const CoPilotReplay = () => {
               ].map(([t, b], k, arr) => (
                 <li key={t} className="flex flex-col md:flex-row md:items-center gap-2 flex-1">
                   <div className="flex-1 bg-white border border-rule px-3 py-3">
-                    <p className="m-0 font-serif text-lg">{k + 1}. {t}</p>
+                    <p className="m-0 font-display text-lg">{k + 1}. {t}</p>
                     <p className="m-0 text-[13px] text-muted">{b}</p>
                   </div>
                   {k < arr.length - 1 && <span className="self-center text-muted rotate-90 md:rotate-0" aria-hidden="true">→</span>}
@@ -436,7 +437,7 @@ const CoPilotReplay = () => {
                 ['Stale data is visible', 'The dashboard counts stocks whose feed has gone quiet, so a frozen price never looks like a calm one.'],
               ].map(([t, b]) => (
                 <div key={t} className="border-t border-rule pt-3">
-                  <p className="m-0 font-serif text-lg">{t}</p>
+                  <p className="m-0 font-display text-lg">{t}</p>
                   <p className="m-0 text-[14px] text-ink-soft">{b}</p>
                 </div>
               ))}

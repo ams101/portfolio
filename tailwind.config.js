@@ -4,17 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#F6F4EF',
-        'paper-deep': '#ECE8DF',
-        ink: '#1A1A1A',
-        'ink-soft': '#3D3A35',
-        muted: '#5A5650',
-        rule: '#DDD8CE',
-        'rule-strong': '#BDB6A8',
-        accent: '#B3330E',
+        // Graphite neutrals: the surfaces stay out of the way; colour lives in the work.
+        paper: '#FAFAFA',
+        'paper-deep': '#F4F4F5',
+        ink: '#171717',
+        'ink-soft': '#525252',
+        muted: '#6B6B6B',
+        rule: '#E5E5E5',
+        'rule-strong': '#D4D4D4',
+        // Ledger crimson, after the red cloth of an Indian bahi-khata account book.
+        accent: '#B42318',
       },
       fontFamily: {
-        serif: ['Newsreader', 'Georgia', 'serif'],
+        // Anek Latin, by the Indian foundry Ek Type, for headlines only.
+        display: ['"Anek Latin"', '"IBM Plex Sans"', 'system-ui', 'sans-serif'],
         sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
       },
