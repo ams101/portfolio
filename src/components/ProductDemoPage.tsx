@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ArrowRight, X } from 'lucide-react';
 import TaraDemo from './TaraDemo';
 import TripComparator from './TripComparator';
 import PanCheck from './PanCheck';
@@ -90,8 +91,12 @@ const ProductDemoPage = () => {
                     <span className="text-base text-muted">{d.description}</span>
                     <span className="font-mono text-xs text-muted pt-1">{d.tags}</span>
                   </span>
-                  <span className="text-[15px] font-medium text-accent">
-                    {isOpen ? 'Close ×' : <>Try it <span className="row-arrow inline-block">→</span></>}
+                  <span className="inline-flex items-center gap-2 text-[15px] font-medium text-accent">
+                    {isOpen ? (
+                      <>Close <X aria-hidden="true" size={16} strokeWidth={1.5} /></>
+                    ) : (
+                      <>Try it <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" /></>
+                    )}
                   </span>
                 </button>
               </li>
@@ -108,8 +113,8 @@ const ProductDemoPage = () => {
         >
           <div className="flex items-center justify-between py-3 border-b border-rule">
             <span className="label">Now playing · {d.title}</span>
-            <button onClick={() => setOpenDemo(null)} className="font-mono text-[13px] text-muted hover:text-ink min-h-[44px]">
-              Close ×
+            <button onClick={() => setOpenDemo(null)} className="inline-flex items-center gap-1.5 font-mono text-[13px] text-muted transition-colors hover:text-ink min-h-[44px]">
+              Close <X aria-hidden="true" size={14} strokeWidth={1.5} />
             </button>
           </div>
           <d.Component />

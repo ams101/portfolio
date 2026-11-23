@@ -1,21 +1,21 @@
+import { ArrowLeft } from 'lucide-react';
 import { articles } from '../data/articles';
+import { hrefFor } from '../routes';
 
 interface ArticleDetailProps {
   articleId: string;
-  onBack: () => void;
 }
 
-const ArticleDetail = ({ articleId, onBack }: ArticleDetailProps) => {
+const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
   const article = articles.find(a => a.id === articleId);
   if (!article) return null;
 
   return (
     <article className="pb-24">
       <header className="pt-16 md:pt-[72px] pb-12 flex flex-col gap-6 max-w-[820px]">
-        <button onClick={onBack} className="self-start font-mono text-[13px] text-muted hover:text-ink">
-          ← All writing
-        </button>
-        <p className="label m-0">Essay</p>
+        <a href={hrefFor.homeSection('writing')} className="self-start inline-flex items-center gap-2 min-h-[44px] font-mono text-[13px] text-muted no-underline transition-colors hover:text-ink">
+          <ArrowLeft aria-hidden="true" size={14} strokeWidth={1.5} /> All writing
+        </a>
         <h1 className="m-0 font-serif font-normal text-[40px] md:text-[56px] leading-[1.08] tracking-[-0.015em]">
           {article.title}
         </h1>

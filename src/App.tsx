@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navigation, { type NavTarget } from './components/Navigation';
@@ -11,8 +11,22 @@ import Writing from './components/Writing';
 import ArticleDetail from './components/ArticleDetail';
 import About from './components/About';
 import Contact, { Footer } from './components/Contact';
+import { caseStudies } from './data/caseStudies';
+import { articles } from './data/articles';
+import { hrefFor } from './routes';
 
 type View = 'home' | 'case-study' | 'article' | 'product-demo';
+type Route = { view: View; id: string | null };
+
+// See routes.ts for the URL scheme. A home route's id is a section to scroll to.
+const parseHash = (hash: string): Route => {
+  const [kind, id] = hash.replace(/^#\/?/, '').split('/');
+  if (kind === 'work' && id && caseStudies.some(s => s.id === id)) return { view: 'case-study', id };
+  if (kind === 'writing' && id && articles.some(a => a.id === id)) return { view: 'article', id };
+  if (kind === 'built') return { view: 'product-demo', id: id || null };
+  if ((kind === 'work' || kind === 'writing') && !id) return { view: 'home', id: kind };
+  return { view: 'home', id: null };
+};
 
 // Cross-fade between views where the browser supports it; otherwise change instantly.
 const withTransition = (update: () => void) => {
@@ -31,35 +45,56 @@ const scrollToId = (id: string) => {
 };
 
 function App() {
-  const [currentView, setCurrentView] = useState<View>('home');
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [route, setRoute] = useState<Route>(() => parseHash(window.location.hash));
+  const routeRef = useRef(route);
+  const homeScroll = useRef(0);
+  const pendingSection = useRef<string | null>(null);
 
-  const show = (view: View, id: string | null = null) =>
-    withTransition(() => {
-      setCurrentView(view);
-      setSelectedId(id);
-      window.scrollTo(0, 0);
-    });
+  useEffect(() => {
+    if (route.id && route.view !== 'case-study' && route.view !== 'article') scrollToId(route.id);
+    // Only on first load: later changes scroll in the hashchange handler.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const next = parseHash(window.location.hash);
+      const prev = routeRef.current;
+      if (prev.view === 'home') homeScroll.current = window.scrollY;
+      routeRef.current = next;
+      withTransition(() => {
+        setRoute(next);
+        // Returning home puts you back where you left off; other views start at the top.
+        if (next.view === 'home' && prev.view !== 'home') window.scrollTo(0, next.id ? 0 : homeScroll.current);
+        else if (!(next.view === prev.view && next.id === prev.id)) window.scrollTo(0, 0);
+      });
+      const section = pendingSection.current ?? (next.view === 'home' || next.view === 'product-demo' ? next.id : null);
+      pendingSection.current = null;
+      if (section) scrollToId(section);
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const go = (href: string) => {
+    if (window.location.hash === href) return;
+    window.location.hash = href;
+  };
 
   const navigate = (target: NavTarget) => {
-    if (target === 'built') {
-      show('product-demo');
-      return;
-    }
+    if (target === 'built') return go(hrefFor.built());
     if (target === 'home') {
-      show('home');
-      return;
+      homeScroll.current = 0;
+      if (route.view === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+      return go(hrefFor.home);
     }
-    if (currentView !== 'home') withTransition(() => setCurrentView('home'));
-    scrollToId(target);
+    if (route.view === 'home') return scrollToId(target);
+    homeScroll.current = 0;
+    pendingSection.current = target;
+    go(hrefFor.home);
   };
 
-  const openSection = (id: string) => {
-    withTransition(() => setCurrentView('product-demo'));
-    scrollToId(id);
-  };
-
-  const openTara = () => openSection('tara');
+  const { view: currentView, id: selectedId } = route;
 
   const active: NavTarget | null =
     currentView === 'product-demo' ? 'built' : currentView === 'case-study' ? 'work' : currentView === 'article' ? 'writing' : null;
@@ -71,25 +106,21 @@ function App() {
       <main className="max-w-page mx-auto px-6 md:px-8">
         {currentView === 'home' && (
           <>
-            <Hero onSeeBuilt={() => show('product-demo')} />
-            <CaseStudies onViewDetails={id => show('case-study', id)} />
-            <BuiltTeaser onTryTara={openTara} onSeeAll={() => show('product-demo')} onOpenSection={openSection} />
+            <Hero />
+            <CaseStudies />
+            <BuiltTeaser />
             <About />
-            <Writing onReadArticle={id => show('article', id)} />
+            <Writing />
             <Contact />
           </>
         )}
 
         {currentView === 'case-study' && selectedId && (
-          <CaseStudyDetail
-            caseStudyId={selectedId}
-            onBack={() => navigate('work')}
-            onOpen={id => show('case-study', id)}
-          />
+          <CaseStudyDetail caseStudyId={selectedId} />
         )}
 
         {currentView === 'article' && selectedId && (
-          <ArticleDetail articleId={selectedId} onBack={() => navigate('writing')} />
+          <ArticleDetail articleId={selectedId} />
         )}
 
         {currentView === 'product-demo' && <ProductDemoPage />}

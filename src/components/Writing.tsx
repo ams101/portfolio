@@ -1,21 +1,18 @@
 import { ArrowRight } from 'lucide-react';
 import Section from './Section';
+import { hrefFor } from '../routes';
 import { articles } from '../data/articles';
 
-interface WritingProps {
-  onReadArticle: (id: string) => void;
-}
-
-const Writing = ({ onReadArticle }: WritingProps) => (
+const Writing = () => (
   <Section id="writing" label="Writing" className="py-20 md:py-24 border-t border-rule">
     <ul className="m-0 p-0 list-none">
       {articles.map((article, i) => (
         <li key={article.id}>
-          <button
-            onClick={() => onReadArticle(article.id)}
-            className={`group w-full text-left flex flex-wrap items-baseline gap-x-6 gap-y-2 py-6 border-t ${
+          <a
+            href={hrefFor.article(article.id)}
+            className={`group w-full text-left text-ink no-underline flex flex-wrap items-baseline gap-x-6 gap-y-2 py-6 border-t ${
               i === 0 ? 'border-ink' : 'border-rule'
-            } ${i === articles.length - 1 ? 'border-b border-b-rule' : ''}`}
+            }`}
           >
             <span className="flex-[1_1_420px] flex flex-col gap-1">
               <span className="font-serif text-[26px] leading-[1.2] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
@@ -26,7 +23,7 @@ const Writing = ({ onReadArticle }: WritingProps) => (
             <span className="inline-flex items-center gap-2 text-[15px] font-medium text-accent">
               Read <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
             </span>
-          </button>
+          </a>
         </li>
       ))}
     </ul>

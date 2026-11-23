@@ -15,7 +15,7 @@ const About = () => (
         I&apos;ve worked across enterprise procurement software, B2B commerce for US buyers, subscriptions and payments at
         Shaadi.com, and a travel business I helped build from scratch at Zostel.
       </p>
-      <p className="m-0 text-ink-soft">
+      <p className="m-0 text-ink-soft max-w-[62ch]">
         The thread through all of it: find where people get stuck, fix the smallest thing that unblocks them, and measure
         whether it worked. I&apos;m comfortable in SQL and dashboards, so I answer most of my own questions. Lately the
         thing that unblocks people is often a model, but only where it clearly beats the simpler option.

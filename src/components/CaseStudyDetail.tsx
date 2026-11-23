@@ -1,14 +1,14 @@
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Section from './Section';
+import { hrefFor } from '../routes';
 import { caseStudies } from '../data/caseStudies';
 import { CASE_DIAGRAMS } from './CaseDiagrams';
 
 interface CaseStudyDetailProps {
   caseStudyId: string;
-  onBack: () => void;
-  onOpen: (id: string) => void;
 }
 
-const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) => {
+const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
   const index = caseStudies.findIndex(s => s.id === caseStudyId);
   if (index === -1) return null;
   const study = caseStudies[index];
@@ -18,10 +18,9 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
   return (
     <article>
       <header className="pt-16 md:pt-[72px] pb-14 flex flex-col gap-6">
-        <button onClick={onBack} className="self-start font-mono text-[13px] text-muted hover:text-ink">
-          ← All work
-        </button>
-        <p className="label m-0">Case study · {study.company}</p>
+        <a href={hrefFor.homeSection('work')} className="self-start inline-flex items-center gap-2 min-h-[44px] font-mono text-[13px] text-muted no-underline transition-colors hover:text-ink">
+          <ArrowLeft aria-hidden="true" size={14} strokeWidth={1.5} /> All work
+        </a>
         <h1 className="m-0 font-serif font-normal text-[40px] md:text-[60px] leading-[1.08] tracking-[-0.015em] max-w-[900px]">
           {study.headline}
         </h1>
@@ -61,7 +60,7 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
         </figure>
       )}
 
-      <Section label="01 — What I owned" className="pt-24">
+      <Section label="What I owned" className="pt-24">
         <div className="max-w-[680px] flex flex-col gap-4">
           {study.roleIntro && <p className="m-0 text-ink-soft">{study.roleIntro}</p>}
           <ul className="m-0 pl-5 list-disc flex flex-col gap-2 marker:text-accent">
@@ -72,7 +71,7 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
         </div>
       </Section>
 
-      <Section label="02 — What I did" className="pt-24">
+      <Section label="What I did" className="pt-24">
         <ol className="m-0 p-0 list-none">
           {study.initiatives.map((item, i) => (
             <li
@@ -98,7 +97,7 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
         </blockquote>
       )}
 
-      <Section label="03 — What changed" className="pt-24">
+      <Section label="What changed" className="pt-24">
         <div className="flex flex-col gap-8">
           <div className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(180px,1fr))]">
             {study.stats.map(s => (
@@ -116,15 +115,15 @@ const CaseStudyDetail = ({ caseStudyId, onBack, onOpen }: CaseStudyDetailProps) 
         </div>
       </Section>
 
-      <button
-        onClick={() => onOpen(next.id)}
-        className="group w-full text-left flex flex-wrap justify-between items-baseline gap-4 mt-28 mb-20 py-8 border-t-2 border-ink"
+      <a
+        href={hrefFor.caseStudy(next.id)}
+        className="group w-full text-left text-ink no-underline flex flex-wrap justify-between items-baseline gap-4 mt-28 mb-20 py-8 border-t-2 border-ink"
       >
         <span className="label">Next case study</span>
         <span className="font-serif text-[28px] md:text-[36px] leading-[1.2]">
-          {next.listTitle} <span className="row-arrow inline-block">→</span>
+          {next.listTitle} <ArrowRight aria-hidden="true" size={28} strokeWidth={1.5} className="row-arrow inline-block align-[-0.1em]" />
         </span>
-      </button>
+      </a>
     </article>
   );
 };

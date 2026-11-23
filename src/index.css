@@ -15,6 +15,12 @@
     caret-color: theme('colors.accent');
   }
 
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
   ::selection {
     @apply bg-accent text-paper;
   }
@@ -209,5 +215,11 @@ body {
   }
   .no-print {
     display: none !important;
+  }
+  /* The Tara call plays on scroll; print never scrolls, so show it finished. */
+  .call-line {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
   }
 }

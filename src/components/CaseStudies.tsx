@@ -1,21 +1,18 @@
 import { ArrowRight } from 'lucide-react';
 import Section from './Section';
+import { hrefFor } from '../routes';
 import { caseStudies } from '../data/caseStudies';
 
-interface CaseStudiesProps {
-  onViewDetails: (id: string) => void;
-}
-
-const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
+const CaseStudies = () => (
   <Section id="work" label="Work" className="py-20 md:py-24">
     <ul className="m-0 p-0 list-none">
       {caseStudies.map((study, i) => (
         <li key={study.id}>
-          <button
-            onClick={() => onViewDetails(study.id)}
-            className={`group w-full text-left flex flex-wrap items-baseline gap-x-6 gap-y-2 py-6 border-t ${
+          <a
+            href={hrefFor.caseStudy(study.id)}
+            className={`group w-full text-left text-ink no-underline flex flex-wrap items-baseline gap-x-6 gap-y-2 py-6 border-t ${
               i === 0 ? 'border-ink' : 'border-rule'
-            } ${i === caseStudies.length - 1 ? 'border-b border-b-rule' : ''}`}
+            }`}
           >
             <span className="label flex-[0_0_170px]">{study.company}</span>
             <span className="flex-[1_1_380px] flex flex-col gap-1">
@@ -25,7 +22,7 @@ const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
               <span className="text-base text-muted">{study.listLine}</span>
             </span>
             <ArrowRight aria-hidden="true" size={20} strokeWidth={1.5} className="row-arrow hidden sm:block self-center shrink-0" />
-          </button>
+          </a>
         </li>
       ))}
     </ul>

@@ -1,12 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Section from './Section';
+import { hrefFor } from '../routes';
 
-interface BuiltTeaserProps {
-  onTryTara: () => void;
-  onSeeAll: () => void;
-  onOpenSection: (id: string) => void;
-}
 
 type Item = {
   title: string;
@@ -56,7 +52,7 @@ const MORE: Item[] = [
   },
 ];
 
-const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) => void }) => {
+const Row = ({ item }: { item: Item }) => {
   const body = (
     <>
       <span className="hidden sm:block flex-[0_0_168px] h-[104px] overflow-hidden border border-rule bg-paper-deep">
@@ -81,15 +77,15 @@ const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) 
       </span>
     </>
   );
-  const cls = 'group w-full text-left flex flex-wrap sm:flex-nowrap items-center gap-x-6 gap-y-2 py-5';
+  const cls = 'group w-full text-left text-ink no-underline flex flex-wrap sm:flex-nowrap items-center gap-x-6 gap-y-2 py-5';
   return item.href ? (
     <a href={item.href} target="_blank" rel="noopener" className={cls}>
       {body}
     </a>
   ) : (
-    <button onClick={() => onOpenSection(item.section!)} className={cls}>
+    <a href={hrefFor.built(item.section)} className={cls}>
       {body}
-    </button>
+    </a>
   );
 };
 
@@ -173,7 +169,7 @@ const TaraCall = () => {
   );
 };
 
-const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) => (
+const BuiltTeaser = () => (
   <Section id="built" label="Things I’ve built" className="py-20 md:py-24 border-t border-rule">
     <div className="flex justify-end -mt-1 mb-2">
       <span className="font-mono text-xs text-muted">{MORE.length + 1} things you can try</span>
@@ -186,7 +182,7 @@ const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) =
           English. Pick a situation and try to trip her up.
         </p>
         <div className="flex flex-wrap items-center gap-5">
-          <button onClick={onTryTara} className="btn-accent">Start a 1-minute call</button>
+          <a href={hrefFor.built('tara')} className="btn-accent">Start a 1-minute call</a>
         </div>
       </div>
 
@@ -195,16 +191,16 @@ const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) =
 
     <ul className="m-0 p-0 list-none mt-12 border-t border-ink">
       {MORE.map(item => (
-        <li key={item.title} className="border-b border-rule">
-          <Row item={item} onOpenSection={onOpenSection} />
+        <li key={item.title} className="border-t border-rule first:border-t-0">
+          <Row item={item} />
         </li>
       ))}
     </ul>
 
     <div className="flex justify-end pt-5">
-      <button onClick={onSeeAll} className="group link inline-flex items-center gap-2 text-base">
+      <a href={hrefFor.built()} className="group link inline-flex items-center gap-2 text-base text-ink">
         See all demos and side projects <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
-      </button>
+      </a>
     </div>
   </Section>
 );
