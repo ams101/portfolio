@@ -82,6 +82,25 @@
     clip-path: inset(-8px -8px -8px -8px round 12px);
   }
 
+  /* The ₹18 Cr note: hidden until the figure is hovered or focused (tap focuses it). */
+  .crore-note {
+    opacity: 0;
+    transform: translateY(-4px);
+    visibility: hidden;
+    transition:
+      opacity 160ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 160ms;
+  }
+
+  .group\/cr:hover .crore-note,
+  .group\/cr:focus-within .crore-note {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
   .menu-reveal {
     animation: menuReveal 240ms cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -147,6 +166,10 @@
 
   .menu-reveal {
     animation: none;
+  }
+
+  .crore-note {
+    transform: none;
   }
 
   .btn-primary:active,

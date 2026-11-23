@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, RotateCcw } from 'lucide-react';
+import { hrefFor } from '../routes';
 
 // The call plays once when it scrolls into view: each line arrives from its
 // speaker's side, the status follows whose turn it is, the clock runs 0:36 → 0:42.
+// When it ends, the card hands over: replay it, or take the call yourself.
 const CALL = [
   { at: 0, stamp: '0:36', from: 'tara', text: 'You’re on the video KYC. It takes about three minutes. Can you do it now?' },
   { at: 2600, stamp: '0:39', from: 'caller', text: 'I’m driving right now.' },
@@ -19,6 +22,7 @@ const TaraCall = ({ className = '' }: { className?: string }) => {
   const [shown, setShown] = useState(skip ? CALL.length : 0);
   const [sec, setSec] = useState(skip ? END_SEC : START_SEC);
   const [started, setStarted] = useState(skip);
+  const [run, setRun] = useState(0);
 
   useEffect(() => {
     if (skip || !ref.current) return;
@@ -45,7 +49,14 @@ const TaraCall = ({ className = '' }: { className?: string }) => {
       window.clearInterval(clock);
       window.clearTimeout(stop);
     };
-  }, [started, skip]);
+  }, [started, skip, run]);
+
+  const ended = started && shown === CALL.length && sec >= END_SEC;
+  const replay = () => {
+    setShown(0);
+    setSec(START_SEC);
+    setRun(r => r + 1);
+  };
 
   const speaking = shown > 0 && CALL[shown - 1].from === 'tara' && sec < END_SEC;
   const status = !started ? 'Ringing' : speaking ? 'Speaking' : 'Listening';
@@ -53,9 +64,9 @@ const TaraCall = ({ className = '' }: { className?: string }) => {
   return (
     <div
       ref={ref}
-      aria-hidden="true"
       className={`bg-[#141415] text-[#EDEDED] rounded-[20px] p-6 flex flex-col gap-3 shadow-[0_8px_24px_rgba(0,0,0,0.06)] ${className}`}
     >
+      <div aria-hidden="true" className="flex flex-col gap-3 flex-1">
       <div className="flex items-center gap-3 pb-3 border-b border-white/[0.08]">
         <span className="w-9 h-9 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-display font-medium text-lg">T</span>
         <span className="flex flex-col leading-tight">
@@ -87,6 +98,26 @@ const TaraCall = ({ className = '' }: { className?: string }) => {
           </p>
         </div>
       ))}
+      </div>
+      <div
+        className={`flex items-center justify-between gap-3 pt-3 border-t border-white/[0.08] transition-opacity duration-300 ${
+          ended ? 'opacity-100' : 'opacity-0 invisible'
+        }`}
+      >
+        <button
+          type="button"
+          onClick={replay}
+          className="inline-flex items-center gap-2 min-h-[44px] text-[14px] text-[#A1A1A6] transition-colors hover:text-[#EDEDED]"
+        >
+          <RotateCcw aria-hidden="true" size={16} strokeWidth={1.5} /> Replay
+        </button>
+        <a
+          href={hrefFor.built('tara')}
+          className="group inline-flex items-center gap-2 min-h-[44px] text-[14px] font-medium text-accent-on-dark no-underline"
+        >
+          Your turn <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow !text-accent-on-dark" />
+        </a>
+      </div>
     </div>
   );
 };
