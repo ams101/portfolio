@@ -132,10 +132,10 @@ const Spark = ({ s, i }: { s: Series; i: number }) => {
   const ol = s.ol[i];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" role="img" aria-label="Price and VWAP through the session">
-      {i >= ORB_END && oh != null && <line x1={x(ORB_END)} x2={W} y1={y(oh)} y2={y(oh)} stroke="#BDB6A8" strokeDasharray="4 4" />}
-      {i >= ORB_END && ol != null && <line x1={x(ORB_END)} x2={W} y1={y(ol)} y2={y(ol)} stroke="#BDB6A8" strokeDasharray="4 4" />}
-      <path d={path('vwap', i)} fill="none" stroke="#5A5650" strokeWidth={1} strokeDasharray="2 3" />
-      <path d={path('c', i)} fill="none" stroke="#1A1A1A" strokeWidth={1.75} />
+      {i >= ORB_END && oh != null && <line x1={x(ORB_END)} x2={W} y1={y(oh)} y2={y(oh)} stroke="#BDBDBD" strokeDasharray="4 4" />}
+      {i >= ORB_END && ol != null && <line x1={x(ORB_END)} x2={W} y1={y(ol)} y2={y(ol)} stroke="#BDBDBD" strokeDasharray="4 4" />}
+      <path d={path('vwap', i)} fill="none" stroke="#5C5C5C" strokeWidth={1} strokeDasharray="2 3" />
+      <path d={path('c', i)} fill="none" stroke="#171717" strokeWidth={1.75} />
       <line x1={x(i)} x2={x(i)} y1={0} y2={H} stroke="#B3330E" strokeWidth={1} />
     </svg>
   );

@@ -359,12 +359,12 @@ const TaraDemo = () => {
 
         {/* Right: call panel (a phone, so it stays dark) */}
         <div className={`flex-[1_1_340px] max-w-[400px] w-full ${inCall ? 'fixed inset-x-0 bottom-0 z-40 p-3 max-w-none lg:static lg:p-0 lg:max-w-[400px]' : ''}`}>
-          <div className="bg-ink text-[#EDEAE3] rounded-[32px] p-[22px] flex flex-col h-[440px] lg:h-[520px] shadow-[0_24px_48px_rgba(26,26,26,0.18)]">
-            <div className="flex items-center gap-3 pb-3.5 border-b border-[#34322E]">
-              <span className={`w-10 h-10 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-xl ${taraSpeaking ? 'ring-4 ring-accent/50' : ''}`}>T</span>
+          <div className="bg-ink text-[#EDEDED] rounded-[32px] p-[22px] flex flex-col h-[440px] lg:h-[520px] shadow-[0_24px_48px_rgba(26,26,26,0.18)]">
+            <div className="flex items-center gap-3 pb-3.5 border-b border-[#333333]">
+              <span className={`w-10 h-10 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-serif text-xl ${taraSpeaking ? 'ring-4 ring-accent/50' : ''}`}>T</span>
               <span className="flex-1 flex flex-col leading-tight">
                 <span className="text-[15px]">Tara</span>
-                <span className="font-mono text-[11px] text-[#A8A397]">
+                <span className="font-mono text-[11px] text-[#A3A3A3]">
                   {status === 'idle' && 'Live call · 1 minute'}
                   {status === 'connecting' && 'Connecting…'}
                   {status === 'live' && (taraSpeaking ? 'Speaking' : 'Listening')}
@@ -373,7 +373,7 @@ const TaraDemo = () => {
                 </span>
               </span>
               {status === 'live' && (
-                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-[#F2A07B]' : 'text-[#A8A397]'}`}>
+                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-[#F2A07B]' : 'text-[#A3A3A3]'}`}>
                   <Clock className="w-4 h-4" aria-hidden="true" />
                   0:{String(secondsLeft).padStart(2, '0')}
                 </span>
@@ -384,11 +384,11 @@ const TaraDemo = () => {
               {status === 'idle' && (
                 <div className="h-full flex flex-col items-center justify-center text-center gap-1.5 px-2">
                   <p className="m-0 font-serif text-[22px] leading-[1.3]">Tara will call you right here in the browser.</p>
-                  <p className="m-0 text-[13px] text-[#A8A397]">Captions appear as you talk.</p>
+                  <p className="m-0 text-[13px] text-[#A3A3A3]">Captions appear as you talk.</p>
                 </div>
               )}
               {status === 'connecting' && (
-                <div className="h-full flex flex-col items-center justify-center gap-3 text-sm text-[#A8A397]">
+                <div className="h-full flex flex-col items-center justify-center gap-3 text-sm text-[#A3A3A3]">
                   <Loader2 className="w-6 h-6 animate-spin" aria-hidden="true" />
                   Connecting to Tara…
                 </div>
@@ -402,13 +402,13 @@ const TaraDemo = () => {
               {(status === 'live' || status === 'ended') && (
                 <>
                   {lines.length === 0 && !partial && status === 'live' && (
-                    <p className="text-center text-xs text-[#A8A397] pt-8">Tara is about to speak…</p>
+                    <p className="text-center text-xs text-[#A3A3A3] pt-8">Tara is about to speak…</p>
                   )}
                   {[...lines, ...(partial ? [partial] : [])].map((l, i) => (
                     <div key={i} className={`flex ${l.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <p
                         className={`m-0 max-w-[85%] px-3 py-2 rounded-[14px] text-sm leading-[1.45] ${
-                          l.role === 'user' ? 'bg-[#EDEAE3] text-ink' : 'bg-[#2A2825]'
+                          l.role === 'user' ? 'bg-[#EDEDED] text-ink' : 'bg-[#2A2A2A]'
                         } ${partial && i === lines.length ? 'opacity-70' : ''}`}
                       >
                         {l.text}
@@ -416,7 +416,7 @@ const TaraDemo = () => {
                     </div>
                   ))}
                   {status === 'ended' && (
-                    <p className="text-center text-xs text-[#A8A397] pt-2">That&apos;s the minute. Try another situation?</p>
+                    <p className="text-center text-xs text-[#A3A3A3] pt-2">That&apos;s the minute. Try another situation?</p>
                   )}
                 </>
               )}
@@ -437,7 +437,7 @@ const TaraDemo = () => {
               </div>
             )}
 
-            <div className="pt-3 border-t border-[#34322E]">
+            <div className="pt-3 border-t border-[#333333]">
               {inCall ? (
                 <div className="flex items-center justify-center gap-4">
                   <button
@@ -445,7 +445,7 @@ const TaraDemo = () => {
                     disabled={status !== 'live'}
                     aria-label={muted ? 'Unmute' : 'Mute'}
                     className={`w-12 h-12 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 ${
-                      muted ? 'bg-[#EDEAE3] text-ink border-[#EDEAE3]' : 'border-[#4A4743] hover:bg-[#2A2825]'
+                      muted ? 'bg-[#EDEDED] text-ink border-[#EDEDED]' : 'border-[#4A4743] hover:bg-[#2A2A2A]'
                     }`}
                   >
                     {muted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -467,7 +467,7 @@ const TaraDemo = () => {
                     {status === 'idle' ? <Phone className="w-5 h-5" aria-hidden="true" /> : <RotateCcw className="w-5 h-5" aria-hidden="true" />}
                     {status === 'idle' ? 'Start call' : 'Call again'}
                   </button>
-                  <p className="m-0 mt-2 text-[11px] text-[#A8A397] text-center leading-snug">
+                  <p className="m-0 mt-2 text-[11px] text-[#A3A3A3] text-center leading-snug">
                     Uses your microphone · processed by Vapi · don&apos;t share real personal details
                   </p>
                 </>
