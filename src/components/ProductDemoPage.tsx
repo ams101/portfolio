@@ -6,41 +6,7 @@ import PanCheck from './PanCheck';
 import OpsSection from './OpsSection';
 import CoPilotReplay from './CoPilotReplay';
 import Section from './Section';
-import ProductDemo from './ProductDemo';
-import ABExperiment from './ABExperiment';
-import WhatsAppDemo from './WhatsAppDemo';
-import RAGPlayground from './RAGPlayground';
-
-const DEMOS = [
-  {
-    id: 'whatsapp',
-    title: 'WhatsApp booking assistant',
-    description: 'Book, change and cancel a stay over chat, and see what it decided on every message.',
-    tags: 'Conversation design · guardrails · handoff',
-    Component: WhatsAppDemo
-  },
-  {
-    id: 'rag',
-    title: 'How RAG works',
-    description: 'An interactive walkthrough of retrieval-augmented generation, using a movie recommender.',
-    tags: 'Retrieval · embeddings · grounding',
-    Component: RAGPlayground
-  },
-  {
-    id: 'payment',
-    title: 'Payment flow simulator',
-    description: 'The in-centre card payment flow I designed for Shaadi.com, from tap to settlement.',
-    tags: 'Payments · Shaadi.com',
-    Component: ProductDemo
-  },
-  {
-    id: 'abtest',
-    title: 'A/B testing simulator',
-    description: 'Pick a metric, choose a lever, and see what happens. Including when not to ship.',
-    tags: 'Experimentation · decisions',
-    Component: ABExperiment
-  }
-];
+import { MORE_DEMOS as DEMOS } from '../data/demos';
 
 const ProductDemoPage = () => {
   const [openDemo, setOpenDemo] = useState<string | null>(null);
