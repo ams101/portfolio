@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import Section from './Section';
 import { caseStudies } from '../data/caseStudies';
 
@@ -6,7 +7,7 @@ interface CaseStudiesProps {
 }
 
 const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
-  <Section id="work" label="01 — Work" className="pt-24 pb-10">
+  <Section id="work" label="Work" className="py-20 md:py-24">
     <ul className="m-0 p-0 list-none">
       {caseStudies.map((study, i) => (
         <li key={study.id}>
@@ -23,7 +24,7 @@ const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
               </span>
               <span className="text-base text-muted">{study.listLine}</span>
             </span>
-            <span className="row-arrow text-[22px]" aria-hidden="true">→</span>
+            <ArrowRight aria-hidden="true" size={20} strokeWidth={1.5} className="row-arrow hidden sm:block self-center shrink-0" />
           </button>
         </li>
       ))}

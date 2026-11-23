@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import Section from './Section';
 import { articles } from '../data/articles';
 
@@ -6,7 +7,7 @@ interface WritingProps {
 }
 
 const Writing = ({ onReadArticle }: WritingProps) => (
-  <Section id="writing" label="04 — Writing" className="pb-24">
+  <Section id="writing" label="Writing" className="py-20 md:py-24 border-t border-rule">
     <ul className="m-0 p-0 list-none">
       {articles.map((article, i) => (
         <li key={article.id}>
@@ -22,7 +23,9 @@ const Writing = ({ onReadArticle }: WritingProps) => (
               </span>
               <span className="text-base text-muted">{article.subtitle}</span>
             </span>
-            <span className="row-arrow text-[15px] font-medium">Read →</span>
+            <span className="inline-flex items-center gap-2 text-[15px] font-medium text-accent">
+              Read <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
+            </span>
           </button>
         </li>
       ))}

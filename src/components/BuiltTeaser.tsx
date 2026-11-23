@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Section from './Section';
 
 interface BuiltTeaserProps {
@@ -57,8 +58,8 @@ const MORE: Item[] = [
 const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) => void }) => {
   const body = (
     <>
-      <span className="hidden sm:block flex-[0_0_168px] h-[105px] overflow-hidden border border-rule bg-paper-deep">
-        <img src={item.thumb} alt={item.alt} loading="lazy" className="w-full h-full object-cover object-top" />
+      <span className="hidden sm:block flex-[0_0_168px] h-[104px] overflow-hidden border border-rule bg-paper-deep">
+        <img src={item.thumb} alt={item.alt} loading="lazy" width={168} height={104} className="w-full h-full object-cover object-top" />
       </span>
       <span className="flex-[1_1_300px] min-w-0 flex flex-col gap-1">
         <span className="font-serif text-[24px] md:text-[26px] leading-[1.2] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
@@ -67,9 +68,14 @@ const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) 
         <span className="text-[15px] text-muted">{item.line}</span>
       </span>
       <span className="flex items-baseline gap-5 sm:flex-col sm:items-end sm:gap-2 whitespace-nowrap">
-        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">{item.kind}</span>
-        <span className="text-[15px] font-medium text-accent">
-          {item.cta} <span className="row-arrow inline-block">{item.href ? '↗' : '→'}</span>
+        <span className="font-mono text-xs text-muted">{item.kind}</span>
+        <span className="inline-flex items-center gap-2 text-[15px] font-medium text-accent">
+          {item.cta}
+          {item.href ? (
+            <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
+          ) : (
+            <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
+          )}
         </span>
       </span>
     </>
@@ -87,16 +93,15 @@ const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) 
 };
 
 const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) => (
-  <Section id="built" label="02 — Things I've built" className="pt-16 pb-24">
+  <Section id="built" label="Things I’ve built" className="py-20 md:py-24 border-t border-rule">
     <div className="flex justify-end -mt-1 mb-2">
       <span className="font-mono text-xs text-muted">{MORE.length + 1} things you can try</span>
     </div>
     <div className="flex flex-wrap items-center gap-10 pt-6 border-t border-ink">
       <div className="flex-[1_1_340px] flex flex-col gap-4">
-        <p className="m-0 font-mono text-xs text-muted">Voice AI agent · real agent, concept company</p>
-        <h2 className="m-0 font-serif font-normal text-[40px] leading-[1.1]">Talk to Tara</h2>
+        <h3 className="m-0 font-serif font-normal text-[40px] leading-[1.1]">Talk to Tara</h3>
         <p className="m-0 text-ink-soft">
-          She calls approved credit-card customers and gets them to an active card, one step at a time, in Hindi or
+          A real voice AI agent, working for a concept company. She calls approved credit-card customers and gets them to an active card, one step at a time, in Hindi or
           English. Pick a situation and try to trip her up.
         </p>
         <div className="flex flex-wrap items-center gap-5">
@@ -106,7 +111,7 @@ const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) =
 
       <div
         aria-hidden="true"
-        className="flex-[0_1_300px] bg-ink text-[#EDEAE3] rounded-[28px] p-[22px] flex flex-col gap-3.5 min-h-[300px]"
+        className="flex-[0_1_300px] bg-ink text-[#EDEAE3] rounded-[28px] p-6 flex flex-col gap-3 min-h-[300px]"
       >
         <div className="flex items-center gap-3 pb-3 border-b border-[#34322E]">
           <span className="w-9 h-9 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-lg">T</span>
@@ -136,7 +141,9 @@ const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) =
     </ul>
 
     <div className="flex justify-end pt-5">
-      <button onClick={onSeeAll} className="link text-base">See all demos and side projects →</button>
+      <button onClick={onSeeAll} className="group link inline-flex items-center gap-2 text-base">
+        See all demos and side projects <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
+      </button>
     </div>
   </Section>
 );
