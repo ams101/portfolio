@@ -254,7 +254,7 @@ const ProductDemo = () => {
         )}
       </div>
       <ChevronRight className={`absolute w-4 h-4 transition duration-300 ${
-        isActive ? isFrontend ? 'text-accent' : 'text-amber-700' : 'text-muted'
+        isActive ? isFrontend ? 'text-accent' : 'text-ink' : 'text-muted'
       }`} />
     </div>
   );
@@ -267,7 +267,7 @@ const ProductDemo = () => {
           <div className="grid lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-rule">
             <div className="lg:col-span-2 p-6 md:p-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-ink rounded ">
+                <div className="p-3 bg-ink rounded-md ">
                   <CreditCard className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -288,11 +288,11 @@ const ProductDemo = () => {
                       type="number"
                       value={form.amount}
                       onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                      className="w-full bg-paper-deep border border-rule rounded pl-12 pr-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
+                      className="w-full bg-paper-deep border border-rule rounded-lg pl-12 pr-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                       placeholder="10000"
                     />
                   </div>
-                  {errors.amount && <p className="text-red-700 text-xs mt-1.5">{errors.amount}</p>}
+                  {errors.amount && <p className="text-negative text-xs mt-1.5">{errors.amount}</p>}
                 </div>
 
                 <div>
@@ -301,10 +301,10 @@ const ProductDemo = () => {
                     type="text"
                     value={form.plan}
                     onChange={(e) => setForm({ ...form, plan: e.target.value })}
-                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
+                    className="w-full bg-paper-deep border border-rule rounded-lg px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                     placeholder="Premium Shaadi Plan"
                   />
-                  {errors.plan && <p className="text-red-700 text-xs mt-1.5">{errors.plan}</p>}
+                  {errors.plan && <p className="text-negative text-xs mt-1.5">{errors.plan}</p>}
                 </div>
 
                 <div>
@@ -318,13 +318,13 @@ const ProductDemo = () => {
                       <button
                         key={s.id}
                         onClick={() => setForm({ ...form, scenario: s.id as 'happy' | 'declined' | 'refund' })}
-                        className={`py-2.5 px-3 rounded text-sm font-semibold transition duration-300 ${
+                        className={`py-2.5 px-3 rounded-lg text-sm font-semibold transition duration-300 ${
                           form.scenario === s.id
                             ? s.color === 'teal'
                               ? 'bg-accent/10 border-2 border-accent/40 text-accent'
                               : s.color === 'red'
-                              ? 'bg-red-50 border-2 border-red-200 text-red-700'
-                              : 'bg-amber-50 border-2 border-amber-200 text-amber-700'
+                              ? 'bg-negative-tint border-2 border-negative-line text-negative'
+                              : 'bg-warning-tint border-2 border-warning-line text-warning'
                             : 'bg-paper-deep border-2 border-rule text-muted hover:border-ink'
                         }`}
                       >
@@ -336,7 +336,7 @@ const ProductDemo = () => {
 
                 <button
                   onClick={isSimulating ? resetSimulation : startSimulation}
-                  className={`w-full py-4 rounded font-bold transition duration-300 flex items-center justify-center gap-2 ${
+                  className={`w-full py-4 rounded-lg font-bold transition duration-300 flex items-center justify-center gap-2 ${
                     isSimulating
                       ? 'bg-paper-deep text-ink hover:bg-rule'
                       : 'bg-accent text-white hover:opacity-90'
@@ -359,7 +359,7 @@ const ProductDemo = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={togglePlayPause}
-                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2"
+                      className="flex-1 py-2.5 rounded-lg font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2"
                     >
                       {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       {isPlaying ? 'Pause' : 'Resume'}
@@ -367,7 +367,7 @@ const ProductDemo = () => {
                     <button
                       onClick={stepForward}
                       disabled={currentStage >= totalStages}
-                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 py-2.5 rounded-lg font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <SkipForward className="w-4 h-4" />
                       Step
@@ -423,7 +423,7 @@ const ProductDemo = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-3 h-3 rounded-full bg-ink"></div>
-                    <span className="text-[13px] font-medium text-amber-700">Backend and banking rails</span>
+                    <span className="text-[13px] font-medium text-ink">Backend and banking rails</span>
                   </div>
                   <div className="flex items-center justify-between">
                     {backendNodes.map((node, index) => (
@@ -461,12 +461,12 @@ const ProductDemo = () => {
                         className={`flex items-start gap-2 text-xs p-3 rounded-lg border ${
                           log.type === 'frontend'
                             ? 'bg-accent/10 border-accent/40 text-accent'
-                            : 'bg-amber-50 border-amber-200 text-amber-700'
+                            : 'bg-warning-tint border-warning-line text-warning'
                         }`}
                       >
                         {log.status === 'success' && <CheckCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-accent" />}
-                        {log.status === 'error' && <XCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-red-700" />}
-                        {log.status === 'info' && <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-blue-700" />}
+                        {log.status === 'error' && <XCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-negative" />}
+                        {log.status === 'info' && <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-ink-soft" />}
                         {!log.status && <div className="w-3.5 h-3.5 flex-shrink-0" />}
                         <span>{log.message}</span>
                       </div>

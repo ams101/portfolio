@@ -261,7 +261,7 @@ const WhatsAppDemo = () => {
                 type="text"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
-                className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30"
+                className="w-full bg-paper-deep border border-rule rounded-lg px-4 py-3 text-ink focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30"
                 placeholder="Your name"
               />
             </div>
@@ -272,7 +272,7 @@ const WhatsAppDemo = () => {
                 type="tel"
                 value={userPhone}
                 onChange={(e) => setUserPhone(e.target.value)}
-                className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30"
+                className="w-full bg-paper-deep border border-rule rounded-lg px-4 py-3 text-ink focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30"
                 placeholder="+971 50 000 0000"
               />
             </div>
@@ -280,7 +280,7 @@ const WhatsAppDemo = () => {
             <button
               onClick={startSession}
               disabled={!userName.trim() || !userPhone.trim()}
-              className="w-full py-3 bg-accent text-white font-bold rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-accent text-white font-bold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Start Chat
             </button>
@@ -296,7 +296,7 @@ const WhatsAppDemo = () => {
         <div className="mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <button
             onClick={resetDemo}
-            className="px-4 py-2 bg-paper-deep border border-rule rounded text-ink-soft hover:bg-paper-deep transition text-sm font-semibold"
+            className="px-4 py-2 bg-paper-deep border border-rule rounded-md text-ink-soft hover:bg-paper-deep transition text-sm font-semibold"
           >
             Reset Demo
           </button>
@@ -309,7 +309,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText('Book a private room in Place 2 next weekend for 2');
                 }}
-                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded-md text-xs text-ink transition-colors"
               >
                 Book a stay
               </button>
@@ -318,7 +318,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText('Cancel booking BK-' + Date.now().toString().slice(-6));
                 }}
-                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded-md text-xs text-ink transition-colors"
               >
                 Cancel booking
               </button>
@@ -327,7 +327,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText("What's the cancellation policy?");
                 }}
-                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded-md text-xs text-ink transition-colors"
               >
                 Ask about policy
               </button>
@@ -336,7 +336,7 @@ const WhatsAppDemo = () => {
                   if (screen === 'list') setScreen('chat');
                   setInputText('Modify my booking to add 1 guest');
                 }}
-                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded text-xs text-ink transition-colors"
+                className="px-3 py-1.5 bg-white hover:border-ink border border-rule-strong rounded-md text-xs text-ink transition-colors"
               >
                 Modify booking
               </button>
@@ -574,7 +574,7 @@ const BehindTheChat = ({ messages }: { messages: Message[] }) => {
       ) : (
         <div className="flex-1 overflow-y-auto space-y-3 pr-1">
           {turns.map(({ bot, user }) => (
-            <div key={bot.id} className="bg-paper border border-rule rounded p-3 text-xs">
+            <div key={bot.id} className="bg-paper border border-rule rounded-md p-3 text-xs">
               {user && user.direction === 'out' && (
                 <p className="text-ink-soft mb-2 truncate">“{user.text}”</p>
               )}
@@ -582,7 +582,7 @@ const BehindTheChat = ({ messages }: { messages: Message[] }) => {
                 <span className="text-muted">intent</span>
                 <span className="text-accent">{bot.debug!.intent}</span>
                 <span className="text-muted">state</span>
-                <span className="text-amber-700">{bot.debug!.state}</span>
+                <span className="text-ink-soft">{bot.debug!.state}</span>
                 <span className="text-muted">actions</span>
                 <span className="text-ink-soft">
                   {bot.debug!.toolCalls.length ? bot.debug!.toolCalls.join(', ') : 'reply only'}
@@ -593,7 +593,7 @@ const BehindTheChat = ({ messages }: { messages: Message[] }) => {
         </div>
       )}
 
-      <p className="text-[11px] text-muted mt-4 pt-3 border-t border-rule">
+      <p className="text-xs text-muted mt-4 pt-3 border-t border-rule">
         Rule-based engine: keyword intents, a state machine for booking, change and cancellation flows, three-strike moderation and a human handoff.
       </p>
     </div>

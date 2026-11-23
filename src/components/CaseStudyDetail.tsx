@@ -21,7 +21,7 @@ const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
         <a href={hrefFor.homeSection('work')} className="self-start inline-flex items-center gap-2 min-h-[44px] text-[14px] text-muted no-underline transition-colors hover:text-ink">
           <ArrowLeft aria-hidden="true" size={14} strokeWidth={1.5} /> All work
         </a>
-        <h1 className="m-0 font-display font-medium text-[40px] md:text-[60px] leading-[1.08] tracking-[-0.03em] max-w-[900px]">
+        <h1 className="m-0 [text-wrap:balance] font-display font-medium text-[40px] md:text-[60px] leading-[1.08] tracking-[-0.03em] max-w-[900px]">
           {study.headline}
         </h1>
         <p className="m-0 text-lg md:text-xl leading-[1.55] text-ink-soft max-w-[680px]">{study.context}</p>
@@ -55,7 +55,7 @@ const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
             </div>
           </div>
           <figcaption className="text-[13px] text-muted">
-            Fig. 1 — {diagram.caption} <span className="text-[#8A857C]">Simplified diagram.</span>
+            Fig. 1 — {diagram.caption} <span className="text-muted">Simplified diagram.</span>
           </figcaption>
         </figure>
       )}
@@ -63,7 +63,7 @@ const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
       <Section label="What I owned" className="pt-24">
         <div className="max-w-[680px] flex flex-col gap-4">
           {study.roleIntro && <p className="m-0 text-ink-soft">{study.roleIntro}</p>}
-          <ul className="m-0 pl-5 list-disc flex flex-col gap-2 marker:text-accent">
+          <ul className="m-0 pl-5 list-disc flex flex-col gap-2 marker:text-rule-strong">
             {study.role.map(item => (
               <li key={item}>{item}</li>
             ))}
@@ -80,10 +80,10 @@ const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
                 i === study.initiatives.length - 1 ? 'border-b border-b-rule' : ''
               }`}
             >
-              <span className="flex-[0_0_40px] text-[14px] font-medium text-accent tabular-nums">{i + 1}</span>
+              <span className="flex-[0_0_40px] text-[14px] font-medium text-muted tabular-nums">{i + 1}</span>
               <div className="flex-[1_1_520px] flex flex-col gap-1.5">
                 <h3 className="m-0 font-display font-medium text-[24px] md:text-[26px] leading-[1.2] tracking-[-0.02em]">{item.title}</h3>
-                <p className="m-0 text-ink-soft">{item.description}</p>
+                <p className="m-0 text-ink-soft max-w-[60ch]">{item.description}</p>
               </div>
             </li>
           ))}
@@ -107,7 +107,7 @@ const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
               </div>
             ))}
           </div>
-          <ul className="m-0 pl-5 list-disc flex flex-col gap-2.5 text-ink-soft max-w-[680px] marker:text-accent">
+          <ul className="m-0 pl-5 list-disc flex flex-col gap-2.5 text-ink-soft max-w-[680px] marker:text-rule-strong">
             {study.impact.map(item => (
               <li key={item}>{item}</li>
             ))}

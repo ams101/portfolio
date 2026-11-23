@@ -368,7 +368,7 @@ const RAGPlayground = () => {
           </button>
 
           {showWhatIsRAG && (
-            <div className="mt-4 p-6 bg-paper-deep rounded border border-rule text-left max-w-3xl mx-auto">
+            <div className="mt-4 p-6 bg-paper-deep rounded-md border border-rule text-left max-w-3xl mx-auto">
               <p className="text-ink-soft leading-relaxed">
                 <strong className="text-ink">RAG = Retrieve relevant information first, then Generate an answer grounded in that retrieved context.</strong>
                 <br /><br />
@@ -394,7 +394,7 @@ const RAGPlayground = () => {
                     value={positiveQuery}
                     onChange={(e) => setPositiveQuery(e.target.value)}
                     placeholder="e.g., Witty romantic comedy with friends-to-lovers"
-                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-[#8A857C] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
                     rows={3}
                   />
                 </div>
@@ -407,7 +407,7 @@ const RAGPlayground = () => {
                     value={negativeQuery}
                     onChange={(e) => setNegativeQuery(e.target.value)}
                     placeholder="e.g., gore, horror"
-                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-[#8A857C] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
                     rows={2}
                   />
                 </div>
@@ -475,7 +475,7 @@ const RAGPlayground = () => {
                       type="checkbox"
                       checked={latencySimulation}
                       onChange={(e) => setLatencySimulation(e.target.checked)}
-                      className="w-4 h-4 rounded border-rule-strong bg-white text-accent focus:ring-accent/30"
+                      className="w-4 h-4 rounded-md border-rule-strong bg-white text-accent focus:ring-accent/30"
                     />
                     Latency simulation (adds delays for realism)
                   </label>
@@ -597,7 +597,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
             <p className="mb-2">Top genres:</p>
             <div className="flex flex-wrap gap-2">
               {genreDistribution.map(([genre, count]) => (
-                <span key={genre} className="px-2 py-1 bg-paper-deep rounded text-xs">
+                <span key={genre} className="px-2 py-1 bg-paper-deep rounded-md text-xs">
                   {genre} ({count})
                 </span>
               ))}
@@ -610,14 +610,14 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search movies..."
-              className="w-full px-3 py-2 bg-white border border-rule-strong rounded text-sm text-ink placeholder-[#8A857C] mb-2"
+              className="w-full px-3 py-2 bg-white border border-rule-strong rounded-lg text-sm text-ink placeholder-muted mb-2"
             />
             <div className="max-h-48 overflow-y-auto space-y-1">
               {filteredMovies.slice(0, 20).map(movie => (
                 <button
                   key={movie.id}
                   onClick={() => setSelectedMovieId(selectedMovieId === movie.id ? null : movie.id)}
-                  className="w-full text-left px-3 py-2 bg-white hover:bg-paper-deep rounded text-xs text-ink-soft transition-colors"
+                  className="w-full text-left px-3 py-2 bg-white hover:bg-paper-deep rounded-lg text-xs text-ink-soft transition-colors"
                 >
                   {movie.title} ({movie.year}) - {movie.genres.join(', ')}
                 </button>
@@ -626,7 +626,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
           </div>
 
           {selectedMovieId && (
-            <div className="p-3 bg-white rounded border border-rule text-xs">
+            <div className="p-3 bg-white rounded-md border border-rule text-xs">
               {(() => {
                 const movie = filteredMovies.find(m => m.id === selectedMovieId);
                 if (!movie) return null;
@@ -637,7 +637,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
                     <p className="text-ink-soft text-xs mb-2">{movie.synopsis}</p>
                     <div className="flex flex-wrap gap-1">
                       {movie.tags.map(tag => (
-                        <span key={tag} className="px-2 py-0.5 bg-paper-deep rounded text-xs text-accent">
+                        <span key={tag} className="px-2 py-0.5 bg-paper-deep rounded-md text-xs text-accent">
                           {tag}
                         </span>
                       ))}
@@ -660,7 +660,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
             Why chunk? So retrieval can grab the most relevant parts of each synopsis.
           </p>
 
-          <div className="p-3 bg-white rounded border border-rule">
+          <div className="p-3 bg-white rounded-md border border-rule">
             <p className="text-xs text-muted mb-2">Example: {step.data.movie.title}</p>
             <p className="text-xs text-muted mb-2">Original synopsis:</p>
             <p className="text-xs text-ink-soft mb-3">{step.data.movie.synopsis}</p>
@@ -668,7 +668,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
             <p className="text-xs text-muted mb-2">Split into {step.data.chunks.length} chunks:</p>
             <div className="space-y-2">
               {step.data.chunks.map((chunk: string, idx: number) => (
-                <div key={idx} className="p-2 bg-paper-deep rounded">
+                <div key={idx} className="p-2 bg-paper-deep rounded-md">
                   <p className="text-xs text-accent mb-1">Chunk #{idx + 1}</p>
                   <p className="text-xs text-ink-soft">{chunk}</p>
                 </div>
@@ -688,7 +688,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
             Local embedding simulation using hashed bag-of-words with TF weighting
           </p>
 
-          <div className="p-3 bg-white rounded border border-rule">
+          <div className="p-3 bg-white rounded-md border border-rule">
             <p className="text-xs text-muted mb-2">Sample embedding (first 12 values):</p>
             <div className="font-mono text-xs text-ink-soft">
               [{step.data.embedding.slice(0, 12).map((v: number) => v.toFixed(4)).join(', ')}...]
@@ -713,7 +713,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
 
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {step.data.chunks.map((chunk: RetrievedChunk, idx: number) => (
-              <div key={idx} className="p-3 bg-white rounded border border-rule">
+              <div key={idx} className="p-3 bg-white rounded-md border border-rule">
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <p className="text-xs font-semibold text-ink">
@@ -721,7 +721,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
                     </p>
                     <p className="text-xs text-muted">Chunk #{chunk.chunkIndex + 1}</p>
                   </div>
-                  <span className="px-2 py-1 bg-accent/10 text-accent rounded text-xs font-mono">
+                  <span className="px-2 py-1 bg-accent/10 text-accent rounded-md text-xs font-mono">
                     {chunk.similarity.toFixed(4)}
                   </span>
                 </div>
@@ -737,7 +737,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
         <div className="space-y-3">
           <p className="text-ink-soft text-sm">Context pack assembled from top chunks</p>
 
-          <div className="p-3 bg-white rounded border border-rule max-h-96 overflow-y-auto">
+          <div className="p-3 bg-white rounded-md border border-rule max-h-96 overflow-y-auto">
             <pre className="text-xs text-ink-soft whitespace-pre-wrap font-mono">
               {step.data.context}
             </pre>
@@ -751,17 +751,17 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
           <p className="text-ink-soft text-sm">Prompt components:</p>
 
           <div className="space-y-2">
-            <div className="p-3 bg-white rounded border border-rule">
+            <div className="p-3 bg-white rounded-md border border-rule">
               <p className="text-xs font-semibold text-accent mb-1">SYSTEM</p>
               <p className="text-xs text-ink-soft">{step.data.prompt.system}</p>
             </div>
 
-            <div className="p-3 bg-white rounded border border-rule">
+            <div className="p-3 bg-white rounded-md border border-rule">
               <p className="text-xs font-semibold text-accent mb-1">USER</p>
               <p className="text-xs text-ink-soft whitespace-pre-wrap">{step.data.prompt.user}</p>
             </div>
 
-            <div className="p-3 bg-white rounded border border-rule">
+            <div className="p-3 bg-white rounded-md border border-rule">
               <p className="text-xs font-semibold text-accent mb-1">CONTEXT</p>
               <p className="text-xs text-ink-soft whitespace-pre-wrap">
                 {step.data.prompt.context.slice(0, 500)}...
@@ -779,7 +779,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
           </p>
 
           {step.data.mode === 'keyless' && (
-            <div className="p-3 bg-white rounded border border-rule">
+            <div className="p-3 bg-white rounded-md border border-rule">
               <p className="text-xs text-muted mb-2">In this demo, the answer is assembled from the retrieved chunks. A production system would pass the prompt from step 6 to a language model.</p>
               <ol className="text-xs text-ink-soft space-y-1 list-decimal list-inside">
                 <li>Group chunks by movie</li>
@@ -831,7 +831,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
                 </button>
 
                 {showCitations[rec.movie.id] && (
-                  <div className="mt-3 p-3 bg-paper-deep rounded border border-rule">
+                  <div className="mt-3 p-3 bg-paper-deep rounded-md border border-rule">
                     <p className="text-xs text-muted mb-2">Sources used:</p>
                     <p className="text-xs text-ink-soft font-mono">{rec.sources}</p>
                   </div>

@@ -207,10 +207,9 @@ const CoPilotReplay = () => {
     <section id="copilot" aria-labelledby="copilot-title" className="scroll-mt-24 border-t-2 border-ink pt-10">
       <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
         <div className="flex flex-col gap-2.5 max-w-[680px]">
-          <p className="m-0 font-mono text-xs text-muted">Personal project · live market data · decision support</p>
           <h2 id="copilot-title" className="m-0 font-display font-medium text-[40px] md:text-[48px] leading-[1.05] tracking-[-0.02em]">Intraday Co-Pilot</h2>
           <p className="m-0 text-lg md:text-[19px] text-ink-soft">
-            It suggests and explains; I decide and execute. The co-pilot watches a live feed of NSE stocks, scores intraday
+            A personal project on live market data. It suggests and explains; I decide and execute. The co-pilot watches a live feed of NSE stocks, scores intraday
             setups against rules I can tune, and explains each one in plain English.
           </p>
           <p className="m-0 text-[15px] text-muted">
@@ -242,7 +241,7 @@ const CoPilotReplay = () => {
               {niftyChg != null && (
                 <p className="m-0">
                   <span className="font-mono text-xs text-muted block">NIFTY 50</span>
-                  <span className={`font-mono text-lg tabular-nums ${niftyChg >= 0 ? 'text-green-800' : 'text-red-700'}`}>{pct(niftyChg)}</span>
+                  <span className={`font-mono text-lg tabular-nums ${niftyChg >= 0 ? 'text-positive' : 'text-negative'}`}>{pct(niftyChg)}</span>
                 </p>
               )}
               <div className="flex gap-2 ml-auto">
@@ -271,7 +270,7 @@ const CoPilotReplay = () => {
                 className="w-full accent-[#B42318]"
                 aria-valuetext={data.times[i]}
               />
-              <span className="flex justify-between font-mono text-[11px] text-muted">
+              <span className="flex justify-between font-mono text-xs text-muted">
                 <span>09:15</span>
                 <span>Opening range until 09:45</span>
                 <span>15:29</span>
@@ -284,7 +283,7 @@ const CoPilotReplay = () => {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] border-collapse text-[14px]">
                 <thead>
-                  <tr className="border-b border-ink text-left font-mono text-[11px] text-muted">
+                  <tr className="border-b border-ink text-left font-mono text-xs text-muted">
                     <th className="py-2 pr-2 font-normal">Stock</th>
                     <th className="py-2 pr-2 font-normal text-right">Price</th>
                     <th className="py-2 pr-2 font-normal">Bias</th>
@@ -305,23 +304,23 @@ const CoPilotReplay = () => {
                       >
                         <td className="py-2 pr-2">
                           <button className="text-left font-medium" aria-pressed={active}>{r.sym}</button>
-                          <span className={`block font-mono text-[11px] ${r.chg >= 0 ? 'text-green-800' : 'text-red-700'}`}>{pct(r.chg)}</span>
+                          <span className={`block font-mono text-xs ${r.chg >= 0 ? 'text-positive' : 'text-negative'}`}>{pct(r.chg)}</span>
                         </td>
                         <td className="py-2 pr-2 text-right font-mono tabular-nums">{r.price.toFixed(2)}</td>
                         <td className="py-2 pr-2 capitalize">{r.side}</td>
                         <td className="py-2 pr-2 text-right font-mono">{r.score}</td>
                         <td className="py-2 pr-2">
-                          <span className={r.vwapOk ? 'text-green-800' : 'text-muted'}>{r.vwapOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
+                          <span className={r.vwapOk ? 'text-positive' : 'text-muted'}>{r.vwapOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
                           <span className="font-mono text-[12px] text-muted">{pct(r.vd)}</span>
                         </td>
                         <td className="py-2 pr-2">
-                          <span className={r.volOk ? 'text-green-800' : 'text-muted'}>{r.volOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
+                          <span className={r.volOk ? 'text-positive' : 'text-muted'}>{r.volOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
                           <span className="font-mono text-[12px] text-muted">{r.vx.toFixed(1)}×</span>
                         </td>
                         <td className="py-2">
                           <span
-                            className={`inline-block px-2 py-0.5 rounded border text-[12px] ${
-                              r.ready ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-paper-deep text-muted border-rule'
+                            className={`inline-block px-2 py-0.5 rounded-md border text-[12px] ${
+                              r.ready ? 'bg-warning-tint text-warning border-warning-line' : 'bg-paper-deep text-muted border-rule'
                             }`}
                           >
                             {r.ready ? 'Enter?' : 'Wait'}
@@ -343,7 +342,7 @@ const CoPilotReplay = () => {
                   <span className="font-mono text-[12px] text-muted">{sel.sym}</span>
                 </div>
                 <Spark s={data.stocks[sel.sym]} i={i} />
-                <p className="m-0 font-mono text-[11px] text-muted">
+                <p className="m-0 font-mono text-xs text-muted max-w-[80ch]">
                   — price · ··· 60-minute VWAP · - - opening range · <span className="text-accent">|</span> now
                 </p>
                 <p className="m-0 text-[15px] leading-relaxed">{readOut(sel)}</p>
@@ -393,7 +392,7 @@ const CoPilotReplay = () => {
             )}
           </div>
 
-          <p className="m-0 font-mono text-[12px] text-muted">
+          <p className="m-0 font-mono text-xs text-muted max-w-[80ch]">
             Not investment advice. A replay of historical prices for illustration; no returns or performance are shown or
             implied. Data: NSE one-minute candles from the “Indian Stock Market Data (NSE)” dataset on Hugging Face (MIT),
             sourced from Upstox.

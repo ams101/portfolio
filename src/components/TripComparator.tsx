@@ -112,7 +112,7 @@ const TripPageTab = ({ variant, onPick, comparing, setComparing, a, b }: TripPag
       <div className="bg-white border border-rule">
         <div className="flex items-center justify-between px-5 md:px-7 py-3 border-b border-rule">
           <span className="font-display text-lg">{BRAND.name}</span>
-          <span className="font-mono text-[11px] text-muted">Sample trip page</span>
+          <span className="font-mono text-xs text-muted">Sample trip page</span>
         </div>
         <div className="px-5 md:px-7 py-6 flex flex-col gap-5">
           <div className="flex flex-col gap-1.5">
@@ -128,7 +128,7 @@ const TripPageTab = ({ variant, onPick, comparing, setComparing, a, b }: TripPag
                 key={v.id}
                 onClick={() => onPick(v.id)}
                 aria-pressed={v.id === variant.id}
-                className={`min-h-[40px] px-4 rounded border text-[15px] transition-colors ${
+                className={`min-h-[40px] px-4 rounded-lg border text-[15px] transition-colors ${
                   v.id === variant.id ? 'bg-ink border-ink text-paper' : 'border-rule-strong hover:border-ink'
                 }`}
               >
@@ -307,7 +307,7 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
                     </button>
                     {open && (
                       <div className="mt-2 flex flex-col gap-2 max-w-[340px]">
-                        <p className="m-0 font-mono text-[11px] leading-relaxed text-muted bg-paper-deep p-2">{r.rawExcerpt}</p>
+                        <p className="m-0 font-mono text-xs leading-relaxed text-muted bg-paper-deep p-2">{r.rawExcerpt}</p>
                         {r.flightsNote && <p className="m-0 text-[13px] text-ink-soft">{r.flightsNote}</p>}
                         <p className="m-0 text-[13px] text-ink-soft">Route: {r.route}</p>
                       </div>
@@ -317,9 +317,9 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
                   <td className="py-3 pr-3">{r.priceShown}</td>
                   <td className="py-3 pr-3 text-right font-mono">{inr(r.priceInr)}</td>
                   <td className="py-3 pr-3 text-right font-mono font-medium">{inr(r.perNight)}</td>
-                  <td className="py-3 pr-3">{r.flights === 'Unclear' ? <span className="text-amber-700">Unclear</span> : r.flights}</td>
+                  <td className="py-3 pr-3">{r.flights === 'Unclear' ? <span className="text-warning">Unclear</span> : r.flights}</td>
                   <td className="py-3 pr-3">
-                    {r.mealsCount === null ? <span className="text-amber-700">Unclear</span> : `${r.id === 'b' ? '≈' : ''}${r.mealsCount}`}
+                    {r.mealsCount === null ? <span className="text-warning">Unclear</span> : `${r.id === 'b' ? '≈' : ''}${r.mealsCount}`}
                     {r.mealsCount !== null && <span className="block text-[12px] text-muted">{r.meals}</span>}
                   </td>
                   <td className="py-3">
@@ -328,7 +328,7 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
                     ) : (
                       <ul className="m-0 p-0 list-none flex flex-col gap-1">
                         {r.flags.map(f => (
-                          <li key={f.text} className={`text-[12px] leading-snug ${f.level === 'warn' ? 'text-amber-700' : 'text-muted'}`}>
+                          <li key={f.text} className={`text-[12px] leading-snug ${f.level === 'warn' ? 'text-warning' : 'text-muted'}`}>
                             {f.level === 'warn' && <AlertTriangle aria-hidden="true" size={12} strokeWidth={1.5} className="inline mr-1 align-[-1px]" />}
                             {f.text}
                           </li>
@@ -350,7 +350,7 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
 
       <div className="bg-white border border-rule p-5 flex flex-col gap-3">
         <p className="label m-0">Where we stand</p>
-        <ul className="m-0 pl-5 list-disc marker:text-accent flex flex-col gap-2 text-[15px]">
+        <ul className="m-0 pl-5 list-disc marker:text-rule-strong flex flex-col gap-2 text-[15px]">
           <li>
             <strong className="font-medium">Cheapest fixed-date group trip</strong> at about {inr(ours.priceInr / ours.nights)} a night,
             with no internal flights to add.
@@ -429,7 +429,7 @@ const HowItWorks = ({ variant }: { variant: TripVariant }) => {
 
       <div className="flex flex-col gap-3 max-w-[680px]">
         <p className="label m-0">What I’d improve next</p>
-        <ul className="m-0 pl-5 list-disc marker:text-accent flex flex-col gap-1.5 text-[15px] text-ink-soft">
+        <ul className="m-0 pl-5 list-disc marker:text-rule-strong flex flex-col gap-1.5 text-[15px] text-ink-soft">
           <li>Use the model’s structured-output mode instead of asking for JSON in the prompt, and validate against the schema.</li>
           <li>Retry once on invalid output, then flag the page for a person rather than show a broken comparison.</li>
           <li>Lower the temperature from 0.4: this is extraction, not writing.</li>

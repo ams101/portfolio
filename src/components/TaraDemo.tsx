@@ -311,7 +311,7 @@ const TaraDemo = () => {
                   onClick={() => setScenarioId(s.id)}
                   disabled={inCall}
                   aria-pressed={s.id === scenarioId}
-                  className={`min-h-[44px] px-4 rounded border text-[15px] transition-colors disabled:cursor-not-allowed ${
+                  className={`min-h-[44px] px-4 rounded-lg border text-[15px] transition-colors disabled:cursor-not-allowed ${
                     s.id === scenarioId
                       ? 'bg-ink border-ink text-paper'
                       : 'border-rule-strong text-ink hover:border-ink disabled:opacity-50'
@@ -331,7 +331,7 @@ const TaraDemo = () => {
                 <p className="m-0 text-[13px] text-muted">Tara starts the call knowing</p>
                 <div className="flex flex-wrap gap-1.5 font-mono text-xs">
                   {knows.map(k => (
-                    <span key={k} className="px-2 py-[3px] bg-[#F0EDE5] border border-rule">{k}</span>
+                    <span key={k} className="px-2 py-[3px] bg-paper-deep border border-rule">{k}</span>
                   ))}
                 </div>
               </div>
@@ -351,7 +351,7 @@ const TaraDemo = () => {
               disabled={inCall}
               maxLength={30}
               placeholder="So Tara can confirm she's got the right person"
-              className="min-h-[44px] px-3 border border-rule-strong bg-white rounded text-[15px] text-ink placeholder:text-[#8A857C] focus:outline-none focus:border-ink disabled:opacity-50"
+              className="min-h-[44px] px-3 border border-rule-strong bg-white rounded-lg text-[15px] text-ink placeholder:text-muted focus:outline-none focus:border-ink disabled:opacity-50"
             />
           </div>
         </div>
@@ -363,7 +363,7 @@ const TaraDemo = () => {
               <span className={`w-10 h-10 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-display text-xl ${taraSpeaking ? 'ring-4 ring-accent/50' : ''}`}>T</span>
               <span className="flex-1 flex flex-col leading-tight">
                 <span className="text-[15px]">Tara</span>
-                <span className="font-mono text-[11px] text-[#A1A1A6]">
+                <span className="font-mono text-xs text-[#A1A1A6]">
                   {status === 'idle' && 'Live call · 1 minute'}
                   {status === 'connecting' && 'Connecting…'}
                   {status === 'live' && (taraSpeaking ? 'Speaking' : 'Listening')}
@@ -372,7 +372,7 @@ const TaraDemo = () => {
                 </span>
               </span>
               {status === 'live' && (
-                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-[#F2A07B]' : 'text-[#A1A1A6]'}`}>
+                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-accent-on-dark' : 'text-[#A1A1A6]'}`}>
                   <Clock className="w-4 h-4" aria-hidden="true" />
                   0:{String(secondsLeft).padStart(2, '0')}
                 </span>
@@ -394,7 +394,7 @@ const TaraDemo = () => {
               )}
               {status === 'error' && (
                 <div className="h-full flex flex-col items-center justify-center text-center gap-3 px-4">
-                  <AlertCircle className="w-6 h-6 text-[#F2A07B]" aria-hidden="true" />
+                  <AlertCircle className="w-6 h-6 text-accent-on-dark" aria-hidden="true" />
                   <p className="m-0 text-sm">{errorText}</p>
                 </div>
               )}
@@ -428,7 +428,7 @@ const TaraDemo = () => {
                   return (
                     <span
                       key={i}
-                      className={`w-[3px] rounded-full transition duration-100 ${taraSpeaking ? 'bg-accent' : 'bg-[#4A4743]'}`}
+                      className={`w-[3px] rounded-full transition duration-100 ${taraSpeaking ? 'bg-accent' : 'bg-[#3F3F46]'}`}
                       style={{ height: `${h * 100}%` }}
                     />
                   );
@@ -444,7 +444,7 @@ const TaraDemo = () => {
                     disabled={status !== 'live'}
                     aria-label={muted ? 'Unmute' : 'Mute'}
                     className={`w-12 h-12 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 ${
-                      muted ? 'bg-[#EDEDED] text-ink border-[#EDEDED]' : 'border-[#4A4743] hover:bg-[#232325]'
+                      muted ? 'bg-[#EDEDED] text-ink border-[#EDEDED]' : 'border-[#3F3F46] hover:bg-[#232325]'
                     }`}
                   >
                     {muted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
@@ -461,12 +461,12 @@ const TaraDemo = () => {
                 <>
                   <button
                     onClick={startCall}
-                    className="w-full min-h-[52px] rounded bg-accent hover:opacity-90 text-white font-medium flex items-center justify-center gap-2 transition-opacity"
+                    className="w-full min-h-[52px] rounded-lg bg-accent hover:opacity-90 text-white font-medium flex items-center justify-center gap-2 transition-opacity"
                   >
                     {status === 'idle' ? <Phone className="w-5 h-5" aria-hidden="true" /> : <RotateCcw className="w-5 h-5" aria-hidden="true" />}
                     {status === 'idle' ? 'Start call' : 'Call again'}
                   </button>
-                  <p className="m-0 mt-2 text-[11px] text-[#A1A1A6] text-center leading-snug">
+                  <p className="m-0 mt-2 text-xs text-[#A1A1A6] text-center leading-snug">
                     Uses your microphone · processed by Vapi · don&apos;t share real personal details
                   </p>
                 </>
