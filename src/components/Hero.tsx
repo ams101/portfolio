@@ -79,11 +79,11 @@ const PEEK = [
 
 const Hero = () => (
   <>
-    <section className="pt-12 md:pt-16 pb-16 md:pb-20 flex flex-col gap-8 md:gap-10">
-      <h1 className="relative m-0 max-w-[14ch] font-display font-semibold [font-stretch:88%] text-[44px] sm:text-[64px] lg:text-[92px] leading-[0.95] tracking-[-0.04em] [text-wrap:balance]">
-        Product judgement, grounded in data and <Payoff />
-      </h1>
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] items-start">
+    <section className="pt-12 md:pt-16 pb-16 md:pb-20 grid gap-12 lg:gap-14 lg:grid-cols-[minmax(0,1fr)_320px] items-center">
+      <div className="flex flex-col gap-8 md:gap-10 min-w-0">
+        <h1 className="relative m-0 max-w-[14ch] font-display font-semibold [font-stretch:88%] text-[44px] sm:text-[64px] lg:text-[76px] xl:text-[92px] leading-[0.95] tracking-[-0.04em] [text-wrap:balance]">
+          Product judgement, grounded in data and <Payoff />
+        </h1>
         <div className="flex flex-col gap-6">
           <p className="m-0 text-lg md:text-xl leading-[1.5] text-ink-soft max-w-[36rem]">
             I&apos;m a senior product manager across payments, growth and applied AI. From a <Crore /> trips business built
@@ -106,8 +106,8 @@ const Hero = () => (
             </a>
           </div>
         </div>
-        <TaraCall className="w-full max-w-[360px] lg:max-w-none min-h-[340px]" />
       </div>
+      <TaraCall className="w-full max-w-[360px] lg:max-w-none min-h-[340px]" />
     </section>
 
     <section
