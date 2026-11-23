@@ -116,14 +116,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* No movement: the new page sits opaque underneath and the old one dissolves
-     off it, so there is never a moment where neither is readable. */
+  /* No movement: the old page stays opaque underneath and the new one (which
+     paints on top) fades in over it, so brightness never dips and every frame
+     stays readable. */
   ::view-transition-old(root) {
-    animation-duration: 120ms;
+    animation: none;
   }
 
   ::view-transition-new(root) {
-    animation: none;
+    animation: 120ms ease-out both vtFadeIn;
+  }
+
+  @keyframes vtFadeIn {
+    from {
+      opacity: 0;
+    }
   }
 
   .call-line {
