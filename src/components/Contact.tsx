@@ -26,7 +26,7 @@ const Contact = () => (
 export const Footer = () => (
   <footer className="flex flex-wrap justify-between gap-4 py-8 border-t border-rule font-mono text-xs text-muted">
     <span>© {new Date().getFullYear()} Atib Shaikh</span>
-    <span>Set in Newsreader and IBM Plex.</span>
+    <span>Set in Newsreader and IBM Plex</span>
   </footer>
 );
 

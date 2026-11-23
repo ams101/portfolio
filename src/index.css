@@ -35,7 +35,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2.5 min-h-[48px] px-[22px] bg-ink text-paper rounded font-medium text-base transition-colors hover:bg-ink-soft;
+    @apply inline-flex items-center gap-2.5 min-h-[48px] px-6 bg-ink text-paper rounded font-medium text-base transition-colors hover:bg-ink-soft;
   }
 
   .btn-secondary {
@@ -43,7 +43,7 @@
   }
 
   .btn-accent {
-    @apply inline-flex items-center gap-2.5 min-h-[48px] px-[22px] bg-accent text-white rounded font-medium text-base transition-opacity hover:opacity-90;
+    @apply inline-flex items-center gap-2.5 min-h-[48px] px-6 bg-accent text-white rounded font-medium text-base transition-opacity hover:opacity-90;
   }
 
   .row-arrow {

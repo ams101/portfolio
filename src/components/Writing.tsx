@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import Section from './Section';
 import { articles } from '../data/articles';
 
@@ -22,7 +23,9 @@ const Writing = ({ onReadArticle }: WritingProps) => (
               </span>
               <span className="text-base text-muted">{article.subtitle}</span>
             </span>
-            <span className="row-arrow text-[15px] font-medium">Read →</span>
+            <span className="inline-flex items-center gap-2 text-[15px] font-medium text-accent">
+              Read <ArrowRight aria-hidden="true" size={16} strokeWidth={1.5} className="row-arrow" />
+            </span>
           </button>
         </li>
       ))}

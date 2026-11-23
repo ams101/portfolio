@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import Section from './Section';
 import { caseStudies } from '../data/caseStudies';
 
@@ -23,7 +24,7 @@ const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
               </span>
               <span className="text-base text-muted">{study.listLine}</span>
             </span>
-            <span className="row-arrow hidden sm:inline text-[22px]" aria-hidden="true">→</span>
+            <ArrowRight aria-hidden="true" size={20} strokeWidth={1.5} className="row-arrow hidden sm:block self-center shrink-0" />
           </button>
         </li>
       ))}
