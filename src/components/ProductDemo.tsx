@@ -205,12 +205,12 @@ const ProductDemo = () => {
     return (
       <div key={node.id} className="group relative">
         <div
-          className={`relative flex flex-col items-center transition-all duration-500 ${
+          className={`relative flex flex-col items-center transition duration-500 ${
             isActive ? 'scale-110' : isCompleted ? 'scale-100' : 'scale-95 opacity-60'
           }`}
         >
           <div
-            className={`relative w-16 h-16 md:w-20 md:h-20 rounded-lg flex items-center justify-center transition-all duration-500 ${
+            className={`relative w-16 h-16 md:w-20 md:h-20 rounded-lg flex items-center justify-center transition duration-500 ${
               isActive
                 ? isFrontend
                   ? 'bg-accent '
@@ -222,12 +222,6 @@ const ProductDemo = () => {
                 : 'bg-paper-deep border border-rule'
             }`}
           >
-            {isActive && (
-              <>
-                <div className={`absolute inset-0 rounded-lg ${isFrontend ? 'bg-accent' : 'bg-ink'} opacity-30 animate-ping`}></div>
-                <div className={`absolute -inset-1 rounded-lg ${isFrontend ? 'bg-accent/10' : 'bg-amber-50'} blur-md`}></div>
-              </>
-            )}
             <Icon className={`w-7 h-7 md:w-8 md:h-8 relative z-10 ${isActive ? 'text-white' : isCompleted ? (isFrontend ? 'text-accent' : 'text-ink') : 'text-muted'}`} />
           </div>
           <span className={`mt-2 text-xs md:text-sm font-semibold text-center transition-colors duration-300 ${
@@ -236,7 +230,7 @@ const ProductDemo = () => {
             {node.shortLabel}
           </span>
         </div>
-        <div className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50">
+        <div className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none z-50">
           <div className="px-3 py-2 bg-white border border-rule rounded-lg text-xs text-ink-soft whitespace-nowrap ">
             {node.tooltip}
           </div>
@@ -248,7 +242,7 @@ const ProductDemo = () => {
 
   const renderConnector = (isActive: boolean, isFrontend: boolean) => (
     <div className="flex items-center justify-center w-8 md:w-12">
-      <div className={`relative h-0.5 w-full transition-all duration-500 ${
+      <div className={`relative h-0.5 w-full transition duration-500 ${
         isActive
           ? isFrontend
             ? 'bg-accent'
@@ -259,7 +253,7 @@ const ProductDemo = () => {
           <div className={`absolute inset-0 ${isFrontend ? 'bg-accent' : 'bg-ink'} blur-sm opacity-50`}></div>
         )}
       </div>
-      <ChevronRight className={`absolute w-4 h-4 transition-all duration-300 ${
+      <ChevronRight className={`absolute w-4 h-4 transition duration-300 ${
         isActive ? isFrontend ? 'text-accent' : 'text-amber-700' : 'text-muted'
       }`} />
     </div>
@@ -277,7 +271,7 @@ const ProductDemo = () => {
                   <CreditCard className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-serif font-normal text-ink">Payment Details</h3>
+                  <h3 className="text-xl font-display font-normal text-ink">Payment Details</h3>
                   <p className="text-xs text-muted flex items-center gap-1">
                     <Shield className="w-3 h-3" />
                     Demo mode - no real transactions
@@ -294,7 +288,7 @@ const ProductDemo = () => {
                       type="number"
                       value={form.amount}
                       onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                      className="w-full bg-paper-deep border border-rule rounded pl-12 pr-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition-all"
+                      className="w-full bg-paper-deep border border-rule rounded pl-12 pr-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                       placeholder="10000"
                     />
                   </div>
@@ -307,7 +301,7 @@ const ProductDemo = () => {
                     type="text"
                     value={form.plan}
                     onChange={(e) => setForm({ ...form, plan: e.target.value })}
-                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition-all"
+                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                     placeholder="Premium Shaadi Plan"
                   />
                   {errors.plan && <p className="text-red-700 text-xs mt-1.5">{errors.plan}</p>}
@@ -324,7 +318,7 @@ const ProductDemo = () => {
                       <button
                         key={s.id}
                         onClick={() => setForm({ ...form, scenario: s.id as 'happy' | 'declined' | 'refund' })}
-                        className={`py-2.5 px-3 rounded text-sm font-semibold transition-all duration-300 ${
+                        className={`py-2.5 px-3 rounded text-sm font-semibold transition duration-300 ${
                           form.scenario === s.id
                             ? s.color === 'teal'
                               ? 'bg-accent/10 border-2 border-accent/40 text-accent'
@@ -342,7 +336,7 @@ const ProductDemo = () => {
 
                 <button
                   onClick={isSimulating ? resetSimulation : startSimulation}
-                  className={`w-full py-4 rounded font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+                  className={`w-full py-4 rounded font-bold transition duration-300 flex items-center justify-center gap-2 ${
                     isSimulating
                       ? 'bg-paper-deep text-ink hover:bg-rule'
                       : 'bg-accent text-white hover:opacity-90'
@@ -365,7 +359,7 @@ const ProductDemo = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={togglePlayPause}
-                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition-all flex items-center justify-center gap-2"
+                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2"
                     >
                       {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       {isPlaying ? 'Pause' : 'Resume'}
@@ -373,7 +367,7 @@ const ProductDemo = () => {
                     <button
                       onClick={stepForward}
                       disabled={currentStage >= totalStages}
-                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <SkipForward className="w-4 h-4" />
                       Step
@@ -397,7 +391,7 @@ const ProductDemo = () => {
                 <div className="mb-6">
                   <div className="h-1.5 bg-paper-deep rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-accent transition-all duration-500 rounded-full"
+                      className="h-full bg-accent transition duration-500 rounded-full"
                       style={{ width: `${progress}%` }}
                     />
                   </div>
@@ -408,7 +402,7 @@ const ProductDemo = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-3 h-3 rounded-full bg-accent"></div>
-                    <span className="text-xs font-bold text-accent uppercase tracking-wider">Frontend Layer</span>
+                    <span className="text-[13px] font-medium text-accent">Frontend layer</span>
                   </div>
                   <div className="flex items-center justify-between">
                     {frontendNodes.map((node, index) => (
@@ -429,7 +423,7 @@ const ProductDemo = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-3 h-3 rounded-full bg-ink"></div>
-                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">Backend / Banking Rails</span>
+                    <span className="text-[13px] font-medium text-amber-700">Backend and banking rails</span>
                   </div>
                   <div className="flex items-center justify-between">
                     {backendNodes.map((node, index) => (

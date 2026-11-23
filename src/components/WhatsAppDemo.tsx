@@ -250,7 +250,7 @@ const WhatsAppDemo = () => {
             <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
               <Smartphone className="w-8 h-8 text-white" />
             </div>
-            <h3 className="text-2xl font-serif font-normal text-ink mb-2">Travel Assistant</h3>
+            <h3 className="text-2xl font-display font-normal text-ink mb-2">Travel Assistant</h3>
             <p className="text-muted text-sm">Enter your details to start chatting</p>
           </div>
 
@@ -280,7 +280,7 @@ const WhatsAppDemo = () => {
             <button
               onClick={startSession}
               disabled={!userName.trim() || !userPhone.trim()}
-              className="w-full py-3 bg-accent text-white font-bold rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-accent text-white font-bold rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Start Chat
             </button>
@@ -296,7 +296,7 @@ const WhatsAppDemo = () => {
         <div className="mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <button
             onClick={resetDemo}
-            className="px-4 py-2 bg-paper-deep border border-rule rounded text-ink-soft hover:bg-paper-deep transition-all text-sm font-semibold"
+            className="px-4 py-2 bg-paper-deep border border-rule rounded text-ink-soft hover:bg-paper-deep transition text-sm font-semibold"
           >
             Reset Demo
           </button>
@@ -347,7 +347,7 @@ const WhatsAppDemo = () => {
         <div className="flex justify-end mb-4">
           <button
             onClick={() => setShowInternals(!showInternals)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-paper-deep border border-rule rounded-lg text-xs text-ink-soft hover:bg-paper-deep transition-all"
+            className="flex items-center gap-2 px-3 py-1.5 bg-paper-deep border border-rule rounded-lg text-xs text-ink-soft hover:bg-paper-deep transition"
           >
             <Cpu className="w-3.5 h-3.5" />
             {showInternals ? 'Hide' : 'Show'} what's happening behind the chat
@@ -501,7 +501,7 @@ const WhatsAppDemo = () => {
                 {showScrollDown && (
                   <button
                     onClick={() => scrollToBottom('smooth')}
-                    className="absolute bottom-20 right-8 bg-accent hover:bg-accent text-white rounded-full p-2 transition-all"
+                    className="absolute bottom-20 right-8 bg-accent hover:bg-accent text-white rounded-full p-2 transition"
                   >
                     <ChevronDown className="w-5 h-5" />
                   </button>

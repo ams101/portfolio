@@ -40,10 +40,9 @@ const OpsSection = () => (
   <section id="ops" aria-labelledby="ops-title" className="scroll-mt-24 border-t-2 border-ink pt-10 mt-24">
     <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
       <div className="flex flex-col gap-2.5 max-w-[680px]">
-        <p className="m-0 font-mono text-xs text-muted">Operations · back office · {BRAND.name} (fictional company)</p>
-        <h2 id="ops-title" className="m-0 font-serif font-normal text-[40px] md:text-[48px] leading-[1.05]">{BRAND.name} Ops</h2>
+        <h2 id="ops-title" className="m-0 font-display font-medium text-[40px] md:text-[48px] leading-[1.05] tracking-[-0.02em]">{BRAND.name} Ops</h2>
         <p className="m-0 text-lg md:text-[19px] text-ink-soft">
-          The back office behind the trips: who the company buys from, and how each departure gets run. Two prototypes
+          The back office behind the trips at {BRAND.name}, a fictional company: who the company buys from, and how each departure gets run. Two prototypes
           merged into one working app, with supply management on one side and trip operations on the other.
         </p>
       </div>
@@ -73,7 +72,7 @@ const OpsSection = () => (
       ].map((col, i) => (
         <div key={col.title} className="bg-white border border-rule p-5 flex flex-col gap-3">
           <div className="flex items-baseline justify-between gap-2">
-            <h3 className="m-0 font-serif font-normal text-2xl">{col.title}</h3>
+            <h3 className="m-0 font-display font-normal text-2xl">{col.title}</h3>
             <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, '0')}</span>
           </div>
           <p className="m-0 text-sm text-muted">{col.sub}</p>
@@ -100,7 +99,7 @@ const OpsSection = () => (
               className={`group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4 border-t ${i === 0 ? 'border-ink' : 'border-rule'} ${i === TRY.length - 1 ? 'border-b border-b-rule' : ''}`}
             >
               <span className="flex flex-col">
-                <span className="font-serif text-[22px] leading-tight">{t.label}</span>
+                <span className="font-display text-[22px] leading-tight">{t.label}</span>
                 <span className="text-[14px] text-muted">{t.note}</span>
               </span>
               <span className="row-arrow text-[15px] font-medium">Open ↗</span>
@@ -118,7 +117,7 @@ const OpsSection = () => (
           <li key={d.title} className="flex gap-4 py-5 border-t border-rule">
             <span className="font-mono text-[13px] text-accent pt-1.5">{i + 1}</span>
             <div className="flex flex-col gap-1.5">
-              <h3 className="m-0 font-serif font-normal text-[22px] leading-[1.25]">{d.title}</h3>
+              <h3 className="m-0 font-display font-normal text-[22px] leading-[1.25]">{d.title}</h3>
               <p className="m-0 text-[15px] text-ink-soft leading-relaxed">{d.body}</p>
             </div>
           </li>

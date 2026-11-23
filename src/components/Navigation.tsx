@@ -31,7 +31,7 @@ const Navigation = ({ active, onNavigate }: NavigationProps) => {
   return (
     <header className="max-w-page mx-auto px-6 md:px-8">
       <nav aria-label="Main" className="flex items-baseline justify-between gap-4 py-7 border-b border-rule">
-        <button onClick={() => go('home')} className="font-serif text-[22px] leading-none text-ink">
+        <button onClick={() => go('home')} className="font-display font-medium text-[20px] leading-none tracking-[-0.01em] text-ink">
           Atib Shaikh
         </button>
 
@@ -50,24 +50,24 @@ const Navigation = ({ active, onNavigate }: NavigationProps) => {
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          className="md:hidden font-mono text-[13px] text-ink min-h-[44px] px-1"
+          className="md:hidden text-[15px] font-medium text-ink min-h-[44px] px-1"
         >
           {open ? 'Close' : 'Menu'}
         </button>
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="md:hidden flex flex-col border-b border-rule">
+        <div id="mobile-menu" className="menu-reveal md:hidden flex flex-col border-b border-rule">
           {ITEMS.map(item => (
             <button
               key={item.target}
               onClick={() => go(item.target)}
-              className="text-left font-serif text-2xl py-3 border-b border-rule last:border-b-0"
+              className="text-left font-display font-medium text-2xl py-3 border-b border-rule last:border-b-0"
             >
               {item.label}
             </button>
           ))}
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="font-serif text-2xl py-3">
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="font-display font-medium text-2xl py-3">
             Resume
           </a>
         </div>

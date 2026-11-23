@@ -44,7 +44,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
           <div className="bg-paper-deep rounded p-4 mb-6 border border-rule">
             <div className="text-center">
               <p className="text-muted text-sm mb-1">Amount to Pay</p>
-              <p className="text-3xl font-serif font-normal text-ink">₹{amount.toLocaleString()}</p>
+              <p className="text-3xl font-display font-normal text-ink">₹{amount.toLocaleString()}</p>
             </div>
           </div>
 
@@ -59,7 +59,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold transition ${
                     activeTab === tab.id
                       ? 'text-accent border-b-2 border-accent/40'
                       : 'text-muted hover:text-ink'
@@ -168,13 +168,13 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
           <div className="flex gap-3">
             <button
               onClick={() => handlePayment('SUCCESS')}
-              className="flex-1 bg-accent text-white font-bold py-3 rounded transition-all "
+              className="flex-1 bg-accent text-white font-bold py-3 rounded transition "
             >
               Pay (Success)
             </button>
             <button
               onClick={() => handlePayment('FAIL')}
-              className="flex-1 bg-red-50 hover:bg-red-100 text-red-700 font-bold py-3 rounded transition-all border border-red-200"
+              className="flex-1 bg-red-50 hover:bg-red-100 text-red-700 font-bold py-3 rounded transition border border-red-200"
             >
               Pay (Fail)
             </button>
