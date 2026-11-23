@@ -2,7 +2,7 @@ import Section from './Section';
 
 const Contact = () => (
   <>
-    <Section id="contact" label="05 — Contact" className="py-24 border-t border-ink">
+    <Section id="contact" label="Contact" className="py-20 md:py-24 border-t border-ink">
       <div className="flex flex-col gap-6 max-w-[720px]">
         <p className="m-0 font-serif text-[34px] md:text-[44px] leading-[1.1] tracking-[-0.01em]">
           Got a problem worth untangling? I&apos;d like to hear about it.

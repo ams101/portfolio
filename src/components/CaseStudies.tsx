@@ -6,7 +6,7 @@ interface CaseStudiesProps {
 }
 
 const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
-  <Section id="work" label="01 — Work" className="pt-24 pb-10">
+  <Section id="work" label="Work" className="py-20 md:py-24">
     <ul className="m-0 p-0 list-none">
       {caseStudies.map((study, i) => (
         <li key={study.id}>
@@ -23,7 +23,7 @@ const CaseStudies = ({ onViewDetails }: CaseStudiesProps) => (
               </span>
               <span className="text-base text-muted">{study.listLine}</span>
             </span>
-            <span className="row-arrow text-[22px]" aria-hidden="true">→</span>
+            <span className="row-arrow hidden sm:inline text-[22px]" aria-hidden="true">→</span>
           </button>
         </li>
       ))}

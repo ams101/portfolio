@@ -6,7 +6,7 @@ interface WritingProps {
 }
 
 const Writing = ({ onReadArticle }: WritingProps) => (
-  <Section id="writing" label="04 — Writing" className="pb-24">
+  <Section id="writing" label="Writing" className="py-20 md:py-24 border-t border-rule">
     <ul className="m-0 p-0 list-none">
       {articles.map((article, i) => (
         <li key={article.id}>

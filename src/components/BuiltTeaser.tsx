@@ -58,7 +58,7 @@ const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) 
   const body = (
     <>
       <span className="hidden sm:block flex-[0_0_168px] h-[105px] overflow-hidden border border-rule bg-paper-deep">
-        <img src={item.thumb} alt={item.alt} loading="lazy" className="w-full h-full object-cover object-top" />
+        <img src={item.thumb} alt={item.alt} loading="lazy" width={168} height={105} className="w-full h-full object-cover object-top" />
       </span>
       <span className="flex-[1_1_300px] min-w-0 flex flex-col gap-1">
         <span className="font-serif text-[24px] md:text-[26px] leading-[1.2] group-hover:underline decoration-1 underline-offset-4 decoration-rule-strong">
@@ -87,16 +87,15 @@ const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) 
 };
 
 const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) => (
-  <Section id="built" label="02 — Things I've built" className="pt-16 pb-24">
+  <Section id="built" label="Things I’ve built" className="py-20 md:py-24 border-t border-rule">
     <div className="flex justify-end -mt-1 mb-2">
       <span className="font-mono text-xs text-muted">{MORE.length + 1} things you can try</span>
     </div>
     <div className="flex flex-wrap items-center gap-10 pt-6 border-t border-ink">
       <div className="flex-[1_1_340px] flex flex-col gap-4">
-        <p className="m-0 font-mono text-xs text-muted">Voice AI agent · real agent, concept company</p>
-        <h2 className="m-0 font-serif font-normal text-[40px] leading-[1.1]">Talk to Tara</h2>
+        <h3 className="m-0 font-serif font-normal text-[40px] leading-[1.1]">Talk to Tara</h3>
         <p className="m-0 text-ink-soft">
-          She calls approved credit-card customers and gets them to an active card, one step at a time, in Hindi or
+          A real voice AI agent, working for a concept company. She calls approved credit-card customers and gets them to an active card, one step at a time, in Hindi or
           English. Pick a situation and try to trip her up.
         </p>
         <div className="flex flex-wrap items-center gap-5">

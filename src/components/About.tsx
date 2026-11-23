@@ -9,7 +9,7 @@ const RECOGNITION = [
 const TOOLS = ['SQL', 'GA4', 'Looker', 'MoEngage', 'PRDs', 'Agile delivery'];
 
 const About = () => (
-  <Section id="about" label="03 — About" className="py-24 border-t border-rule">
+  <Section id="about" label="About" className="py-20 md:py-24 border-t border-rule">
     <div className="flex flex-col gap-6 max-w-[680px]">
       <p className="m-0 font-serif text-[24px] md:text-[26px] leading-[1.45]">
         I&apos;ve worked across enterprise procurement software, B2B commerce for US buyers, subscriptions and payments at
