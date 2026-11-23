@@ -73,10 +73,10 @@ const OpsSection = () => (
         <div key={col.title} className="bg-white border border-rule p-5 flex flex-col gap-3">
           <div className="flex items-baseline justify-between gap-2">
             <h3 className="m-0 font-display font-normal text-2xl">{col.title}</h3>
-            <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, '0')}</span>
+            <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
           </div>
           <p className="m-0 text-sm text-muted">{col.sub}</p>
-          <ul className="m-0 pl-5 list-disc marker:text-accent flex flex-col gap-1.5 text-[15px]">
+          <ul className="m-0 pl-5 list-disc marker:text-rule-strong flex flex-col gap-1.5 text-[15px]">
             {col.items.map(it => <li key={it}>{it}</li>)}
           </ul>
         </div>

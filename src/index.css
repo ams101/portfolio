@@ -21,6 +21,19 @@
     text-wrap: pretty;
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /* Matches preflight's specificity (input::placeholder) so it actually wins. */
+  input::placeholder,
+  textarea::placeholder {
+    color: theme('colors.muted');
+    opacity: 1;
+  }
+
   ::selection {
     @apply bg-accent text-paper;
   }

@@ -74,7 +74,7 @@ const STATUS_LABEL: Record<Status, string> = {
 };
 
 const Chip = ({ status, label }: { status: Status; label?: string }) => (
-  <span className={`inline-flex items-center px-2 py-0.5 border rounded text-[12px] whitespace-nowrap ${STATUS_STYLE[status]}`}>
+  <span className={`inline-flex items-center px-2 py-0.5 border rounded-md text-[12px] whitespace-nowrap ${STATUS_STYLE[status]}`}>
     {label ?? STATUS_LABEL[status]}
   </span>
 );
@@ -172,7 +172,7 @@ const PanCheck = () => {
         </div>
         <div className="flex flex-col gap-1.5">
           <span className="font-mono text-xs text-muted">Name scoring</span>
-          <div role="group" aria-label="Name scoring" className="inline-flex border border-ink rounded overflow-hidden">
+          <div role="group" aria-label="Name scoring" className="inline-flex border border-ink rounded-md overflow-hidden">
             {(['original', 'improved'] as Mode[]).map(m => (
               <button
                 key={m}
@@ -192,7 +192,7 @@ const PanCheck = () => {
         <div className="bg-white border border-rule">
           <div className="flex items-center justify-between px-5 py-3 border-b border-rule">
             <span className="font-display text-lg">{BRAND.name}</span>
-            <span className="font-mono text-[11px] text-muted">Traveller view</span>
+            <span className="font-mono text-xs text-muted">Traveller view</span>
           </div>
           <div className="p-5 flex flex-col gap-5">
             <div>
@@ -221,7 +221,7 @@ const PanCheck = () => {
                     setActive(g.id);
                     setLabName(null);
                   }}
-                  className={`flex items-center gap-2 min-h-[40px] px-3 rounded border text-[14px] ${
+                  className={`flex items-center gap-2 min-h-[40px] px-3 rounded-lg border text-[14px] ${
                     g.id === active ? 'border-ink' : 'border-rule hover:border-rule-strong'
                   }`}
                 >
@@ -246,7 +246,7 @@ const PanCheck = () => {
                       placeholder="Use a test PAN below"
                       autoComplete="off"
                       spellCheck={false}
-                      className="min-h-[44px] px-3 border border-rule-strong rounded font-mono text-[15px] text-ink uppercase tracking-wider focus:outline-none focus:border-ink"
+                      className="min-h-[44px] px-3 border border-rule-strong rounded-lg font-mono text-[15px] text-ink uppercase tracking-wider focus:outline-none focus:border-ink"
                     />
                   </label>
                   <label className="flex flex-col gap-1.5 text-[13px] text-muted">
@@ -255,7 +255,7 @@ const PanCheck = () => {
                       type="date"
                       value={draft.dob}
                       onChange={e => setDraft({ dob: e.target.value })}
-                      className="min-h-[44px] px-3 border border-rule-strong rounded text-[15px] text-ink focus:outline-none focus:border-ink"
+                      className="min-h-[44px] px-3 border border-rule-strong rounded-lg text-[15px] text-ink focus:outline-none focus:border-ink"
                     />
                   </label>
                 </div>
@@ -266,10 +266,10 @@ const PanCheck = () => {
                       <button
                         key={t.pan}
                         onClick={() => setDraft({ pan: t.pan })}
-                        className="text-left px-2.5 py-1.5 border border-rule hover:border-ink rounded"
+                        className="text-left px-2.5 py-1.5 border border-rule hover:border-ink rounded-md"
                       >
                         <span className="block font-mono text-[12px]">{t.pan}</span>
-                        <span className="block text-[11px] text-muted">{t.hint}</span>
+                        <span className="block text-xs text-muted">{t.hint}</span>
                       </button>
                     ))}
                   </div>
@@ -296,12 +296,12 @@ const PanCheck = () => {
         <div className="bg-paper-deep border border-rule">
           <div className="flex items-center justify-between px-5 py-3 border-b border-rule">
             <span className="font-display text-lg">Ops · {PAN_BOOKING.id}</span>
-            <span className="font-mono text-[11px] text-muted">Operations view</span>
+            <span className="font-mono text-xs text-muted">Operations view</span>
           </div>
           <div className="p-5 flex flex-col gap-5">
             <table className="w-full border-collapse text-[14px]">
               <thead>
-                <tr className="text-left font-mono text-[11px] text-muted border-b border-rule-strong">
+                <tr className="text-left font-mono text-xs text-muted border-b border-rule-strong">
                   <th className="py-1.5 pr-2 font-normal">Guest</th>
                   <th className="py-1.5 pr-2 font-normal">PAN</th>
                   <th className="py-1.5 font-normal">Status</th>
@@ -317,7 +317,7 @@ const PanCheck = () => {
                     <td className="py-2 pr-2 font-mono text-[12px]">{submitted[g.id] && PAN_FORMAT.test(submitted[g.id].pan) ? maskPan(submitted[g.id].pan) : '—'}</td>
                     <td className="py-2">
                       <Chip status={outcomes[g.id].status} />
-                      {ops[g.id] && <span className="block text-[11px] text-muted mt-0.5">{ops[g.id].note}</span>}
+                      {ops[g.id] && <span className="block text-xs text-muted mt-0.5">{ops[g.id].note}</span>}
                     </td>
                   </tr>
                 ))}
@@ -393,7 +393,7 @@ const PanCheck = () => {
               <input
                 value={labA}
                 onChange={e => setLabName(e.target.value)}
-                className="min-h-[44px] px-3 border border-rule-strong rounded text-[15px] text-ink focus:outline-none focus:border-ink"
+                className="min-h-[44px] px-3 border border-rule-strong rounded-lg text-[15px] text-ink focus:outline-none focus:border-ink"
               />
             </label>
           </div>
@@ -430,7 +430,7 @@ const PanCheck = () => {
                 <div key={title} className={`border p-4 flex flex-col gap-3 ${improved === (mode === 'improved') ? 'border-ink' : 'border-rule'}`}>
                   <div className="flex items-baseline justify-between gap-2">
                     <p className="m-0 font-display text-xl">{title}</p>
-                    {improved === (mode === 'improved') && <span className="font-mono text-[11px] text-muted">in use</span>}
+                    {improved === (mode === 'improved') && <span className="font-mono text-xs text-muted">in use</span>}
                   </div>
                   <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px]">
                     {steps.map(([k, v]) => (

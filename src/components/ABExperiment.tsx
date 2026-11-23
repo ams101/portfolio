@@ -70,7 +70,7 @@ const ABExperiment = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded bg-accent flex items-center justify-center ">
+                  <div className="w-10 h-10 rounded-md bg-accent flex items-center justify-center ">
                     <TrendingUp className="w-5 h-5 text-white" />
                   </div>
                   <h3 className="text-xl font-display font-normal text-ink">Select Metric</h3>
@@ -87,7 +87,7 @@ const ABExperiment = () => {
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-3 rounded transition duration-300 ${
+                        className={`p-3 rounded-md transition duration-300 ${
                           selectedMetric === metric.id
                             ? 'bg-accent '
                             : 'bg-rule group-hover:bg-rule'
@@ -113,7 +113,7 @@ const ABExperiment = () => {
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded bg-accent flex items-center justify-center ">
+                  <div className="w-10 h-10 rounded-md bg-accent flex items-center justify-center ">
                     <Beaker className="w-5 h-5 text-white" />
                   </div>
                   <h3 className="text-xl font-display font-normal text-ink">Choose Lever</h3>
@@ -130,7 +130,7 @@ const ABExperiment = () => {
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`p-3 rounded transition duration-300 ${
+                        className={`p-3 rounded-md transition duration-300 ${
                           selectedLever === lever.id
                             ? 'bg-accent '
                             : 'bg-rule group-hover:bg-rule'
@@ -159,7 +159,7 @@ const ABExperiment = () => {
               <button
                 onClick={handleRunExperiment}
                 disabled={!selectedMetric || !selectedLever || isAnimating}
-                className={`px-8 py-4 rounded font-bold text-lg transition duration-300 ${
+                className={`px-8 py-4 rounded-md font-bold text-lg transition duration-300 ${
                   selectedMetric && selectedLever && !isAnimating
                     ? 'bg-accent text-white '
                     : 'bg-paper-deep text-muted cursor-not-allowed'
@@ -170,7 +170,7 @@ const ABExperiment = () => {
               {(selectedMetric || selectedLever || showResult) && (
                 <button
                   onClick={handleReset}
-                  className="px-6 py-4 rounded font-bold text-lg bg-paper-deep text-ink-soft border border-rule hover:bg-paper-deep hover:border-ink transition duration-300 flex items-center gap-2"
+                  className="px-6 py-4 rounded-md font-bold text-lg bg-paper-deep text-ink-soft border border-rule hover:bg-paper-deep hover:border-ink transition duration-300 flex items-center gap-2"
                 >
                   <X className="w-5 h-5" />
                   Reset
@@ -182,17 +182,17 @@ const ABExperiment = () => {
               <div className="mt-8 animate-fadeIn">
                 <div className="bg-paper-deep rounded-lg border border-rule p-8">
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
-                    <div className="text-center p-6 bg-white rounded border border-rule">
+                    <div className="text-center p-6 bg-white rounded-md border border-rule">
                       <div className={`text-4xl font-bold mb-2 ${result.isPositive ? 'text-positive' : 'text-negative'}`}>
                         {result.isPositive ? '+' : '-'}{result.change}%
                       </div>
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Change</div>
                     </div>
-                    <div className="text-center p-6 bg-white rounded border border-rule">
+                    <div className="text-center p-6 bg-white rounded-md border border-rule">
                       <div className="text-4xl font-display font-normal text-accent mb-2">{result.confidence}%</div>
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Confidence</div>
                     </div>
-                    <div className="text-center p-6 bg-white rounded border border-rule">
+                    <div className="text-center p-6 bg-white rounded-md border border-rule">
                       <div className="text-4xl font-display font-normal text-ink-soft mb-2">7d</div>
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Duration</div>
                     </div>

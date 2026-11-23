@@ -267,7 +267,7 @@ const ProductDemo = () => {
           <div className="grid lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-rule">
             <div className="lg:col-span-2 p-6 md:p-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-ink rounded ">
+                <div className="p-3 bg-ink rounded-md ">
                   <CreditCard className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -288,7 +288,7 @@ const ProductDemo = () => {
                       type="number"
                       value={form.amount}
                       onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                      className="w-full bg-paper-deep border border-rule rounded pl-12 pr-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
+                      className="w-full bg-paper-deep border border-rule rounded-lg pl-12 pr-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                       placeholder="10000"
                     />
                   </div>
@@ -301,7 +301,7 @@ const ProductDemo = () => {
                     type="text"
                     value={form.plan}
                     onChange={(e) => setForm({ ...form, plan: e.target.value })}
-                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
+                    className="w-full bg-paper-deep border border-rule rounded-lg px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                     placeholder="Premium Shaadi Plan"
                   />
                   {errors.plan && <p className="text-negative text-xs mt-1.5">{errors.plan}</p>}
@@ -318,7 +318,7 @@ const ProductDemo = () => {
                       <button
                         key={s.id}
                         onClick={() => setForm({ ...form, scenario: s.id as 'happy' | 'declined' | 'refund' })}
-                        className={`py-2.5 px-3 rounded text-sm font-semibold transition duration-300 ${
+                        className={`py-2.5 px-3 rounded-lg text-sm font-semibold transition duration-300 ${
                           form.scenario === s.id
                             ? s.color === 'teal'
                               ? 'bg-accent/10 border-2 border-accent/40 text-accent'
@@ -336,7 +336,7 @@ const ProductDemo = () => {
 
                 <button
                   onClick={isSimulating ? resetSimulation : startSimulation}
-                  className={`w-full py-4 rounded font-bold transition duration-300 flex items-center justify-center gap-2 ${
+                  className={`w-full py-4 rounded-lg font-bold transition duration-300 flex items-center justify-center gap-2 ${
                     isSimulating
                       ? 'bg-paper-deep text-ink hover:bg-rule'
                       : 'bg-accent text-white hover:opacity-90'
@@ -359,7 +359,7 @@ const ProductDemo = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={togglePlayPause}
-                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2"
+                      className="flex-1 py-2.5 rounded-lg font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2"
                     >
                       {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       {isPlaying ? 'Pause' : 'Resume'}
@@ -367,7 +367,7 @@ const ProductDemo = () => {
                     <button
                       onClick={stepForward}
                       disabled={currentStage >= totalStages}
-                      className="flex-1 py-2.5 rounded font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 py-2.5 rounded-lg font-semibold text-ink bg-paper-deep hover:bg-rule transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <SkipForward className="w-4 h-4" />
                       Step

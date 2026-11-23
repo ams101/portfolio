@@ -311,7 +311,7 @@ const TaraDemo = () => {
                   onClick={() => setScenarioId(s.id)}
                   disabled={inCall}
                   aria-pressed={s.id === scenarioId}
-                  className={`min-h-[44px] px-4 rounded border text-[15px] transition-colors disabled:cursor-not-allowed ${
+                  className={`min-h-[44px] px-4 rounded-lg border text-[15px] transition-colors disabled:cursor-not-allowed ${
                     s.id === scenarioId
                       ? 'bg-ink border-ink text-paper'
                       : 'border-rule-strong text-ink hover:border-ink disabled:opacity-50'
@@ -351,7 +351,7 @@ const TaraDemo = () => {
               disabled={inCall}
               maxLength={30}
               placeholder="So Tara can confirm she's got the right person"
-              className="min-h-[44px] px-3 border border-rule-strong bg-white rounded text-[15px] text-ink placeholder:text-muted focus:outline-none focus:border-ink disabled:opacity-50"
+              className="min-h-[44px] px-3 border border-rule-strong bg-white rounded-lg text-[15px] text-ink placeholder:text-muted focus:outline-none focus:border-ink disabled:opacity-50"
             />
           </div>
         </div>
@@ -363,7 +363,7 @@ const TaraDemo = () => {
               <span className={`w-10 h-10 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-display text-xl ${taraSpeaking ? 'ring-4 ring-accent/50' : ''}`}>T</span>
               <span className="flex-1 flex flex-col leading-tight">
                 <span className="text-[15px]">Tara</span>
-                <span className="font-mono text-[11px] text-[#A1A1A6]">
+                <span className="font-mono text-xs text-[#A1A1A6]">
                   {status === 'idle' && 'Live call · 1 minute'}
                   {status === 'connecting' && 'Connecting…'}
                   {status === 'live' && (taraSpeaking ? 'Speaking' : 'Listening')}
@@ -461,12 +461,12 @@ const TaraDemo = () => {
                 <>
                   <button
                     onClick={startCall}
-                    className="w-full min-h-[52px] rounded bg-accent hover:opacity-90 text-white font-medium flex items-center justify-center gap-2 transition-opacity"
+                    className="w-full min-h-[52px] rounded-lg bg-accent hover:opacity-90 text-white font-medium flex items-center justify-center gap-2 transition-opacity"
                   >
                     {status === 'idle' ? <Phone className="w-5 h-5" aria-hidden="true" /> : <RotateCcw className="w-5 h-5" aria-hidden="true" />}
                     {status === 'idle' ? 'Start call' : 'Call again'}
                   </button>
-                  <p className="m-0 mt-2 text-[11px] text-[#A1A1A6] text-center leading-snug">
+                  <p className="m-0 mt-2 text-xs text-[#A1A1A6] text-center leading-snug">
                     Uses your microphone · processed by Vapi · don&apos;t share real personal details
                   </p>
                 </>

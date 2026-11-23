@@ -123,7 +123,6 @@ const ProductDemoPage = () => {
 
       <div id="side-projects" className="scroll-mt-24 pt-8 pb-24">
         <header className="flex flex-col gap-2 pb-10">
-          <p className="label m-0">Side projects</p>
           <h2 className="m-0 font-display font-medium text-[36px] md:text-[44px] leading-[1.05] tracking-[-0.02em]">Built for my own problems</h2>
         </header>
         <CoPilotReplay />
