@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navigation, { type NavTarget } from './components/Navigation';
 import Hero from './components/Hero';
@@ -13,6 +14,13 @@ import Contact, { Footer } from './components/Contact';
 
 type View = 'home' | 'case-study' | 'article' | 'product-demo';
 
+// Cross-fade between views where the browser supports it; otherwise change instantly.
+const withTransition = (update: () => void) => {
+  const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+  if (doc.startViewTransition) doc.startViewTransition(() => flushSync(update));
+  else update();
+};
+
 const scrollToId = (id: string) => {
   // Wait a tick so the target exists after a view change.
   setTimeout(() => {
@@ -26,11 +34,12 @@ function App() {
   const [currentView, setCurrentView] = useState<View>('home');
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const show = (view: View, id: string | null = null) => {
-    setCurrentView(view);
-    setSelectedId(id);
-    window.scrollTo(0, 0);
-  };
+  const show = (view: View, id: string | null = null) =>
+    withTransition(() => {
+      setCurrentView(view);
+      setSelectedId(id);
+      window.scrollTo(0, 0);
+    });
 
   const navigate = (target: NavTarget) => {
     if (target === 'built') {
@@ -41,12 +50,12 @@ function App() {
       show('home');
       return;
     }
-    if (currentView !== 'home') setCurrentView('home');
+    if (currentView !== 'home') withTransition(() => setCurrentView('home'));
     scrollToId(target);
   };
 
   const openSection = (id: string) => {
-    setCurrentView('product-demo');
+    withTransition(() => setCurrentView('product-demo'));
     scrollToId(id);
   };
 

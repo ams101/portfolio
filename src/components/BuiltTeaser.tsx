@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Section from './Section';
 
@@ -92,6 +93,86 @@ const Row = ({ item, onOpenSection }: { item: Item; onOpenSection: (id: string) 
   );
 };
 
+// The call plays once when it scrolls into view: each line arrives from its
+// speaker's side, the status follows whose turn it is, the clock runs 0:36 → 0:42.
+const CALL = [
+  { at: 0, from: 'tara', text: 'You’re on the video KYC. It takes about three minutes. Can you do it now?' },
+  { at: 2600, from: 'caller', text: 'I’m driving right now.' },
+  { at: 4000, from: 'tara', text: 'No problem. What time works for you later today?' },
+] as const;
+const START_SEC = 36;
+const END_SEC = 42;
+
+const reducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+const TaraCall = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const skip = reducedMotion() || typeof IntersectionObserver === 'undefined';
+  const [shown, setShown] = useState(skip ? CALL.length : 0);
+  const [sec, setSec] = useState(skip ? END_SEC : START_SEC);
+  const [started, setStarted] = useState(skip);
+
+  useEffect(() => {
+    if (skip || !ref.current) return;
+    const io = new IntersectionObserver(
+      entries => {
+        if (entries.some(e => e.isIntersecting)) {
+          setStarted(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [skip]);
+
+  useEffect(() => {
+    if (!started || skip) return;
+    const timers = CALL.map((line, i) => window.setTimeout(() => setShown(i + 1), line.at));
+    const clock = window.setInterval(() => setSec(s => (s < END_SEC ? s + 1 : s)), 1000);
+    const stop = window.setTimeout(() => window.clearInterval(clock), (END_SEC - START_SEC) * 1000 + 50);
+    return () => {
+      timers.forEach(window.clearTimeout);
+      window.clearInterval(clock);
+      window.clearTimeout(stop);
+    };
+  }, [started, skip]);
+
+  const speaking = shown > 0 && CALL[shown - 1].from === 'tara' && sec < END_SEC;
+  const status = !started ? 'Ringing' : speaking ? 'Speaking' : 'Listening';
+
+  return (
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className="flex-[0_1_300px] bg-ink text-[#EDEAE3] rounded-[28px] p-6 flex flex-col gap-3 min-h-[300px]"
+    >
+      <div className="flex items-center gap-3 pb-3 border-b border-[#34322E]">
+        <span className="w-9 h-9 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-lg">T</span>
+        <span className="flex flex-col leading-tight">
+          <span className="text-[15px]">Tara</span>
+          <span className="font-mono text-[11px] text-[#A8A397] tabular-nums">
+            {status} · 0:{String(sec).padStart(2, '0')}
+          </span>
+        </span>
+      </div>
+      {CALL.map((line, i) => (
+        <p
+          key={i}
+          data-on={i < shown ? '' : undefined}
+          className={`call-line m-0 max-w-[85%] px-3 py-2 rounded-[14px] text-sm leading-[1.45] ${
+            line.from === 'tara' ? 'self-start bg-[#2A2825]' : 'call-line--caller self-end bg-[#EDEAE3] text-ink'
+          }`}
+        >
+          {line.text}
+        </p>
+      ))}
+    </div>
+  );
+};
+
 const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) => (
   <Section id="built" label="Things I’ve built" className="py-20 md:py-24 border-t border-rule">
     <div className="flex justify-end -mt-1 mb-2">
@@ -109,27 +190,7 @@ const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) =
         </div>
       </div>
 
-      <div
-        aria-hidden="true"
-        className="flex-[0_1_300px] bg-ink text-[#EDEAE3] rounded-[28px] p-6 flex flex-col gap-3 min-h-[300px]"
-      >
-        <div className="flex items-center gap-3 pb-3 border-b border-[#34322E]">
-          <span className="w-9 h-9 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-lg">T</span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-[15px]">Tara</span>
-            <span className="font-mono text-[11px] text-[#A8A397]">Listening · 0:42</span>
-          </span>
-        </div>
-        <p className="m-0 self-start max-w-[85%] bg-[#2A2825] px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
-          You&apos;re on the video KYC. It takes about three minutes. Can you do it now?
-        </p>
-        <p className="m-0 self-end max-w-[85%] bg-[#EDEAE3] text-ink px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
-          I&apos;m driving right now.
-        </p>
-        <p className="m-0 self-start max-w-[85%] bg-[#2A2825] px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
-          No problem. What time works for you later today?
-        </p>
-      </div>
+      <TaraCall />
     </div>
 
     <ul className="m-0 p-0 list-none mt-12 border-t border-ink">

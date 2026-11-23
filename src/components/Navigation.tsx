@@ -57,7 +57,7 @@ const Navigation = ({ active, onNavigate }: NavigationProps) => {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="md:hidden flex flex-col border-b border-rule">
+        <div id="mobile-menu" className="menu-reveal md:hidden flex flex-col border-b border-rule">
           {ITEMS.map(item => (
             <button
               key={item.target}
