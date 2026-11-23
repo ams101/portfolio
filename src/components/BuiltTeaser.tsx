@@ -111,22 +111,22 @@ const BuiltTeaser = ({ onTryTara, onSeeAll, onOpenSection }: BuiltTeaserProps) =
 
       <div
         aria-hidden="true"
-        className="flex-[0_1_300px] bg-ink text-[#EDEDED] rounded-[28px] p-6 flex flex-col gap-3 min-h-[300px]"
+        className="flex-[0_1_300px] bg-ink text-[#EDEAE3] rounded-[28px] p-6 flex flex-col gap-3 min-h-[300px]"
       >
-        <div className="flex items-center gap-3 pb-3 border-b border-[#333333]">
-          <span className="w-9 h-9 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-serif text-lg">T</span>
+        <div className="flex items-center gap-3 pb-3 border-b border-[#34322E]">
+          <span className="w-9 h-9 rounded-full bg-[#EDEAE3] text-ink flex items-center justify-center font-serif text-lg">T</span>
           <span className="flex flex-col leading-tight">
             <span className="text-[15px]">Tara</span>
-            <span className="font-mono text-[11px] text-[#A3A3A3]">Listening · 0:42</span>
+            <span className="font-mono text-[11px] text-[#A8A397]">Listening · 0:42</span>
           </span>
         </div>
-        <p className="m-0 self-start max-w-[85%] bg-[#2A2A2A] px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
+        <p className="m-0 self-start max-w-[85%] bg-[#2A2825] px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
           You&apos;re on the video KYC. It takes about three minutes. Can you do it now?
         </p>
-        <p className="m-0 self-end max-w-[85%] bg-[#EDEDED] text-ink px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
+        <p className="m-0 self-end max-w-[85%] bg-[#EDEAE3] text-ink px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
           I&apos;m driving right now.
         </p>
-        <p className="m-0 self-start max-w-[85%] bg-[#2A2A2A] px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
+        <p className="m-0 self-start max-w-[85%] bg-[#2A2825] px-3 py-2 rounded-[14px] text-sm leading-[1.45]">
           No problem. What time works for you later today?
         </p>
       </div>

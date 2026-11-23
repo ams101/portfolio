@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#FFFFFF',
-        'paper-deep': '#F2F2F2',
-        ink: '#171717',
-        'ink-soft': '#3A3A3A',
-        muted: '#5C5C5C',
-        rule: '#E4E4E4',
-        'rule-strong': '#BDBDBD',
+        paper: '#F6F4EF',
+        'paper-deep': '#ECE8DF',
+        ink: '#1A1A1A',
+        'ink-soft': '#3D3A35',
+        muted: '#5A5650',
+        rule: '#DDD8CE',
+        'rule-strong': '#BDB6A8',
         accent: '#B3330E',
       },
       fontFamily: {

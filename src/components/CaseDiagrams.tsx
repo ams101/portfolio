@@ -3,9 +3,9 @@ import type { ReactNode } from 'react';
 // Hand-drawn-style flow diagrams for the case studies, in the site's palette.
 // Built only from facts in the case-study text; no real screenshots or data.
 
-const INK = '#171717';
-const MUTED = '#5C5C5C';
-const RULE = '#BDBDBD';
+const INK = '#1A1A1A';
+const MUTED = '#5A5650';
+const RULE = '#BDB6A8';
 const ACCENT = '#B3330E';
 const SERIF = 'Newsreader, Georgia, serif';
 const SANS = '"IBM Plex Sans", system-ui, sans-serif';
@@ -26,7 +26,7 @@ interface BoxProps {
 
 const Box = ({ x, y, w, h, title, lines = [], tone = 'plain', dashed = false }: BoxProps) => {
   const stroke = tone === 'accent' ? ACCENT : tone === 'muted' ? RULE : INK;
-  const fill = tone === 'accent' ? '#F7E9E4' : tone === 'muted' ? '#F2F2F2' : '#FFFFFF';
+  const fill = tone === 'accent' ? '#F7E9E4' : tone === 'muted' ? '#ECE8DF' : '#FFFFFF';
   const titleColor = tone === 'muted' ? MUTED : INK;
   const blockH = 22 + lines.length * 17;
   const top = y + (h - blockH) / 2 + 16;
