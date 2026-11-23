@@ -87,7 +87,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
                   <input
                     type="text"
                     placeholder="yourname@upi"
-                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-[#8A857C] focus:outline-none focus:border-ink"
+                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-muted focus:outline-none focus:border-ink"
                   />
                 </div>
               </div>
@@ -103,7 +103,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
                     onChange={(e) => setCardNumber(e.target.value)}
                     placeholder="1234 5678 9012 3456"
                     maxLength={19}
-                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-[#8A857C] focus:outline-none focus:border-ink"
+                    className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-muted focus:outline-none focus:border-ink"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -115,7 +115,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
                       onChange={(e) => setExpiry(e.target.value)}
                       placeholder="MM/YY"
                       maxLength={5}
-                      className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-[#8A857C] focus:outline-none focus:border-ink"
+                      className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-muted focus:outline-none focus:border-ink"
                     />
                   </div>
                   <div>
@@ -126,7 +126,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
                       onChange={(e) => setCvv(e.target.value)}
                       placeholder="123"
                       maxLength={3}
-                      className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-[#8A857C] focus:outline-none focus:border-ink"
+                      className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink placeholder-muted focus:outline-none focus:border-ink"
                     />
                   </div>
                 </div>
@@ -159,8 +159,8 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
             )}
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded p-3 mb-6">
-            <p className="text-xs text-amber-700 text-center font-semibold">
+          <div className="bg-warning-tint border border-warning-line rounded p-3 mb-6">
+            <p className="text-xs text-warning text-center font-semibold">
               Demo Mode: Click success or fail to simulate payment
             </p>
           </div>
@@ -174,7 +174,7 @@ const PaymentGateway = ({ paymentId, amount, onClose, onComplete }: PaymentGatew
             </button>
             <button
               onClick={() => handlePayment('FAIL')}
-              className="flex-1 bg-red-50 hover:bg-red-100 text-red-700 font-bold py-3 rounded transition border border-red-200"
+              className="flex-1 bg-negative-tint hover:bg-negative-line text-negative font-bold py-3 rounded transition border border-negative-line"
             >
               Pay (Fail)
             </button>

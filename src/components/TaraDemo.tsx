@@ -331,7 +331,7 @@ const TaraDemo = () => {
                 <p className="m-0 text-[13px] text-muted">Tara starts the call knowing</p>
                 <div className="flex flex-wrap gap-1.5 font-mono text-xs">
                   {knows.map(k => (
-                    <span key={k} className="px-2 py-[3px] bg-[#F0EDE5] border border-rule">{k}</span>
+                    <span key={k} className="px-2 py-[3px] bg-paper-deep border border-rule">{k}</span>
                   ))}
                 </div>
               </div>
@@ -351,7 +351,7 @@ const TaraDemo = () => {
               disabled={inCall}
               maxLength={30}
               placeholder="So Tara can confirm she's got the right person"
-              className="min-h-[44px] px-3 border border-rule-strong bg-white rounded text-[15px] text-ink placeholder:text-[#8A857C] focus:outline-none focus:border-ink disabled:opacity-50"
+              className="min-h-[44px] px-3 border border-rule-strong bg-white rounded text-[15px] text-ink placeholder:text-muted focus:outline-none focus:border-ink disabled:opacity-50"
             />
           </div>
         </div>
@@ -372,7 +372,7 @@ const TaraDemo = () => {
                 </span>
               </span>
               {status === 'live' && (
-                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-[#F2A07B]' : 'text-[#A1A1A6]'}`}>
+                <span className={`flex items-center gap-1 font-mono text-sm tabular-nums ${secondsLeft <= 10 ? 'text-accent-on-dark' : 'text-[#A1A1A6]'}`}>
                   <Clock className="w-4 h-4" aria-hidden="true" />
                   0:{String(secondsLeft).padStart(2, '0')}
                 </span>
@@ -394,7 +394,7 @@ const TaraDemo = () => {
               )}
               {status === 'error' && (
                 <div className="h-full flex flex-col items-center justify-center text-center gap-3 px-4">
-                  <AlertCircle className="w-6 h-6 text-[#F2A07B]" aria-hidden="true" />
+                  <AlertCircle className="w-6 h-6 text-accent-on-dark" aria-hidden="true" />
                   <p className="m-0 text-sm">{errorText}</p>
                 </div>
               )}
@@ -428,7 +428,7 @@ const TaraDemo = () => {
                   return (
                     <span
                       key={i}
-                      className={`w-[3px] rounded-full transition duration-100 ${taraSpeaking ? 'bg-accent' : 'bg-[#4A4743]'}`}
+                      className={`w-[3px] rounded-full transition duration-100 ${taraSpeaking ? 'bg-accent' : 'bg-[#3F3F46]'}`}
                       style={{ height: `${h * 100}%` }}
                     />
                   );
@@ -444,7 +444,7 @@ const TaraDemo = () => {
                     disabled={status !== 'live'}
                     aria-label={muted ? 'Unmute' : 'Mute'}
                     className={`w-12 h-12 rounded-full flex items-center justify-center border transition-colors disabled:opacity-40 ${
-                      muted ? 'bg-[#EDEDED] text-ink border-[#EDEDED]' : 'border-[#4A4743] hover:bg-[#232325]'
+                      muted ? 'bg-[#EDEDED] text-ink border-[#EDEDED]' : 'border-[#3F3F46] hover:bg-[#232325]'
                     }`}
                   >
                     {muted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}

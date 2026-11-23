@@ -254,7 +254,7 @@ const ProductDemo = () => {
         )}
       </div>
       <ChevronRight className={`absolute w-4 h-4 transition duration-300 ${
-        isActive ? isFrontend ? 'text-accent' : 'text-amber-700' : 'text-muted'
+        isActive ? isFrontend ? 'text-accent' : 'text-ink' : 'text-muted'
       }`} />
     </div>
   );
@@ -292,7 +292,7 @@ const ProductDemo = () => {
                       placeholder="10000"
                     />
                   </div>
-                  {errors.amount && <p className="text-red-700 text-xs mt-1.5">{errors.amount}</p>}
+                  {errors.amount && <p className="text-negative text-xs mt-1.5">{errors.amount}</p>}
                 </div>
 
                 <div>
@@ -304,7 +304,7 @@ const ProductDemo = () => {
                     className="w-full bg-paper-deep border border-rule rounded px-4 py-3 text-ink font-semibold focus:outline-none focus:border-ink focus:ring-2 focus:ring-accent/30 transition"
                     placeholder="Premium Shaadi Plan"
                   />
-                  {errors.plan && <p className="text-red-700 text-xs mt-1.5">{errors.plan}</p>}
+                  {errors.plan && <p className="text-negative text-xs mt-1.5">{errors.plan}</p>}
                 </div>
 
                 <div>
@@ -323,8 +323,8 @@ const ProductDemo = () => {
                             ? s.color === 'teal'
                               ? 'bg-accent/10 border-2 border-accent/40 text-accent'
                               : s.color === 'red'
-                              ? 'bg-red-50 border-2 border-red-200 text-red-700'
-                              : 'bg-amber-50 border-2 border-amber-200 text-amber-700'
+                              ? 'bg-negative-tint border-2 border-negative-line text-negative'
+                              : 'bg-warning-tint border-2 border-warning-line text-warning'
                             : 'bg-paper-deep border-2 border-rule text-muted hover:border-ink'
                         }`}
                       >
@@ -423,7 +423,7 @@ const ProductDemo = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-3 h-3 rounded-full bg-ink"></div>
-                    <span className="text-[13px] font-medium text-amber-700">Backend and banking rails</span>
+                    <span className="text-[13px] font-medium text-ink">Backend and banking rails</span>
                   </div>
                   <div className="flex items-center justify-between">
                     {backendNodes.map((node, index) => (
@@ -461,12 +461,12 @@ const ProductDemo = () => {
                         className={`flex items-start gap-2 text-xs p-3 rounded-lg border ${
                           log.type === 'frontend'
                             ? 'bg-accent/10 border-accent/40 text-accent'
-                            : 'bg-amber-50 border-amber-200 text-amber-700'
+                            : 'bg-warning-tint border-warning-line text-warning'
                         }`}
                       >
                         {log.status === 'success' && <CheckCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-accent" />}
-                        {log.status === 'error' && <XCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-red-700" />}
-                        {log.status === 'info' && <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-blue-700" />}
+                        {log.status === 'error' && <XCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-negative" />}
+                        {log.status === 'info' && <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-ink-soft" />}
                         {!log.status && <div className="w-3.5 h-3.5 flex-shrink-0" />}
                         <span>{log.message}</span>
                       </div>

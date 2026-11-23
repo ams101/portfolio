@@ -394,7 +394,7 @@ const RAGPlayground = () => {
                     value={positiveQuery}
                     onChange={(e) => setPositiveQuery(e.target.value)}
                     placeholder="e.g., Witty romantic comedy with friends-to-lovers"
-                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-[#8A857C] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
                     rows={3}
                   />
                 </div>
@@ -407,7 +407,7 @@ const RAGPlayground = () => {
                     value={negativeQuery}
                     onChange={(e) => setNegativeQuery(e.target.value)}
                     placeholder="e.g., gore, horror"
-                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-[#8A857C] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 bg-white border border-rule-strong rounded-lg text-ink placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent resize-none"
                     rows={2}
                   />
                 </div>
@@ -610,7 +610,7 @@ const StepContent = ({ step, selectedMovieId, setSelectedMovieId, searchTerm, se
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search movies..."
-              className="w-full px-3 py-2 bg-white border border-rule-strong rounded text-sm text-ink placeholder-[#8A857C] mb-2"
+              className="w-full px-3 py-2 bg-white border border-rule-strong rounded text-sm text-ink placeholder-muted mb-2"
             />
             <div className="max-h-48 overflow-y-auto space-y-1">
               {filteredMovies.slice(0, 20).map(movie => (

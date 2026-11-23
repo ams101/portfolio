@@ -183,7 +183,7 @@ const ABExperiment = () => {
                 <div className="bg-paper-deep rounded-lg border border-rule p-8">
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
                     <div className="text-center p-6 bg-white rounded border border-rule">
-                      <div className={`text-4xl font-bold mb-2 ${result.isPositive ? 'text-accent' : 'text-red-700'}`}>
+                      <div className={`text-4xl font-bold mb-2 ${result.isPositive ? 'text-positive' : 'text-negative'}`}>
                         {result.isPositive ? '+' : '-'}{result.change}%
                       </div>
                       <div className="text-muted text-sm uppercase tracking-wide font-semibold">Change</div>
@@ -198,13 +198,13 @@ const ABExperiment = () => {
                     </div>
                   </div>
 
-                  <div className="bg-amber-50 border border-amber-200 rounded p-6">
+                  <div className="bg-paper-deep border border-rule rounded-lg p-6">
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 p-3 bg-amber-50 rounded">
-                        <AlertCircle className="w-6 h-6 text-amber-700" />
+                      <div className="flex-shrink-0 p-3 bg-paper rounded-lg border border-rule">
+                        <AlertCircle className="w-6 h-6 text-ink-soft" aria-hidden="true" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-xl font-display font-normal text-amber-700 mb-3">Product Commentary</h4>
+                        <h4 className="text-xl font-display font-medium text-ink mb-3">Product commentary</h4>
                         <p className="text-ink font-semibold mb-3">
                           "This is when you don't ship."
                         </p>

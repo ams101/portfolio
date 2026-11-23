@@ -55,7 +55,7 @@ const CaseStudyDetail = ({ caseStudyId }: CaseStudyDetailProps) => {
             </div>
           </div>
           <figcaption className="text-[13px] text-muted">
-            Fig. 1 — {diagram.caption} <span className="text-[#8A857C]">Simplified diagram.</span>
+            Fig. 1 — {diagram.caption} <span className="text-muted">Simplified diagram.</span>
           </figcaption>
         </figure>
       )}

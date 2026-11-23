@@ -60,7 +60,11 @@ const TaraCall = ({ className = '' }: { className?: string }) => {
         <span className="w-9 h-9 rounded-full bg-[#EDEDED] text-ink flex items-center justify-center font-display font-medium text-lg">T</span>
         <span className="flex flex-col leading-tight">
           <span className="text-[15px]">Tara</span>
-          <span className="font-mono text-xs text-[#A1A1A6] tabular-nums">
+          <span className="flex items-center gap-1.5 font-mono text-xs text-[#A1A1A6] tabular-nums">
+            <span
+              aria-hidden="true"
+              className={`w-1.5 h-1.5 rounded-full transition-colors duration-150 ${speaking ? 'bg-accent-on-dark' : 'bg-[#3F3F46]'}`}
+            />
             {status} · 0:{String(sec).padStart(2, '0')}
           </span>
         </span>

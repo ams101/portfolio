@@ -242,7 +242,7 @@ const CoPilotReplay = () => {
               {niftyChg != null && (
                 <p className="m-0">
                   <span className="font-mono text-xs text-muted block">NIFTY 50</span>
-                  <span className={`font-mono text-lg tabular-nums ${niftyChg >= 0 ? 'text-green-800' : 'text-red-700'}`}>{pct(niftyChg)}</span>
+                  <span className={`font-mono text-lg tabular-nums ${niftyChg >= 0 ? 'text-positive' : 'text-negative'}`}>{pct(niftyChg)}</span>
                 </p>
               )}
               <div className="flex gap-2 ml-auto">
@@ -305,23 +305,23 @@ const CoPilotReplay = () => {
                       >
                         <td className="py-2 pr-2">
                           <button className="text-left font-medium" aria-pressed={active}>{r.sym}</button>
-                          <span className={`block font-mono text-[11px] ${r.chg >= 0 ? 'text-green-800' : 'text-red-700'}`}>{pct(r.chg)}</span>
+                          <span className={`block font-mono text-[11px] ${r.chg >= 0 ? 'text-positive' : 'text-negative'}`}>{pct(r.chg)}</span>
                         </td>
                         <td className="py-2 pr-2 text-right font-mono tabular-nums">{r.price.toFixed(2)}</td>
                         <td className="py-2 pr-2 capitalize">{r.side}</td>
                         <td className="py-2 pr-2 text-right font-mono">{r.score}</td>
                         <td className="py-2 pr-2">
-                          <span className={r.vwapOk ? 'text-green-800' : 'text-muted'}>{r.vwapOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
+                          <span className={r.vwapOk ? 'text-positive' : 'text-muted'}>{r.vwapOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
                           <span className="font-mono text-[12px] text-muted">{pct(r.vd)}</span>
                         </td>
                         <td className="py-2 pr-2">
-                          <span className={r.volOk ? 'text-green-800' : 'text-muted'}>{r.volOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
+                          <span className={r.volOk ? 'text-positive' : 'text-muted'}>{r.volOk ? <Check aria-label="yes" size={14} strokeWidth={1.5} className="inline" /> : <X aria-label="no" size={14} strokeWidth={1.5} className="inline" />}</span>{' '}
                           <span className="font-mono text-[12px] text-muted">{r.vx.toFixed(1)}×</span>
                         </td>
                         <td className="py-2">
                           <span
                             className={`inline-block px-2 py-0.5 rounded border text-[12px] ${
-                              r.ready ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-paper-deep text-muted border-rule'
+                              r.ready ? 'bg-warning-tint text-warning border-warning-line' : 'bg-paper-deep text-muted border-rule'
                             }`}
                           >
                             {r.ready ? 'Enter?' : 'Wait'}

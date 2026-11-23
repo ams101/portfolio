@@ -582,7 +582,7 @@ const BehindTheChat = ({ messages }: { messages: Message[] }) => {
                 <span className="text-muted">intent</span>
                 <span className="text-accent">{bot.debug!.intent}</span>
                 <span className="text-muted">state</span>
-                <span className="text-amber-700">{bot.debug!.state}</span>
+                <span className="text-ink-soft">{bot.debug!.state}</span>
                 <span className="text-muted">actions</span>
                 <span className="text-ink-soft">
                   {bot.debug!.toolCalls.length ? bot.debug!.toolCalls.join(', ') : 'reply only'}

@@ -317,9 +317,9 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
                   <td className="py-3 pr-3">{r.priceShown}</td>
                   <td className="py-3 pr-3 text-right font-mono">{inr(r.priceInr)}</td>
                   <td className="py-3 pr-3 text-right font-mono font-medium">{inr(r.perNight)}</td>
-                  <td className="py-3 pr-3">{r.flights === 'Unclear' ? <span className="text-amber-700">Unclear</span> : r.flights}</td>
+                  <td className="py-3 pr-3">{r.flights === 'Unclear' ? <span className="text-warning">Unclear</span> : r.flights}</td>
                   <td className="py-3 pr-3">
-                    {r.mealsCount === null ? <span className="text-amber-700">Unclear</span> : `${r.id === 'b' ? '≈' : ''}${r.mealsCount}`}
+                    {r.mealsCount === null ? <span className="text-warning">Unclear</span> : `${r.id === 'b' ? '≈' : ''}${r.mealsCount}`}
                     {r.mealsCount !== null && <span className="block text-[12px] text-muted">{r.meals}</span>}
                   </td>
                   <td className="py-3">
@@ -328,7 +328,7 @@ const TeamTab = ({ openRow, setOpenRow }: { openRow: string | null; setOpenRow: 
                     ) : (
                       <ul className="m-0 p-0 list-none flex flex-col gap-1">
                         {r.flags.map(f => (
-                          <li key={f.text} className={`text-[12px] leading-snug ${f.level === 'warn' ? 'text-amber-700' : 'text-muted'}`}>
+                          <li key={f.text} className={`text-[12px] leading-snug ${f.level === 'warn' ? 'text-warning' : 'text-muted'}`}>
                             {f.level === 'warn' && <AlertTriangle aria-hidden="true" size={12} strokeWidth={1.5} className="inline mr-1 align-[-1px]" />}
                             {f.text}
                           </li>

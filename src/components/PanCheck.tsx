@@ -58,9 +58,9 @@ function evaluate(guest: BookingGuest, sub: Submission, mode: Mode): Outcome {
 const STATUS_STYLE: Record<Status, string> = {
   pending: 'bg-paper-deep text-muted border-rule',
   checking: 'bg-paper-deep text-muted border-rule',
-  verified: 'bg-green-50 text-green-800 border-green-200',
-  flagged: 'bg-amber-50 text-amber-800 border-amber-200',
-  failed: 'bg-red-50 text-red-800 border-red-200',
+  verified: 'bg-positive-tint text-positive border-positive-line',
+  flagged: 'bg-warning-tint text-warning border-warning-line',
+  failed: 'bg-negative-tint text-negative border-negative-line',
   'not-required': 'bg-paper-deep text-muted border-rule',
 };
 
@@ -330,7 +330,7 @@ const PanCheck = () => {
                 <p className="m-0 text-[14px] text-muted">Nothing to review. Flagged names appear here.</p>
               ) : (
                 flagged.map(g => (
-                  <div key={g.id} className="bg-white border border-amber-200 p-3 flex flex-col gap-2">
+                  <div key={g.id} className="bg-white border border-warning-line p-3 flex flex-col gap-2">
                     <div className="grid grid-cols-[auto_1fr] gap-x-3 text-[13px]">
                       <span className="text-muted">Booking</span>
                       <span>{g.name}</span>
